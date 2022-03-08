@@ -1,0 +1,98 @@
+* {
+    box-sizing: 0;
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    background: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    background-image: url(img/fondoArena.jfif);
+    background-size: hover;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+/*Navegacion*/
+.navMain {
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 20px 0;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.navBrand{
+    width: 50px;
+}
+
+.navMain ul{
+    display: flex;
+}
+
+.navMain ul li{
+    padding: 10px;
+}
+
+.navMain ul li a:hover{
+    border-bottom: 2px solid white;
+}
+
+.navMenu{
+    flex: 1;
+    padding: 20px;
+}
+
+.filtros{
+    margin: 5px;
+    padding: 5px;
+
+}
+
+.listaFiltros{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.ordenar{
+    margin: 5px;
+    padding: 5px;
+
+}
+
+.listaOrdenar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.infoLogo{
+    width: 25px;
+}
+
+.filtroLogo{
+    width: 25px;
+}
