@@ -175,7 +175,7 @@ ul {
     color: #fff;
     top: 50%;
     left: 50%;
-    position: absolute;
+    position: fixed;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 70px 30px;
@@ -254,6 +254,14 @@ ul {
     position: relative;
     display: inline-block;
     padding-right: 50px;
+    
+    
+  }
+
+  .dropbtn {
+    background-color: transparent;
+    border: none;
+    
   }
   
   /* Dropdown Content (Hidden by Default) */
@@ -309,7 +317,7 @@ input#abrir-cerrar:checked ~ #sidebar {
 }
 
 input#abrir-cerrar:checked + label[for="abrir-cerrar"], input#abrir-cerrar:checked ~ #contenido {
-    margin-left:300%;
+    margin-left:400%;
     transition: margin-left .4s;
 }
 
@@ -391,4 +399,8 @@ h1 {
 .abrir-cerrar {
     color: #2E88C7;
     font-size:1rem;   
+}
+
+.cerrarImg {
+    width: 30px;
 }
