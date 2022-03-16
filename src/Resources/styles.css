@@ -246,6 +246,84 @@ ul {
     color: #fff;
 }
 
+/*Subir Archivos */
+.subir-box {
+    width: 320px;
+    height: 600px;
+    background: #000;
+    color: #fff;
+    top: 60%;
+    left: 60%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.subir-box .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+  
+.subir-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+  
+.subir-box label {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+  }
+  
+.subir-box input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+.subir-box input[type="text"], .subir-box input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+  
+.subir-box input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #b80f22;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+  
+.subir-box input[type="submit"]:hover {
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+  
+.subir-box a {
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+}
+  
+.subir-box a:hover {
+    color: #fff;
+} 
 /* Dropdown Button */
 
   
