@@ -309,7 +309,7 @@ input#abrir-cerrar:checked ~ #sidebar {
 }
 
 input#abrir-cerrar:checked + label[for="abrir-cerrar"], input#abrir-cerrar:checked ~ #contenido {
-    margin-left:300px;
+    margin-left:300%;
     transition: margin-left .4s;
 }
 
@@ -348,7 +348,7 @@ input#abrir-cerrar:checked + label[for="abrir-cerrar"] .abrir {
     height: 32px;
     width: 32px;
     text-align: center;
-    vertical-align: top;
+    
 }
 
 .sidebar ul, .sidebar li{
