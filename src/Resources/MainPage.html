@@ -13,7 +13,20 @@
     
     <div class="container">
         <nav class="navMain">
-            <img src="img/menuLogo.png" alt="Menu logo" class="navMenu">
+            <ul class="navMenuRight">
+                <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
+              <label for="abrir-cerrar"> <span class="abrir"><img src="img/menuLogo.png" alt="Menu logo" class="navMenu" ></span><span class="cerrar"><img src="img/iconoX.png" class="cerrarImg"></span></label>
+              <div id="sidebar" class="sidebar">
+                <ul class="menu">
+                  <p>OPCIONES</p>
+                  <li><a href="#">Mi biblioteca</a></li>
+                  <li><a href="#">Subir Archivos</a></li>
+                  <li><a href="#">Ajustes</a></li>
+                </ul>
+              </div>
+    
+              </ul>
+            
             <ul class="navBanner">
                 
             </ul>
@@ -29,12 +42,43 @@
         </nav>
         <div class="filtros">
             <ul class="listaFiltros">
-                <img src="img/info.png" alt="info logo" class="infoLogo">
-                <li>UNIVERSIDAD</li>
-                <li>GRADO</li>
-                <li>CURSO</li>
-                <li>CUATRIMESTRE</li>
-                <li>ASIGNATURA</li>
+                <div title="Texto flotante"><img src="img/info.png" alt="info logo" class="infoLogo"></div>
+                <li><div class="box">
+                    <select>
+                      <option>Universidad de Valladolid</option>
+                      <option>Universidad de Valencia</option>
+                      <option>Universidad de Barcelona</option>
+                    </select>
+                  </div></li>
+                <li><div class="box">
+                    <select>
+                      <option>Ingeniería Informática</option>
+                      <option>Educación Primaría</option>
+                      <option>Ingeniería Industrial</option>
+                      
+                    </select>
+                  </div></li>
+                <li><div class="box">
+                    <select>
+                      <option>Primer Curso</option>
+                      <option>Segundo Curso</option>
+                      <option>Tercer Curso</option>
+                      <option>Cuarto Curso</option>
+                    </select>
+                  </div></li>
+                <li><div class="box">
+                    <select>
+                      <option>Primer Cuatrimestre</option>
+                      <option>Segundo Cuatrimestre</option>
+                    </select>
+                  </div></li>
+                <li><div class="box">
+                    <select>
+                      <option>Servicios y Sistemas Web</option>
+                      <option>Física</option>
+                      <option>Fundamentos de Matemáticas</option>
+                    </select>
+                  </div></li>
             </ul>
         </div>
         <div class="ordenar">

@@ -63,7 +63,7 @@ ul {
 .listaFiltros{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    
 
 }
 
@@ -482,3 +482,17 @@ h1 {
 .cerrarImg {
     width: 30px;
 }
+
+/* Check Boxes */
+  
+  .box select {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgb(0, 0, 0);
+    padding: 12px;
+    width: 100%;
+    border: none;
+    font-size: 100%;
+    
+  }
+  
+  
