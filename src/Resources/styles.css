@@ -5,15 +5,20 @@
 
 }
 
+html{
+    height: 100%;
+}
+
 body {
-    background: rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
-    background-image: url(img/fondoArena.jfif);
-    background-size: hover;
+    
+    background-image: linear-gradient(#90b4f5 60%, white);
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
+    background-size: hover;
 
 }
+
+
 
 ul {
     list-style: none;
@@ -22,6 +27,7 @@ ul {
 .container {
     width: 90%;
     margin: auto;
+    
 }
 
 /*Navegacion*/
@@ -35,6 +41,10 @@ ul {
     border-bottom: 2px solid rgb(0, 0, 0);
     padding-bottom: 50px;
     padding-top: 50px;
+}
+
+.navBanner{
+    z-index: 0;
 }
 
 .navMenu{
@@ -384,6 +394,7 @@ label[for="abrir-cerrar"] {
 
 .cerrar {
     display:none;
+    z-index: 5;
 }
 
 #sidebar {
@@ -427,7 +438,7 @@ input#abrir-cerrar:checked + label[for="abrir-cerrar"] .abrir {
     top: 0.5rem;
     right: 1rem;
     font-size: 2rem;
-    display: block;
+    display: none;
     padding: 0;
     line-height: 1.5rem;
     margin: 0;
@@ -480,7 +491,12 @@ h1 {
 }
 
 .cerrarImg {
-    width: 30px;
+    width: 50px;
+    
+}
+
+.iconoX {
+    z-index: 5;
 }
 
 /* Check Boxes */
