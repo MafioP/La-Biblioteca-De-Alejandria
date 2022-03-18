@@ -18,8 +18,6 @@ body {
 
 }
 
-
-
 ul {
     list-style: none;
 }
@@ -45,6 +43,8 @@ ul {
 
 .navBanner{
     z-index: 0;
+    display: block;
+    
 }
 
 .navMenu{
@@ -491,7 +491,7 @@ h1 {
 }
 
 .cerrarImg {
-    width: 50px;
+    width: 30px;
     
 }
 
@@ -508,6 +508,11 @@ h1 {
     width: 100%;
     border: none;
     font-size: 100%;
+    
+  }
+
+  .bannerLogo {
+    width: 400px;
     
   }
   
