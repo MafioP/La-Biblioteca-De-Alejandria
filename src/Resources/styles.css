@@ -111,18 +111,10 @@ ul {
     margin-top: 10px;
 }
 
-/*Registrarse */
-.registrar-box {
-    width: 320px;
-    height: 530px;
-}
-
 #info-box{
     background: #001A23;
     color: #fff;
-    top: 50%;
-    left: 50%;
-    position: absolute;
+    
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 70px 30px;
@@ -198,21 +190,28 @@ ul {
 .login-box {
     width: 320px;
     height: 420px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
+/*Registrarse */
+.registrar-box {
+    width: 320px;
+    height: 530px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
 
 /*Subir Archivos */
 .subir-box {
     width: 320px;
     height: 600px;
-    background: #001A23;
-    color: #fff;
-    top: 50%;
-    left: 50%;
     position: absolute;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
+    top: 50%;
+    left: 70%;
+    
 }
 
 /* Dropdown Button */
@@ -275,7 +274,6 @@ label[for="abrir-cerrar"] {
 
 .cerrar {
     display:none;
-    z-index: 5;
 }
 
 #sidebar {
@@ -287,8 +285,10 @@ input#abrir-cerrar:checked ~ #sidebar {
 }
 
 input#abrir-cerrar:checked + label[for="abrir-cerrar"], input#abrir-cerrar:checked ~ #contenido {
-    margin-left:400%;
+    margin-left: 150px;
     transition: margin-left .4s;
+    z-index: 2;
+    
 }
 
 
@@ -312,21 +312,6 @@ input#abrir-cerrar:checked + label[for="abrir-cerrar"] .abrir {
     transition: 0.4s;
     padding: 1rem 0;
     box-sizing:border-box;
-}
-
-.sidebar .boton-cerrar {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    font-size: 2rem;
-    display: none;
-    padding: 0;
-    line-height: 1.5rem;
-    margin: 0;
-    height: 32px;
-    width: 32px;
-    text-align: center;
-    
 }
 
 .sidebar ul, .sidebar li{
@@ -375,11 +360,6 @@ h1 {
     width: 30px;
     
 }
-
-.iconoX {
-    z-index: 5;
-}
-
 
  /*Search Input*/
 
@@ -430,13 +410,15 @@ h1 {
 /*Drag and drop*/
 .drag-area{
     border: 2px dashed #fff;
-    height: 500px;
-    width: 700px;
+    height: 600px;
+    width: 500px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    
+    
   }
   .drag-area.active{
     border: 2px solid #fff;
@@ -490,9 +472,9 @@ h1 {
       padding: 0 10px;
   }
 
-  .zona-subir{
+  .area-subir{
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       
   }
