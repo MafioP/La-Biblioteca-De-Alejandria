@@ -39,42 +39,37 @@
                   </div>
             </ul>    
         </nav>
-        <div class="zone">
-
-          <div id="dropZ">
-            <i class="fa fa-cloud-upload"></i>
-            <div>Drag and drop your file here</div>                    
-            <span>OR</span>
-            <div class="selectFile">       
-              <label for="file">Select file</label>                   
-              <input type="file" name="files[]" id="file">
+        <div class="area-subir">
+          <div class="drag-area">
+            <h2>Arrastra y suelta un archivo</h2>
+            <span>O</span>
+            <button>Selecciona tu archivo</button>
+            <input type="file" name="" id="input-file" hidden multiple/>
+          </div>
+          <div id="preview"></div>
+          <div class="subir-box" id="info-box">
+              <h1>Subir archivos</h1>
+              <form>
+                <!-- USERNAME INPUT -->
+                <label for="universidad">Universidad</label>
+                <input type="text" placeholder="Introduce nombre de la universidad">
+                <!-- EMAIL INPUT -->
+                <label for="grado">Grado</label>
+                <input type="text" placeholder="Introduce el grado">
+                <!-- PASSWORD INPUT -->
+                <label for="curso">Curso</label>
+                <input type="password" placeholder="Introduce el curso">
+                <!-- PASSWORD INPUT -->
+                <label for="cuatri">Cuatrimestre</label>
+                <input type="password" placeholder="Introduce el cuatrimestre">
+                <!-- PASSWORD INPUT -->
+                <label for="asignatura">Asignatura</label>
+                <input type="password" placeholder="Introduce la asignatura">
+                <input type="submit" value="Subir Archivo">
+                
+              </form>
             </div>
-            <p>File size limit : 10 MB</p>
-          </div>
-        
         </div>
-        <div class="subir-box" id="info-box">
-            <h1>Subir archivos</h1>
-            <form>
-              <!-- USERNAME INPUT -->
-              <label for="universidad">Universidad</label>
-              <input type="text" placeholder="Introduce nombre de la universidad">
-              <!-- EMAIL INPUT -->
-              <label for="grado">Grado</label>
-              <input type="text" placeholder="Introduce el grado">
-              <!-- PASSWORD INPUT -->
-              <label for="curso">Curso</label>
-              <input type="password" placeholder="Introduce el curso">
-              <!-- PASSWORD INPUT -->
-              <label for="cuatri">Cuatrimestre</label>
-              <input type="password" placeholder="Introduce el cuatrimestre">
-              <!-- PASSWORD INPUT -->
-              <label for="asignatura">Asignatura</label>
-              <input type="password" placeholder="Introduce la asignatura">
-              <input type="submit" value="Subir Archivo">
-              
-            </form>
-          </div>
     </div>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>

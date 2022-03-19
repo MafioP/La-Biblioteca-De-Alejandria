@@ -11,7 +11,7 @@ html{
 
 body {
     
-    background-image: linear-gradient(#5C9EAD 60%, white);
+    background-image: linear-gradient(#5C9EAD 60%, rgb(223, 201, 141));
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
     background-size: hover;
@@ -205,6 +205,14 @@ ul {
 .subir-box {
     width: 320px;
     height: 600px;
+    background: #001A23;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
 }
 
 /* Dropdown Button */
@@ -419,92 +427,72 @@ h1 {
 }
 
 
- .zone {
-	 margin: auto;
-	 position: absolute;
-	 top: 0;
-	 left: 0;
-	 bottom: 0;
-	 right: 0;
-	 background: radial-gradient(ellipse at center, #eb6a5a 0, #c9402f 100%);
-	 width: 80%;
-	 height: 50%;
-	 border: 5px dashed white;
-	 text-align: center;
-	 color: white;
-	 z-index: 20;
-	 transition: all 0.3s ease-out;
-	 box-shadow: 0 0 0 1px rgba(255, 255, 255, .05), inset 0 0 0.25em 0 rgba(0, 0, 0, .25);
-}
- .zone .btnCompression .active {
-	 background: #eb6a5a;
-	 color: white;
-}
- .zone i {
-	 text-align: center;
-	 font-size: 10em;
-	 color: #fff;
-	 margin-top: 50px;
-}
- .zone .selectFile {
-	 height: 50px;
-	 margin: 20px auto;
-	 position: relative;
-	 width: 200px;
-}
- .zone label, .zone input {
-	 cursor: pointer;
-	 display: block;
-	 height: 50px;
-	 left: 0;
-	 position: absolute;
-	 top: 0;
-	 width: 100%;
-	 border-radius: 5px;
-}
- .zone label {
-	 background: #fff;
-	 color: #eb6a5a;
-	 display: inline-block;
-	 font-size: 1.2em;
-	 line-height: 50px;
-	 padding: 0;
-	 text-align: center;
-	 white-space: nowrap;
-	 text-transform: uppercase;
-	 font-weight: 400;
-	 box-shadow: 0 1px 1px gray;
-}
- .zone input[type=file] {
-	 opacity: 0;
-}
- .zone.in {
-	 color: white;
-	 border-color: white;
-	 background: radial-gradient(ellipse at center, #eb6a5a 0, #c9402f 100%);
-}
- .zone.in i {
-	 color: #fff;
-}
- .zone.in label {
-	 background: #fff;
-	 color: #eb6a5a;
-}
- .zone.hover {
-	 color: gray;
-	 border-color: white;
-	 background: #fff;
-	 border: 5px dashed gray;
-}
- .zone.hover i {
-	 color: #eb6a5a;
-}
- .zone.hover label {
-	 background: #fff;
-	 color: #eb6a5a;
-}
- .zone.fade {
-	 transition: all 0.3s ease-out;
-	 opacity: 1;
-}
- 
+/*Drag and drop*/
+.drag-area{
+    border: 2px dashed #fff;
+    height: 500px;
+    width: 700px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .drag-area.active{
+    border: 2px solid #fff;
+  }
+  .drag-area .icon{
+    font-size: 100px;
+    color: #fff;
+  }
+  .drag-area h2{
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .drag-area span{
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+    margin: 10px 0 15px 0;
+  }
+  .drag-area button{
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #5256ad;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .drag-area img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .file-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border: solid 1px #ddd;
+  }
+
+  #preview{
+      margin-top: 10px;
+  }
+
+  .status-text{
+      padding: 0 10px;
+  }
+
+  .zona-subir{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+  }
