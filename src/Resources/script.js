@@ -13,7 +13,7 @@ input.addEventListener("change", function(){
   //getting user select file and [0] this means if user select multiple files then we'll select only the first one
   file = this.files[0];
   dropArea.classList.add("active");
-  showFile(file); //calling function
+  processFile(file);
   dropArea.classList.remove("active");
 });
 
@@ -36,12 +36,25 @@ dropArea.addEventListener("drop", (event)=>{
   event.preventDefault(); //preventing from default behaviour
   //getting user select file and [0] this means if user select multiple files then we'll select only the first one
   file = event.dataTransfer.files[0];
-  showFile(file); //calling function
+  processFile(file);
 });
+
+function processFile(file){
+  
+    let preview = document.getElementById("preview");
+    if(preview.hasChildNodes()){
+      while(preview.childNodes.length>=1){
+        preview.removeChild(preview.firstChild);
+      }
+    }
+    showFile(file);
+}
 
 function showFile(file){
   let fileType = file.type; //getting selected file type
-  let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid extensions in array
+  let validExtensions = ["image/jpeg", "image/jpg", "image/png", "application/pdf", 
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation"]; //adding some valid extensions in array
   if(validExtensions.includes(fileType)){ //if user selected file is a valid file
     let fileReader = new FileReader(); //creating new FileReader object
     let id = `file-${Math.random().toString(32).substring(7)}`;
@@ -50,7 +63,7 @@ function showFile(file){
       let fileURL = fileReader.result; //passing user file source in fileURL variable
       let archivo = `
         <div id="${id}" class="file-container">
-          <img src="${fileURL}" alt="${file.name}" width="50">
+          <img src="${fileURL}" alt="${file.name}" width="50px">
           <div class="status">
             <span class="status-text">
               Cargando...
@@ -63,9 +76,8 @@ function showFile(file){
       document.querySelector('#preview').innerHTML = archivo + html;
     });
       
-
-    
     fileReader.readAsDataURL(file);
+
   }else{
     alert("La extensión del archivo no es válida");
     dropArea.classList.remove("active");
