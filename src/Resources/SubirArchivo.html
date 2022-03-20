@@ -13,18 +13,18 @@
     
     <div class="container">
         <nav class="navMain">
-          <ul class="navMenuRight">
+          <ul class="navMenu">
             <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
-          <label for="abrir-cerrar"> <span class="abrir"><img src="img/menuLogo.png" alt="Menu logo" class="navMenu" ></span><span class="cerrar"><img src="img/iconoX.png" class="cerrarImg"></span></label>
-          <div id="sidebar" class="sidebar">
-            <ul class="menu">
-              <p>OPCIONES</p>
-              <li><a href="#">Mi biblioteca</a></li>
-              <li><a href="#">Subir Archivos</a></li>
-              <li><a href="#">Ajustes</a></li>
-            </ul>
-          </div>
-
+            <label for="abrir-cerrar"> <span class="abrir"><img src="img/menuLogo.png" alt="Menu logo" class="navMenu" ></span><span class="cerrar">
+              <img src="img/iconoX.png" class="cerrarImg"></span></label>
+            <div id="sidebar" class="sidebar">
+              <ul class="menu">
+                <p>OPCIONES</p>
+                <li><a href="#">Mi biblioteca</a></li>
+                <li><a href="#">Subir Archivos</a></li>
+                <li><a href="#">Ajustes</a></li>
+              </ul>
+            </div>
           </ul>
             <ul class="navBanner">
               <a href="MainPage.html"><img src="img/Logo.png" class= "bannerLogo" alt="Logo Image"></a>
@@ -49,24 +49,31 @@
           </div>
           
           <div class="subir-box" id="info-box">
-              <h1>Subir archivos</h1>
+              <h2>Subir archivos</h2>
               <form>
-                <!-- USERNAME INPUT -->
+                <!-- TITULO INPUT -->
+                <label for="titulo">Título</label>
+                <input type="text" placeholder="Introduce el título">
+                <!-- UNIVERSIDAD INPUT -->
                 <label for="universidad">Universidad</label>
                 <input type="text" placeholder="Introduce nombre de la universidad">
-                <!-- EMAIL INPUT -->
+                <!-- GRADO INPUT -->
                 <label for="grado">Grado</label>
                 <input type="text" placeholder="Introduce el grado">
-                <!-- PASSWORD INPUT -->
+                <!-- CURSO INPUT -->
                 <label for="curso">Curso</label>
-                <input type="password" placeholder="Introduce el curso">
-                <!-- PASSWORD INPUT -->
+                <input type="text" placeholder="Introduce el curso">
+                <!-- CUATRI INPUT -->
                 <label for="cuatri">Cuatrimestre</label>
-                <input type="password" placeholder="Introduce el cuatrimestre">
-                <!-- PASSWORD INPUT -->
+                <input type="text" placeholder="Introduce el cuatrimestre">
+                <!-- ASIGNATURA INPUT -->
                 <label for="asignatura">Asignatura</label>
-                <input type="password" placeholder="Introduce la asignatura">
+                <input type="text" placeholder="Introduce la asignatura">
+                <!-- DESCRIPCION INPUT -->
+                <label for="descripción">Título</label>
+                <input type="text" placeholder="Introduce la descripción">
                 <input type="submit" value="Subir Archivo">
+                
                 
               </form>
             </div>
