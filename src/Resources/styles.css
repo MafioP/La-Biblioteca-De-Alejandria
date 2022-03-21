@@ -204,7 +204,7 @@ ul {
 /*Subir Archivos */
 .subir-box {
     width: 500px;
-    height: 700px;
+    height: fit-content(700px);
 }
 
 /* Dropdown Button */
@@ -557,3 +557,8 @@ h1 {
     height: 300px;
 }
 
+.comentarios tr{
+    height: 30px;
+    width: 80%;
+    background-color: #ddd;
+}
