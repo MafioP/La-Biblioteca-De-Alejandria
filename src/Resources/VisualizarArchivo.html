@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Alejandría</title>
+
+    <!--CUSTOM CSS-->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+      <nav class="navMain">
+          <ul class="navMenu">
+            <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
+            <label for="abrir-cerrar"> <span class="abrir"><img src="img/menuLogo.png" alt="Menu logo" class="navMenu" ></span><span class="cerrar">
+                <img src="img/iconoX.png" class="cerrarImg"></span></label>
+            <div id="sidebar" class="sidebar">
+              <ul class="menu">
+                <p>OPCIONES</p>
+                <li><a href="#">Mi biblioteca</a></li>
+                <li><a href="SubirArchivo.html">Subir Archivos</a></li>
+                <li><a href="#">Ajustes</a></li>
+              </ul>
+            </div>
+          </ul>
+          <ul class="navBanner">
+            <a href="MainPage.html"><img src="img/Logo.png" class= "bannerLogo" alt="Logo Imagen"></a>
+          </ul>
+          <ul class="navLogIn">
+              <div class="dropdown">
+                  <button class="dropbtn"><img src="img/logoInicioSesion.png" width="50px"></button>
+                  <div class="dropdown-content">
+                    <a href="InicioSesion.html">Iniciar sesión</a>
+                    <a href="Registro.html">Registrarse</a>
+                  </div>
+                </div>
+          </ul>    
+      </nav>
+      <div class="visualizarArea">
+          <div class="preview-box">
+            <iframe src="files/analisis.pdf"></iframe>
+          </div>
+          <div class="descripcion-box">
+            <form>
+              <h1>Título</h1>
+              <label for="titulo">Ejercicios de Sistemas y Servicios Web</label>
+              <h1>Descripción</h1>
+              <label for="descripcion">Ejercicios de la asignatura SSW del año 2021 resueltos en clase por el profesor</label>
+              <h1>Tags</h1>
+              <ul class="tags">
+                <li><a href="#" class="tag">Universidad De Valladolid</a></li>
+                <li><a href="#" class="tag">Informática</a></li>
+                <li><a href="#" class="tag">Tercero</a></li>
+                <li><a href="#" class="tag">2ª Cuatri</a></li>
+                <li><a href="#" class="tag">SSW</a></li>
+              </ul>
+            </form>
+      </div>
+    </div>
