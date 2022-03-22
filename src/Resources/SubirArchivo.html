@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
     <div class="container">
         <nav class="navMain">
           <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
@@ -23,29 +22,7 @@
             <a href="SubirArchivo.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
           </div>
-          <span onclick="openNav()"><img src="img/menuLogo.png" width="50px"></span>
-          <script>
-          /* Set the width of the side navigation to 250px */
-          function openNav() {
-            document.getElementById("sideNavMenu").style.width = "250px";
-          }
-      
-          /* Set the width of the side navigation to 0 */
-          function closeNav() {
-            document.getElementById("sideNavMenu").style.width = "0";
-          }
-
-          function openBiblioteca() {
-            document.getElementById("itemBiblio1").style.display = "block";
-            document.getElementById("itemBiblio2").style.display = "block";
-            document.getElementById("itemBiblio3").style.display = "block";
-          }
-          function closeBiblioteca() {
-            document.getElementById("itemBiblio1").style.display = "none";
-            document.getElementById("itemBiblio2").style.display = "none";
-            document.getElementById("itemBiblio3").style.display = "none";
-          }
-        </script>
+          <span onclick="openNav()"><img src="img/menuLogo.png"  class="menu-sidebar"></span>
         <ul class="navBanner">
           <a href="MainPage.html"><img src="img/Logo.png" class= "bannerLogo" alt="Logo Imagen"></a>
         </ul>
@@ -94,10 +71,10 @@
                 <input type="text" placeholder="Introduce la descripción">
                 <input type="submit" value="Subir Archivo">
                 
-                
               </form>
             </div>
         </div>
     </div>
+    <!--CUSTOM JS-->
     <script src="script.js"></script>
 </body>

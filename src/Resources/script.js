@@ -1,4 +1,4 @@
-//selecting all required elements
+//Seleccinando los elementos requeridos del html
 const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("h2"),
 button = dropArea.querySelector("button"),
@@ -6,36 +6,35 @@ input = dropArea.querySelector("input");
 let file;
 
 button.onclick = ()=>{
-  input.click(); //if user click on the button then the input also clicked
+  input.click(); //Abre el input cuando hay click
 }
 
 input.addEventListener("change", function(){
-  //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-  file = this.files[0];
+  
+  file = this.files[0]; //Si hay muchos archivos seleciona el primero
   dropArea.classList.add("active");
   processFile(file);
   dropArea.classList.remove("active");
 });
 
 
-//If user Drag File Over DropArea
+//Si el usuario arrastra el archivo sobre DropArea
 dropArea.addEventListener("dragover", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
+  event.preventDefault();
   dropArea.classList.add("active");
   dragText.textContent = "Suelta para subir el archivo";
 });
 
-//If user leave dragged File from DropArea
+//Si el usuario deja el archivo arrastrado desde DropArea
 dropArea.addEventListener("dragleave", ()=>{
   dropArea.classList.remove("active");
   dragText.textContent = "Arrastra y suelta para subir el archivo";
 });
 
-//If user drop File on DropArea
+//Si el usuario suelta el archivo en DropArea
 dropArea.addEventListener("drop", (event)=>{
-  event.preventDefault(); //preventing from default behaviour
-  //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-  file = event.dataTransfer.files[0];
+  event.preventDefault();
+  file = event.dataTransfer.files[0]; //Si hay muchos archivos seleciona el primero
   processFile(file);
 });
 
@@ -51,16 +50,16 @@ function processFile(file){
 }
 
 function showFile(file){
-  let fileType = file.type; //getting selected file type
+  let fileType = file.type; //Obtiene el tipo de archivo
   let validExtensions = ["image/jpeg", "image/jpg", "image/png", "application/pdf", 
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-  "application/vnd.openxmlformats-officedocument.presentationml.presentation"]; //adding some valid extensions in array
-  if(validExtensions.includes(fileType)){ //if user selected file is a valid file
-    let fileReader = new FileReader(); //creating new FileReader object
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation"]; //Añade las extensiones validas al array
+  if(validExtensions.includes(fileType)){ //Si la extension es valida
+    let fileReader = new FileReader();
     let id = `file-${Math.random().toString(32).substring(7)}`;
 
     fileReader.addEventListener('load', e =>{
-      let fileURL = fileReader.result; //passing user file source in fileURL variable
+      let fileURL = fileReader.result;
       let archivo = `
         <div id="${id}" class="file-container">
           <img src="${fileURL}" alt="${file.name}" width="50px">
@@ -83,5 +82,26 @@ function showFile(file){
     dropArea.classList.remove("active");
     dragText.textContent = "Arrastra y suelta para subir un archivo";
   }
+}
+
+/*Funcionalidad de SideBar */
+function openNav() {
+  document.getElementById("sideNavMenu").style.width = "250px";
+}
+
+/*Pone el width = 0 del sidebar*/
+function closeNav() {
+  document.getElementById("sideNavMenu").style.width = "0";
+}
+
+function openBiblioteca() {
+  document.getElementById("itemBiblio1").style.display = "block";
+  document.getElementById("itemBiblio2").style.display = "block";
+  document.getElementById("itemBiblio3").style.display = "block";
+}
+function closeBiblioteca() {
+  document.getElementById("itemBiblio1").style.display = "none";
+  document.getElementById("itemBiblio2").style.display = "none";
+  document.getElementById("itemBiblio3").style.display = "none";
 }
 
