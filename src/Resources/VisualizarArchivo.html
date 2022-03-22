@@ -12,22 +12,42 @@
 <body>
     <div class="container">
       <nav class="navMain">
-          <ul class="navMenu">
-            <input type="checkbox" id="abrir-cerrar" name="abrir-cerrar" value="">
-            <label for="abrir-cerrar"> <span class="abrir"><img src="img/menuLogo.png" alt="Menu logo" class="navMenu" ></span><span class="cerrar">
-                <img src="img/iconoX.png" class="cerrarImg"></span></label>
-            <div id="sidebar" class="sidebar">
-              <ul class="menu">
-                <p>OPCIONES</p>
-                <li><a href="#">Mi biblioteca</a></li>
-                <li><a href="SubirArchivo.html">Subir Archivos</a></li>
-                <li><a href="#">Ajustes</a></li>
-              </ul>
-            </div>
-          </ul>
-          <ul class="navBanner">
-            <a href="MainPage.html"><img src="img/Logo.png" class= "bannerLogo" alt="Logo Imagen"></a>
-          </ul>
+        <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <p>OPCIONES</p>
+          <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
+            <ul id="itemBiblio1">Favoritos ★</ul>
+            <ul id="itemBiblio2">Tercero Carrera</ul>
+            <ul id="itemBiblio3">+ Crear Nueva</ul>
+          <a href="SubirArchivo.html">Subir Archivos</a>
+          <a href="#">Ajustes</a>
+        </div>
+        <span onclick="openNav()"><img src="img/menuLogo.png" width="50px"></span>
+        <script>
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+          document.getElementById("sideNavMenu").style.width = "250px";
+        }
+    
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+          document.getElementById("sideNavMenu").style.width = "0";
+        }
+
+        function openBiblioteca() {
+          document.getElementById("itemBiblio1").style.display = "block";
+          document.getElementById("itemBiblio2").style.display = "block";
+          document.getElementById("itemBiblio3").style.display = "block";
+        }
+        function closeBiblioteca() {
+          document.getElementById("itemBiblio1").style.display = "none";
+          document.getElementById("itemBiblio2").style.display = "none";
+          document.getElementById("itemBiblio3").style.display = "none";
+        }
+      </script>
+      <ul class="navBanner">
+        <a href="MainPage.html"><img src="img/Logo.png" class= "bannerLogo" alt="Logo Imagen"></a>
+      </ul>
           <ul class="navLogIn">
               <div class="dropdown">
                   <button class="dropbtn"><img src="img/logoInicioSesion.png" width="50px"></button>

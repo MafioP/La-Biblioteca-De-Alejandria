@@ -66,7 +66,6 @@ ul {
     padding: 5px;
     display: flex;
     justify-content: space-between;
-    
 }
 
 /* Check Boxes */
@@ -261,99 +260,54 @@ ul {
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
 
-  /* Barra lateral izquierda desplegable del menu */
-  input#abrir-cerrar {
-    visibility:hidden;
-    position: absolute;
-    top: -9999px;
-}
-
-label[for="abrir-cerrar"] {
-    cursor:pointer;
-    padding: 1rem;
-    color:#fff;
-    display:inline-block;
-    width:100%;
-
-}
-
-.cerrar {
-    display:none;
-}
-
-#sidebar {
-    width:0;
-}
-
-input#abrir-cerrar:checked ~ #sidebar {
-    width:300px;
-}
-
-input#abrir-cerrar:checked + label[for="abrir-cerrar"], input#abrir-cerrar:checked ~ #contenido {
-    margin-left: 150px;
-    transition: margin-left .4s;
-    z-index: 2;
-}
-
-input#abrir-cerrar:checked + label[for="abrir-cerrar"] .cerrar {
-    display:inline;
-}
-
-input#abrir-cerrar:checked + label[for="abrir-cerrar"] .abrir {
-    display:none;
-}
-
-.sidebar {
-    position: fixed;
-    height: 100%;
-    width: 0;
-    top: 0;
+/* The side navigation menu */
+.sideNav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
     left: 0;
-    z-index: 1;
-    background-color: #00324b;
-    overflow-x: hidden;
-    transition: 0.4s;
-    padding: 1rem 0;
-    box-sizing:border-box;
-}
-
-.sidebar ul, .sidebar li{
-    margin:0;
-    padding:0;
-    list-style:none inside;
-}
-
-.sidebar ul {
-    margin: 4rem auto;
-    display: block;
-    width: 80%;
-    min-width:200px;
-}
-
-.sidebar a {
-    display: block;
-    font-size: 120%;
-    color: #eee;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sideNav a {
+    padding: 8px 8px 8px 32px;
     text-decoration: none;
-    
-}
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
 
-.sidebar a:hover{
-    color:#fff;
-    background-color: #f90;
+  .sideNav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sideNav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
 
-}
-
-.sidebar p {
-    font-size: 20px;
-    font-weight: 600;
-}
-
+  .sideNav ul{
+      display: none;
+      color: #eee;
+  }
+  
 h1 {
     color:#f90;
     font-size:180%;
     font-weight:normal;
 }
+
 #contenido {
     transition: margin-left .4s;
     padding: 1rem;
@@ -491,19 +445,19 @@ h1 {
     
   }
 
-  .tabla-resultados {
-
+  .tabla-resultados{
+    border-collapse: collapse;
     width: 100%;
-    border-color: #000;
   }
     
-  .tabla-resultdos tr {
-      border-color: #000;
-      
+  .tabla-resultados tr {
+      background-color: #999;
+      height: 50px;
+      border: solid 2px;
   }
     
 .tabla-resultados tr:hover{
-    background: red;
+    background: #ddd;
     cursor: pointer;
 }
 
