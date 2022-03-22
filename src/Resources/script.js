@@ -84,3 +84,4 @@ function showFile(file){
     dragText.textContent = "Arrastra y suelta para subir un archivo";
   }
 }
+

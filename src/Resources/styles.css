@@ -557,8 +557,56 @@ h1 {
     height: 300px;
 }
 
-.comentarios tr{
-    height: 30px;
-    width: 80%;
-    background-color: #ddd;
+.comentarios {
+    width: 90%;
+    box-sizing: border-box;
+    align-items: center;
+    
 }
+.comentarios table {
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+.comentarios tr{
+    background-color: #ddd;
+    border: solid 2px #777;
+    line-height: 40px;
+}
+
+.comentariosHead {
+    background-color: #666;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    padding: 10px;
+}
+.comentariosHead button {
+    border-radius: 3px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(71, 78, 93, 0.4);
+    padding-top: 50px;
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    height: 30%;
+  }
+  .modal textarea{
+    height: 60%;
+    width: 90%;
+  }

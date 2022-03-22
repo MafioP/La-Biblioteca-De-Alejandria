@@ -60,14 +60,57 @@
             </div>
         </div>
       <div class="comentarios">
-            <h1>Comentarios</h1>
-            <table>
-                <tr>
-                    <td><img src="img/logoInicioSesion.png" id="icono"></td>
-                    <td>El Torro Pai</td>
-                    <td>Buenos apuntes, me sirvieron para aprobar la asignatura en la extraordinaria</td>
-                    <td>Valoracion: 5.0</td>
-                </tr>
-            </table>
+        <h1>Comentarios</h1>
+        <div class="comentariosHead">
+          <label>Numero de comentarios: 3</label>
+          <button onclick="document.getElementById('id01').style.display='block'">Añadir Comentario</button>
+        </div>
+        <table>
+          <tr>
+              <td><img src="img/logoInicioSesion.png" id="icono"></td>
+              <td>El Torro Pai</td>
+              <td>Buenos apuntes, me sirvieron para aprobar la asignatura en la extraordinaria</td>
+              <td>Valoracion: 5.0</td>
+          </tr>
+          <tr>
+            <td><img src="img/logoInicioSesion.png" id="icono"></td>
+            <td>MafioP</td>
+            <td>Buena coleccion de ejercicios, aunque faltarian algunos del tema 4</td>
+            <td>Valoracion: 4.5</td>
+          </tr>
+          <tr>
+            <td><img src="img/logoInicioSesion.png" id="icono"></td>
+            <td>Daxter268</td>
+            <td>Faltan bastantes ejercicios que hizo el profe en clase, vaya desastre de apuntes</td>
+            <td>Valoracion: 1.0</td>
+          </tr>
+        </table>
       </div>
+    </div>
+
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <form class="modal-content" action="/action_page.php">
+        <div class="container">
+          <h1>Añadir Comentario</h1>
+          <div class="inputComentario">
+            <textarea placeholder="Comentario"></textarea>
+            <input type="number" placeholder="0">
+          </div>
+          <div class="buttonsComentario">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="button" class="addbtn">Añadir</button>
+          </div>
+        </div>
+      </form>
+      <script>
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+            }
+          } 
+      </script>
     </div>
