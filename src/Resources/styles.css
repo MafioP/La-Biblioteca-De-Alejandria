@@ -605,8 +605,19 @@ h1 {
     border: 1px solid #888;
     width: 50%; /* Could be more or less, depending on screen size */
     height: 30%;
+    border-radius: 5px;
   }
   .modal textarea{
     height: 60%;
     width: 90%;
+  }
+
+  .buttonsComentario {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+  }
+  .buttonsComentario button {
+      border-radius: 5px;
+      
   }
