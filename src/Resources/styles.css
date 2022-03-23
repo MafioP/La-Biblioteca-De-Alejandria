@@ -20,15 +20,15 @@ ul {
 
 /*Navegacion*/
 .navMain {
-    font-size: 17px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    padding: 20px 0;
-    border-bottom: 2px solid rgb(0, 0, 0);
-    padding-bottom: 50px;
-    padding-top: 50px;
+  font-size: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 20px 0;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .bannerLogo{
@@ -50,6 +50,13 @@ ul {
     width: 100%;
     font-size: 100%;
     border-radius: 10px;
+    border: 0px;
+    cursor: pointer;
+}
+
+.box option {
+    background-color: #063969;
+    border: 0px;
 }
 
 .buscarOrdenar{
@@ -78,8 +85,10 @@ ul {
     margin-top: 10px;
 }
 
+/*Formulario estilo*/
+
 #info-box{
-    background: #001A23;
+    background: rgb(0, 26, 35, 0.8);
     color: #fff;
     border-radius: 10px;
     box-sizing: border-box;
@@ -110,12 +119,12 @@ ul {
     padding: 0;
     font-weight: bold;
     display: block;
-  }
+}
   
 #info-box input {
     width: 100%;
     margin-bottom: 20px;
-  }
+}
   
 #info-box input[type="text"], #info-box input[type="password"] {
     border: none;
@@ -159,7 +168,7 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 70px;
+    padding: 100px;
 }
 
 
@@ -214,19 +223,20 @@ ul {
 
 /* Dropdown Button */
 
-  .dropdown {
+.dropdown {
     position: relative;
     display: inline-block;
     padding-right: 50px;
-  }
+}
 
-  .dropbtn {
+.dropbtn {
     background-color: transparent;
     border: none;
-  }
+    cursor: pointer;
+}
   
-  /* Contenido del Dropdown*/
-  .dropdown-content {
+/* Contenido del Dropdown*/
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #001A23;
@@ -234,24 +244,24 @@ ul {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 5px;
-  }
+}
   
-  /* Enlaces dentro del Dropdown */
-  .dropdown-content a {
+/* Enlaces dentro del Dropdown */
+.dropdown-content a {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Cambia el color de los enlaces desplegables al pasar el reton */
-  .dropdown-content a:hover {
-      background-color: rgb(100, 100, 100, 0.5);
-      border-radius: 5px;
 }
   
-  /* Mostrar el Dropdown al pasar el raton */
-  .dropdown:hover .dropdown-content {display: block;}
+/* Cambia el color de los enlaces desplegables al pasar el reton */
+.dropdown-content a:hover {
+    background-color: rgb(100, 100, 100, 0.5);
+    border-radius: 5px;
+}
+  
+/* Mostrar el Dropdown al pasar el raton */
+.dropdown:hover .dropdown-content {display: block;}
 
 /* Sidebar*/
 .sideNav {
@@ -261,86 +271,86 @@ ul {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #001A23;
+    background-color: #072864;
     overflow-x: hidden; /* Deshabilita el scroll horizontal */
     padding-top: 60px;
     transition: 0.5s;
-  }
+}
   
-  /* Enlaces del sidebar */
-  .sideNav a {
+/* Enlaces del sidebar */
+.sideNav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #b1b1b1;
     display: block;
     transition: 0.3s;
-  }
+}
 
-  .sideNav a:hover {
-    color: #f1f1f1;
-  }
+.sideNav a:hover {
+    color: #ffffff;
+}
   
-  /* Posicion y estilo del boton de cerrar*/
-  .sideNav .closebtn {
+/* Posicion y estilo del boton de cerrar*/
+.sideNav .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
-  }
+}
 
-  .sideNav ul{
-      display: none;
-      color: #eee;
-  }
+.sideNav ul{
+    display: none;
+    color: #eee;
+}
 
-  .menu-sidebar {
+.menu-sidebar {
     cursor: pointer;
     width: 50px;
-  }
+}
 
- /*Barra de busqueda*/
+/*Barra de busqueda*/
 
 .search {
-  width: 100%;
-  position: relative;
-  display: flex;
+    width: 100%;
+    position: relative;
+    display: flex;
 }
 
 .searchTerm {
-  width: 100%;
-  border-bottom: 3px solid #000000;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-top: none;
-  border-left: none;
-  outline: none;
-  color: rgb(0, 0, 0);
-  font-size: 18px;
-  background: transparent;
+    width: 100%;
+    border-bottom: 3px solid #000000;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-top: none;
+    border-left: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    background: transparent;
 }
 
 .searchTerm:focus{
-  color: #000000;
+    color: #000000;
 }
 .searchTerm::placeholder{
     color: rgba(0, 0, 0, 0.6);
 }
 
 .searchButton {
-  width: 40px;
-  height: 36px;
-  border: none;
-  background: transparent;
-  text-align: center;
-  cursor: pointer;
-  font-size: 20px;
+    width: 40px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .wrap{
-  width: 50%;
+      width: 50%;
 }
 
 /*Drag and drop*/
@@ -355,28 +365,33 @@ ul {
     flex-direction: column;
     
     
-  }
-  .drag-area.active{
+}
+
+.drag-area.active{
     border: 2px solid rgb(0, 26, 35);
     background-color: rgb(0, 26, 35, 0.4);
-  }
-  .drag-area .icon{
+}
+
+.drag-area .icon{
     font-size: 100px;
     color: #fff;
-  }
-  .drag-area h2{
+}
+
+.drag-area h2{
     font-size: 28px;
     font-weight: 500;
     color: #fff;
     text-align: center;
-  }
-  .drag-area span{
+}
+
+.drag-area span{
     font-size: 25px;
     font-weight: 500;
     color: #fff;
     margin: 10px 0 25px 0;
-  }
-  .drag-area button{
+}
+
+.drag-area button{
     padding: 10px 25px;
     font-size: 20px;
     font-weight: 500;
@@ -386,54 +401,61 @@ ul {
     color: #000000;
     border-radius: 5px;
     cursor: pointer;
-  }
-  .drag-area img{
+}
+
+.drag-area img{
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 5px;
-  }
+}
 
-  .file-container {
+.file-container {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px;
     border: solid 1px #ddd;
     width: 50px;
-  }
+}
 
-  #preview{
-      margin-top: 10px;
-  }
+#preview{
+    margin-top: 10px;
+}
 
-  .status-text{
+.status-text{
     padding: 0 10px;
     font-size: 10px;
-  }
+}
 
-  .area-subir{    
+.area-subir{    
     margin-top: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    
-  }
+}
 
-  .tabla-resultados{
+/*Tabla de archivos*/
+.tabla-resultados{
     border-collapse: collapse;
     width: 100%;
     overflow: hidden;
     border-radius: 15px;
-  }
+    margin-top: 20px;
+    text-align: left;
+}
     
-  .tabla-resultados tr {
+.tabla-resultados tr {
       background-color: rgb(144, 176, 219);
       height: 50px;
       border-radius: 10px;
-      border-bottom: 2px solid rgb(84, 122, 202); 
-  }
+      border-bottom: 2px solid rgb(84, 122, 202);
+}
+
+.tabla-resultados td {
+    padding-left: 10px;
+}
     
 .tabla-resultados tr:hover{
     background: #ddd;
@@ -460,21 +482,23 @@ ul {
     text-align: left;
     color: #F6BD60;
 }
+
 .descripcion-box label {
     color: white;   
 }
+
 .tags {
     list-style: none;
     margin: 0;
     overflow: hidden; 
     padding: 0;
-  }
+}
   
-  .tags li {
+.tags li {
     float: left; 
-  }
+}
   
-  .tag {
+.tag {
     background: #eee;
     border-radius: 3px;
     color: #999;
@@ -485,18 +509,18 @@ ul {
     position: relative;
     margin: 0 10px 10px 0;
     text-decoration: none;
-  }
+}
 
 .preview-box {
     width: 40%;
-    height: 300px;
+    height: 400px;
     border: solid 2px #ddd;
     border-radius: 5px;
 }
 
 .preview-box iframe {
     width: 100%;
-    height: 300px;
+    height: 100%;
 }
 
 .comentarios {
@@ -508,25 +532,39 @@ ul {
 .comentarios table {
     border-collapse: collapse;
     width: 100%;
-    
+    overflow: hidden;
+    border-radius: 15px;
 }
 .comentarios tr{
-    background-color: #ddd;
-    border: solid 2px #777;
+    background-color: rgb(144, 176, 219);
+    border-bottom: 2px solid rgb(84, 122, 202);
     line-height: 40px;
 }
 
+.comentarios td{
+  padding-left: 10px;
+}
+
 .comentariosHead {
-    background-color: #666;
+    background-color: #072864;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     height: 30px;
     padding: 10px;
+    overflow: hidden;
+    border-radius: 15px;
 }
+
 .comentariosHead button {
-    border-radius: 3px;
+    border-radius: 5px;
+    height: 30px;
+    border: 0px;
+}
+
+.comentariosHead label{
+  color: white;
 }
 
 .modal {
@@ -540,7 +578,7 @@ ul {
     overflow: auto;
     background-color: rgba(71, 78, 93, 0.4);
     padding-top: 50px;
-  }
+}
 
   .modal-content {
     background-color: #fefefe;
@@ -549,19 +587,24 @@ ul {
     width: 50%;
     height: 30%;
     border-radius: 5px;
-  }
+}
 
-  .modal textarea{
-    height: 60%;
-    width: 90%;
-  }
+.modal textarea{
+    max-height: 120px;
+    height: 100px;
+    width: 100%;
+    resize: none;
+}
 
-  .buttonsComentario {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-  }
+.buttonsComentario {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
-  .buttonsComentario button {
-      border-radius: 5px;
-  }
+.buttonsComentario button {
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+}

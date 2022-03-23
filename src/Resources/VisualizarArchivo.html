@@ -14,7 +14,6 @@
       <nav class="navMain">
         <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <p>OPCIONES</p>
           <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
             <ul id="itemBiblio1">Favoritos ★</ul>
             <ul id="itemBiblio2">Tercero Carrera</ul>
@@ -65,19 +64,19 @@
         </div>
         <table>
           <tr>
-              <td><img src="img/logoInicioSesion.png" id="icono"></td>
+              <td><img src="img/logoInicioSesion.png" id="iconoFiltro"></td>
               <td>El Torro Pai</td>
               <td>Buenos apuntes, me sirvieron para aprobar la asignatura en la extraordinaria</td>
               <td>Valoracion: 5.0</td>
           </tr>
           <tr>
-            <td><img src="img/logoInicioSesion.png" id="icono"></td>
+            <td><img src="img/logoInicioSesion.png" id="iconoFiltro"></td>
             <td>MafioP</td>
             <td>Buena coleccion de ejercicios, aunque faltarian algunos del tema 4</td>
             <td>Valoracion: 4.5</td>
           </tr>
           <tr>
-            <td><img src="img/logoInicioSesion.png" id="icono"></td>
+            <td><img src="img/logoInicioSesion.png" id="iconoFiltro"></td>
             <td>Daxter268</td>
             <td>Faltan bastantes ejercicios que hizo el profe en clase, vaya desastre de apuntes</td>
             <td>Valoracion: 1.0</td>
@@ -98,21 +97,42 @@
             <input type="number" min="1" max="5" placeholder="5">
           </div>
           <div class="buttonsComentario">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <button type="button" class="addbtn">Añadir</button>
+            <button type="button" class="cancelbtn" onclick="window.location.href='VisualizarArchivo.html'">Cancelar</button>
+            <button type="button" class="addbtn" onclick="window.location.href='VisualizarArchivo.html'">Añadir</button>
           </div>
         </div>
       </form>
-      <!--CUSTOM JS-->
-    <script src="script.js"></script>
-      <script>
-        var modal = document.getElementById('id01');
-
-        // Cuando pulsas fueara del panel se cierra
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-            }
-          } 
-      </script>
     </div>
+    <!--CUSTOM JS-->
+    <script>
+      var modal = document.getElementById('id01');
+
+      // Cuando pulsas fueara del panel se cierra
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      /*Funcionalidad de SideBar */
+      function openNav() {
+        document.getElementById("sideNavMenu").style.width = "250px";
+      }
+
+      /*Pone el width = 0 del sidebar*/
+      function closeNav() {
+        document.getElementById("sideNavMenu").style.width = "0";
+      }
+
+      function openBiblioteca() {
+        document.getElementById("itemBiblio1").style.display = "block";
+        document.getElementById("itemBiblio2").style.display = "block";
+        document.getElementById("itemBiblio3").style.display = "block";
+      }
+      function closeBiblioteca() {
+        document.getElementById("itemBiblio1").style.display = "none";
+        document.getElementById("itemBiblio2").style.display = "none";
+        document.getElementById("itemBiblio3").style.display = "none";
+      }
+    </script>
+</body>
