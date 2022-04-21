@@ -5,6 +5,12 @@ import java.sql.*;
 
 
 public class UsuarioDB {
+    
+    /**
+     * Insertar un nuevo usuario en la base de datos
+     * @param usuario
+     * @return 
+     */
     public static int insert(Usuario usuario) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -35,7 +41,11 @@ public class UsuarioDB {
             }
     }   
     
-    
+    /**
+     * Comprobar si existe un usuario en la base de datos a partir de su email
+     * @param email
+     * @return 
+     */
     public static boolean emailExists(String email) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -59,6 +69,12 @@ public class UsuarioDB {
         }
     }
     
+    
+    /**
+     * Comprobar si existe un usuario en la base de datos a partir de su nombre de usuario
+     * @param user
+     * @return 
+     */
     public static boolean userExists(String user){
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -81,6 +97,11 @@ public class UsuarioDB {
         }
     }
     
+    /**
+     * Seleccionar un usuario en la base de datos a partir de su correo electronico
+     * @param email
+     * @return 
+     */
     public static Usuario selectUserByMail(String email) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -109,7 +130,11 @@ public class UsuarioDB {
             return null;
           }       
     } 
-    
+    /**
+     * Seleccionar un usuario de la base de datos a partir de su nombre de usuario
+     * @param username
+     * @return 
+     */
     public static Usuario selectUserByName(String username) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
