@@ -19,7 +19,7 @@ catch(Exception e) {
 
 public static ConnectionPool getInstance() {
     if (pool == null) {
-    pool = new ConnectionPool();
+        pool = new ConnectionPool();
     }
     return pool;
 }

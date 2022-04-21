@@ -59,7 +59,29 @@ public class UsuarioDB {
         }
     }
     
-    public static Usuario selectUser(String email) {
+    public static boolean userExists(String user){
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT Username FROM Usuario "
+        + "WHERE Username = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user);
+            rs = ps.executeQuery();
+            boolean res = rs.next();
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static Usuario selectUserByMail(String email) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -71,6 +93,34 @@ public class UsuarioDB {
             rs = ps.executeQuery();
             Usuario usuario = null;
 
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setUsername(rs.getString("Nombre"));
+                usuario.setEmail(rs.getString("Email"));
+                usuario.setPassword(rs.getString("Contraseña"));
+                usuario.setLogros(rs.getInt("Logro"));
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return usuario;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+          }       
+    } 
+    
+    public static Usuario selectUserByName(String username) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Usuario WHERE Username = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            Usuario usuario = null;
 
             if (rs.next()) {
                 usuario = new Usuario();

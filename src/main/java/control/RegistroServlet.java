@@ -12,8 +12,7 @@ import modelo.UsuarioDB;
  * @author Mario
  */
 public class RegistroServlet extends HttpServlet{
-    protected void doPost(HttpServletRequest request,
-        HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // get parameters from the request
         response.setContentType("text/html");
