@@ -22,19 +22,19 @@
           <div class="registrar-box" id="info-box">
             <img src="img/logoInicioSesion.png" class="avatar" alt="Avatar Image">
             <h1>Registrarse</h1>
-            <form>
+            <form action="RegistroServlet" method="post">
               <!-- USERNAME INPUT -->
               <label for="username">Nombre de usuario</label>
-              <input type="text" placeholder="Introduce nombre de usuario">
+              <input type="text" name="username" placeholder="Introduce nombre de usuario">
               <!-- EMAIL INPUT -->
               <label for="email">Correo electrónico</label>
-              <input type="text" placeholder="Introduce correo electrónico">
+              <input type="text" name="email" placeholder="Introduce correo electrónico">
               <!-- PASSWORD INPUT -->
               <label for="password">Contraseña</label>
-              <input type="password" placeholder="Introduce contraseña">
+              <input type="password" name="password1" placeholder="Introduce contraseña">
               <!-- CONFIRM PASSWORD INPUT -->
               <label for="password">Repite contraseña</label>
-              <input type="password" placeholder="Introduce contraseña">
+              <input type="password" name="password2" placeholder="Introduce contraseña">
               <input type="submit" value="Registrarse">
               <a href="InicioSesion.html">Ya tengo cuenta</a>
             </form>
