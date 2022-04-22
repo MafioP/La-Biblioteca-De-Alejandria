@@ -17,7 +17,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author Mario
+ * Servlet para gestionar el inicio de sesion
  */
 public class InicioSesionServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
