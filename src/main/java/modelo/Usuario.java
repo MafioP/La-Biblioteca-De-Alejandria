@@ -3,7 +3,10 @@ package modelo;
 
 import java.io.Serializable;
 
-
+/**
+ * 
+ * Clase JavaBeans que implementa a un Usuario
+ */
 public class Usuario implements Serializable{
     private String email;
     private String username;

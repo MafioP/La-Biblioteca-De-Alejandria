@@ -9,7 +9,7 @@ import modelo.UsuarioDB;
 
 /**
  *
- * @author Mario
+ * Servlet para gestionar el regsitro de sesion
  */
 public class RegistroServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

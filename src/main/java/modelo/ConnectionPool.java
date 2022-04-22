@@ -10,7 +10,7 @@ private static DataSource dataSource = null;
 private ConnectionPool() {
     try {
         InitialContext ic = new InitialContext();
-        dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/db_alejandria");
+        dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/alejandriaDB");
 }
 catch(Exception e) {
     e.printStackTrace();
