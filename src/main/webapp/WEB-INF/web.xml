@@ -6,19 +6,19 @@
 	 version="3.1">
          <resource-ref>
         <description>MySQL DB Connection Pool</description>
-        <res-ref-name>jdbc/alejandriaDB</res-ref-name>
+        <res-ref-name>jdbc/alejandriadb</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
       </resource-ref>
       <servlet> <servlet-name>RegistroServlet</servlet-name>
-    <servlet-class>RegistroServlet</servlet-class> </servlet>
+    <servlet-class>control.RegistroServlet</servlet-class> </servlet>
     <!-- the mapping for the servlets -->
     <servlet-mapping> <servlet-name>RegistroServlet</servlet-name>
     <url-pattern>/RegistroServlet</url-pattern> </servlet-mapping>
     
     <servlet> <servlet-name>InicioSesionServlet</servlet-name>
-    <servlet-class>InicioSesionServlet</servlet-class> </servlet>
+    <servlet-class>control.InicioSesionServlet</servlet-class> </servlet>
     <!-- the mapping for the servlets -->
     <servlet-mapping> <servlet-name>InicioSesionServlet</servlet-name>
     <url-pattern>/InicioSesionServlet</url-pattern> </servlet-mapping>
