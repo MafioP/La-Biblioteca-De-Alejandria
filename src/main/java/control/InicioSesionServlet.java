@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import modelo.UsuarioDB;
 
@@ -74,29 +73,25 @@ public class InicioSesionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // get parameters from the request
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
      
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
         String url = "";
-            //comprobar si el usuario esta registrado en la base de datos y sino llevarle a la pagina de registro
-            if (!UsuarioDB.userExists(username)) {
-                out.println("<script>alert('No estás registrado en el sistema.'); </script>");
+            //Validar si las credenciales para iniciar sesion son correctas
+            if (!UsuarioDB.Validate(username, password)) {
+                out.println("<script>alert('Nombre de usuario o contraseña incorrectos'); </script>");
+                url = "/InicioSesion.html";
                 
-                //url = "/Registro.html";
             } else {
                 Usuario usuario = UsuarioDB.selectUserByName(username);     //sacar el usuario de la base de datos
                 url = "/MainPage.html";
-                // store the user in the session
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
+                
             }
-            
-            RequestDispatcher dispatcher =
-            getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+            RequestDispatcher rs = request.getRequestDispatcher(url);
+                rs.include(request, response);
         
     }
 

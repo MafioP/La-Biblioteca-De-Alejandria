@@ -19,6 +19,7 @@ public class Usuario implements Serializable{
         password = "";
         id = -1;
     }
+    
     public Usuario(String email, String username, String password, int id){
         setEmail(email);
         setUsername(username);

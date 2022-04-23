@@ -76,26 +76,23 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
+
         // get parameters from the request
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
      
         String email = request.getParameter("email");
         String username = request.getParameter("username");
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
+        
         String url = "";
-        out.println(email);
+        
         
         if(!password1.equals(password2)){
-            
-            url = "/Registro.html";
-            
-            
+    
             out.println("<script>alert('Las contraseñas no coinciden.'); </script>");
+            url = "/Registro.html";
         }else{
                 // creamos un nuevo usuario con los parametros del form
             Usuario usuario = new Usuario();
@@ -103,9 +100,8 @@ public class RegistroServlet extends HttpServlet {
             usuario.setUsername(username);
             usuario.setPassword(password1);
             
-            
-            // comprueba si el correo ya esta en el sistema
-            if (UsuarioDB.emailExists(usuario.getEmail())) {
+            // comprueba si el correo o el username ya esta en el sistema
+            if (UsuarioDB.emailExists(usuario.getEmail()) || UsuarioDB.userExists(usuario.getUsername())) {
                 out.println("<script>alert('Ya estás registrado en el sistema.'); </script>");
                 
                 url = "/InicioSesion.html";
@@ -117,13 +113,10 @@ public class RegistroServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuario);
             }
-            
-            RequestDispatcher dispatcher =
-            getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
-            
-            
-        }  
+
+        }
+        RequestDispatcher rs = request.getRequestDispatcher(url);
+            rs.include(request, response);
     }
 
     /**

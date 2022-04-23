@@ -34,7 +34,37 @@ public class UsuarioDB {
             e.printStackTrace();
             return 0;
             }
-    }   
+    }
+    
+    /**
+     * Valida si el username y la contraseña coinciden con algun usuario del sistema
+     * @param user
+     * @param password
+     * @return 
+     */
+    public static boolean Validate(String user, String password){
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Usuario "
+        + "WHERE nombre = ? and contraseña = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            boolean res = rs.next();
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
     /**
      * Comprobar si existe un usuario en la base de datos a partir de su email
