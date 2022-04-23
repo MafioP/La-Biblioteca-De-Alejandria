@@ -16,8 +16,8 @@ public class UsuarioDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "INSERT INTO USUARIO "
-                + "(NOMBRE, EMAIL, CONTRASEÑA, LOGRO) "
-                + "VALUES (?, ?, ?, 0)";
+                + "(NOMBRE, EMAIL, CONTRASEÑA) "
+                + "VALUES (?, ?, ?)";
         
         try {
             ps = connection.prepareStatement(query,
@@ -25,15 +25,10 @@ public class UsuarioDB {
             ps.setString(1, usuario.getUsername());
             ps.setString(2, usuario.getEmail());
             ps.setString(3, usuario.getPassword());
-            int res = 0;
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                res = rs.getInt(1);
-            }
-            
+            int res = ps.executeUpdate();
+   
             ps.close();
-            pool.freeConnection(connection);
+            
             return res;
             } catch (SQLException e) {
             e.printStackTrace();
@@ -80,8 +75,8 @@ public class UsuarioDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT Username FROM Usuario "
-        + "WHERE Username = ?";
+        String query = "SELECT nombre FROM Usuario "
+        + "WHERE nombre = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, user);
@@ -90,6 +85,7 @@ public class UsuarioDB {
             rs.close();
             ps.close();
             pool.freeConnection(connection);
+            
             return res;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,7 +115,6 @@ public class UsuarioDB {
                 usuario.setUsername(rs.getString("Nombre"));
                 usuario.setEmail(rs.getString("Email"));
                 usuario.setPassword(rs.getString("Contraseña"));
-                usuario.setLogros(rs.getInt("Logro"));
             }
             rs.close();
             ps.close();
@@ -152,7 +147,6 @@ public class UsuarioDB {
                 usuario.setUsername(rs.getString("Nombre"));
                 usuario.setEmail(rs.getString("Email"));
                 usuario.setPassword(rs.getString("Contraseña"));
-                usuario.setLogros(rs.getInt("Logro"));
             }
             rs.close();
             ps.close();

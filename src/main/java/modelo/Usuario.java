@@ -12,21 +12,18 @@ public class Usuario implements Serializable{
     private String username;
     private String password;
     private int id;
-    private int logros;
     
     public Usuario(){
         email = "";
         username = "";
         password = "";
         id = -1;
-        logros = 0;
     }
-    public Usuario(String email, String username, String password, int id, int logros){
+    public Usuario(String email, String username, String password, int id){
         setEmail(email);
         setUsername(username);
         setPassword(password);
         setId(id);
-        setLogros(logros);
     }
     
     public String getEmail() {
@@ -61,13 +58,6 @@ public class Usuario implements Serializable{
         this.id = id;
     }
     
-    public int getLogros() {
-        return logros;
-    }
-
-    public void setLogros(int logros) {
-        this.logros = logros;
-    }
     
     
 }
