@@ -5,21 +5,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import modelo.Usuario;
-import modelo.UsuarioDB;
+import modelo.Archivo;
+import modelo.ArchivoDB;
 
 /**
  *
  * @author ZeR3
  */
-
-
-public class RegistroServlet extends HttpServlet {
+public class SubirArchivoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +34,10 @@ public class RegistroServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistroServlet</title>");            
+            out.println("<title>Servlet SubirArchivoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegistroServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubirArchivoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,47 +69,36 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         // get parameters from the request
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
      
-        String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        String password1 = request.getParameter("password1");
-        String password2 = request.getParameter("password2");
+        String nombre = request.getParameter("nombre");
+        String universidad = request.getParameter("universidad");
+        String grado = request.getParameter("grado");
+        int curso = Integer.parseInt(request.getParameter("curso"));
+        int cuatrimestre = Integer.parseInt(request.getParameter("cuatrimestre"));
+        String asignatura = request.getParameter("asignatura");
+        String descripcion = request.getParameter("descripcion");
         
         String url = "";
         
+        Archivo archivo = new Archivo();
+        archivo.setNombre(nombre);
+        archivo.setUniversidad(universidad);
+        archivo.setGrado(grado);
+        archivo.setCurso(curso);
+        archivo.setCuatrimestre(cuatrimestre);
+        archivo.setAsignatura(asignatura);
+        archivo.setDescripcion(descripcion);
         
-        if(!password1.equals(password2)){
-    
-            out.println("<script>alert('Las contraseñas no coinciden.'); </script>");
-            url = "/Registro.html";
-        }else{
-                // creamos un nuevo usuario con los parametros del form
-            Usuario usuario = new Usuario();
-            usuario.setEmail(email);
-            usuario.setUsername(username);
-            usuario.setPassword(password1);
-            
-            // comprueba si el correo o el username ya esta en el sistema
-            if (UsuarioDB.emailExists(usuario.getEmail()) || UsuarioDB.userExists(usuario.getUsername())) {
-                out.println("<script>alert('Ya estás registrado en el sistema.'); </script>");
-                
-                url = "/InicioSesion.html";
-            } else {
-                int id = UsuarioDB.insert(usuario);
-                usuario.setId(id);
-                url = "/MainPage.html";
-                // store the user in the session
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
-            }
-
-        }
+        int id = ArchivoDB.insert(archivo);
+        archivo.setId(id);
+        url = "/MainPage.html";
+        
         RequestDispatcher rs = request.getRequestDispatcher(url);
-            rs.include(request, response);
+        rs.include(request, response);
     }
 
     /**

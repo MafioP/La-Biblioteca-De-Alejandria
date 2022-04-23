@@ -3,12 +3,15 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.servlet.http.Part;
 
 /**
  * 
  * Clase JavaBeans que implementa a un Archivo
  */
 public class Archivo implements Serializable{
+
+    private String nombre;
     private int idArchivo;
     private int propietario;
     private String descripcion;
@@ -22,6 +25,65 @@ public class Archivo implements Serializable{
     private int numDescargas;
     private double valoracionMedia;
     private int comentario;
+    private Part contenido;
+    private int id;
+
+    
+    public Archivo() {
+        this.nombre = ""; 
+        this.idArchivo = -1;
+        this.propietario = -1;
+        this.descripcion = "";
+        this.Universidad = "";
+        this.grado = "";
+        this.curso = -1;
+        this.cuatrimestre = -1;
+        this.asignatura = "";
+        this.numVistas = 0;
+        this.fechaSubida = null;
+        this.numDescargas = 0;
+        this.valoracionMedia = 0;
+        this.comentario = -1;
+        this.contenido = null;
+        this.id = -1;
+    }
+    
+    
+    public Archivo(String nombre, int idArchivo, int propietario, String descripcion, String Universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, int comentario, Part contenido, int id) {
+        this.nombre = nombre;
+        this.idArchivo = idArchivo;
+        this.propietario = propietario;
+        this.descripcion = descripcion;
+        this.Universidad = Universidad;
+        this.grado = grado;
+        this.curso = curso;
+        this.cuatrimestre = cuatrimestre;
+        this.asignatura = asignatura;
+        this.numVistas = numVistas;
+        this.fechaSubida = fechaSubida;
+        this.numDescargas = numDescargas;
+        this.valoracionMedia = valoracionMedia;
+        this.comentario = comentario;
+        this.contenido = contenido;
+        this.id = id;
+    }
+    
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public Part getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(Part contenido) {
+        this.contenido = contenido;
+    }
     
 
     public int getIdArchivo() {
@@ -126,6 +188,14 @@ public class Archivo implements Serializable{
 
     public void setComentario(int comentario) {
         this.comentario = comentario;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

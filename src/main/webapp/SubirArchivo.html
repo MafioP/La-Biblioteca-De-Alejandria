@@ -40,34 +40,34 @@
             <h2>Arrastra y suelta un archivo</h2>
             <span>O</span>
             <button>Selecciona tu archivo</button>
-            <input type="file" name="" id="input-file" hidden multiple/>
+            <input type="file" name="archivo" id="input-file" hidden multiple/>
             <div id="preview"></div>
           </div>
           
           <div class="subir-box" id="info-box">
               <h1>Subir archivo</h1>
-              <form>
+              <form action="SubirArchivoServlet" method="post">
                 <!-- TITULO INPUT -->
                 <label for="titulo">Título</label>
-                <input type="text" placeholder="Introduce el título">
+                <input type="text" name="nombre" placeholder="Introduce el título">
                 <!-- UNIVERSIDAD INPUT -->
                 <label for="universidad">Universidad</label>
-                <input type="text" placeholder="Introduce nombre de la universidad">
+                <input type="text" name="universidad" placeholder="Introduce nombre de la universidad">
                 <!-- GRADO INPUT -->
                 <label for="grado">Grado</label>
-                <input type="text" placeholder="Introduce el grado">
+                <input type="text" name="grado" placeholder="Introduce el grado">
                 <!-- CURSO INPUT -->
                 <label for="curso">Curso</label>
-                <input type="text" placeholder="Introduce el curso">
+                <input type="text" name="curso" placeholder="Introduce el curso">
                 <!-- CUATRI INPUT -->
                 <label for="cuatri">Cuatrimestre</label>
-                <input type="text" placeholder="Introduce el cuatrimestre">               
+                <input type="text" name="cuatrimestre" placeholder="Introduce el cuatrimestre">               
                 <!-- ASIGNATURA INPUT -->
                 <label for="asignatura">Asignatura</label>
-                <input type="text" placeholder="Introduce la asignatura">
+                <input type="text" name="asignatura" placeholder="Introduce la asignatura">
                 <!-- DESCRIPCION INPUT -->
                 <label for="descripción">Descripción</label>
-                <input type="text" placeholder="Introduce la descripción">
+                <input type="text" name="descripcion" placeholder="Introduce la descripción">
                 <input type="submit" value="Subir Archivo">
                 
               </form>

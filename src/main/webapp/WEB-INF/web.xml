@@ -8,6 +8,10 @@
         <servlet-name>InicioSesionServlet</servlet-name>
         <servlet-class>control.InicioSesionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubirArchivoServlet</servlet-name>
+        <servlet-class>control.SubirArchivoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/RegistroServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>InicioSesionServlet</servlet-name>
         <url-pattern>/InicioSesionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubirArchivoServlet</servlet-name>
+        <url-pattern>/SubirArchivoServlet</url-pattern>
     </servlet-mapping>
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
