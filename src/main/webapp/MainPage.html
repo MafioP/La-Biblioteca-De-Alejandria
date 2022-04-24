@@ -84,8 +84,8 @@
     <div class="buscarOrdenar">
           <!-- Search -->
           <div class="wrap">
-            <div class="search">
-              <input type="text" class="searchTerm" placeholder="¿Qué estás buscando?">
+            <div class="search" action="BuscarArchivoServlet" method="post">
+              <input type="text" name="busqueda" class="searchTerm" placeholder="¿Qué estás buscando?">
               <button type="submit" class="searchButton">
                 <img src="img/buscar.png" id="icono">
               </button>

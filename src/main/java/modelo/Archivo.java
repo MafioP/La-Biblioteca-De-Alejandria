@@ -15,7 +15,7 @@ public class Archivo implements Serializable{
     private int idArchivo;
     private int propietario;
     private String descripcion;
-    private String Universidad;
+    private String universidad;
     private String grado;
     private int curso;
     private int cuatrimestre;
@@ -26,7 +26,6 @@ public class Archivo implements Serializable{
     private double valoracionMedia;
     private int comentario;
     private Part contenido;
-    private int id;
 
     
     public Archivo() {
@@ -34,7 +33,7 @@ public class Archivo implements Serializable{
         this.idArchivo = -1;
         this.propietario = -1;
         this.descripcion = "";
-        this.Universidad = "";
+        this.universidad = "";
         this.grado = "";
         this.curso = -1;
         this.cuatrimestre = -1;
@@ -45,16 +44,15 @@ public class Archivo implements Serializable{
         this.valoracionMedia = 0;
         this.comentario = -1;
         this.contenido = null;
-        this.id = -1;
     }
     
     
-    public Archivo(String nombre, int idArchivo, int propietario, String descripcion, String Universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, int comentario, Part contenido, int id) {
+    public Archivo(String nombre, int idArchivo, int propietario, String descripcion, String universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, int comentario, Part contenido) {
         this.nombre = nombre;
         this.idArchivo = idArchivo;
         this.propietario = propietario;
         this.descripcion = descripcion;
-        this.Universidad = Universidad;
+        this.universidad = universidad;
         this.grado = grado;
         this.curso = curso;
         this.cuatrimestre = cuatrimestre;
@@ -65,7 +63,6 @@ public class Archivo implements Serializable{
         this.valoracionMedia = valoracionMedia;
         this.comentario = comentario;
         this.contenido = contenido;
-        this.id = id;
     }
     
     
@@ -111,11 +108,11 @@ public class Archivo implements Serializable{
     }
 
     public String getUniversidad() {
-        return Universidad;
+        return universidad;
     }
 
-    public void setUniversidad(String Universidad) {
-        this.Universidad = Universidad;
+    public void setUniversidad(String universidad) {
+        this.universidad = universidad;
     }
 
     public String getGrado() {
@@ -190,12 +187,5 @@ public class Archivo implements Serializable{
         this.comentario = comentario;
     }
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     
 }

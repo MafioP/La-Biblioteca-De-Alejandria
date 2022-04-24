@@ -1,21 +1,21 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Archivo;
-import modelo.ArchivoDB;
 
 /**
  *
  * @author ZeR3
  */
-public class SubirArchivoServlet extends HttpServlet {
+public class BuscarArchivoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +34,10 @@ public class SubirArchivoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SubirArchivoServlet</title>");            
+            out.println("<title>Servlet BuscarArchivoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SubirArchivoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BuscarArchivoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,36 +69,7 @@ public class SubirArchivoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        // get parameters from the request
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-     
-        String nombre = request.getParameter("nombre");
-        String universidad = request.getParameter("universidad");
-        String grado = request.getParameter("grado");
-        int curso = Integer.parseInt(request.getParameter("curso"));
-        int cuatrimestre = Integer.parseInt(request.getParameter("cuatrimestre"));
-        String asignatura = request.getParameter("asignatura");
-        String descripcion = request.getParameter("descripcion");
-        
-        String url = "";
-        
-        Archivo archivo = new Archivo();
-        archivo.setNombre(nombre);
-        archivo.setUniversidad(universidad);
-        archivo.setGrado(grado);
-        archivo.setCurso(curso);
-        archivo.setCuatrimestre(cuatrimestre);
-        archivo.setAsignatura(asignatura);
-        archivo.setDescripcion(descripcion);
-        
-        int id = ArchivoDB.insert(archivo);
-        archivo.setIdArchivo(id);
-        url = "/MainPage.html";
-        
-        RequestDispatcher rs = request.getRequestDispatcher(url);
-        rs.include(request, response);
+        processRequest(request, response);
     }
 
     /**
