@@ -174,6 +174,7 @@ public class UsuarioDB {
 
             if (rs.next()) {
                 usuario = new Usuario();
+                usuario.setId(rs.getInt("idUsuario"));
                 usuario.setUsername(rs.getString("Nombre"));
                 usuario.setEmail(rs.getString("Email"));
                 usuario.setPassword(rs.getString("Contraseña"));
@@ -182,6 +183,7 @@ public class UsuarioDB {
             ps.close();
             pool.freeConnection(connection);
             return usuario;
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

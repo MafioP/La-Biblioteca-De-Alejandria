@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import modelo.UsuarioDB;
 
@@ -84,7 +85,10 @@ public class InicioSesionServlet extends HttpServlet {
                 
             } else {
                 Usuario usuario = UsuarioDB.selectUserByName(username);     //sacar el usuario de la base de datos
-                url = "/MainPage.html";
+                // store the user in the session
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", usuario);
+                url = "/MainPageIniciada.html";
                 
             }
             RequestDispatcher rs = request.getRequestDispatcher(url);
