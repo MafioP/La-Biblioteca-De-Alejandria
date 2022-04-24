@@ -6,10 +6,14 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Archivo;
+import modelo.ArchivoDB;
 
 /**
  *
@@ -69,7 +73,27 @@ public class BuscarArchivoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+     
+        String busqueda = request.getParameter("busqueda");
+        
+        String url = "";
+        if (ArchivoDB.buscarArchivoNombre(busqueda) == null) {
+            out.println("<script>alert('No se han encontrado coincidencias'); </script");
+            url = "/MainPage.html";
+                
+        } else {
+            Archivo archivo = ArchivoDB.buscarArchivoNombre(busqueda);     //sacar el archivo de la base de datos
+            // store the user in the session
+            HttpSession session = request.getSession();
+            session.setAttribute("archivo", archivo);
+            url = "/MainPageIniciada.html"; //REVISAR: No se si mandar a esta pagina y hacer alert o a otra pagina
+            
+            }
+            RequestDispatcher rs = request.getRequestDispatcher(url);
+                rs.include(request, response);
     }
 
     /**

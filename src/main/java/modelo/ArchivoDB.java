@@ -86,5 +86,45 @@ public class ArchivoDB {
           }       
     }
     
+    public static Archivo buscarArchivoNombre(String name) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Archivo WHERE nombre = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            Archivo archivo = null;
+
+            if (rs.next()) {
+                archivo = new Archivo();
+                archivo.setIdArchivo(rs.getInt("idUsuario"));
+                archivo.setNombre(rs.getString("Nombre"));
+                archivo.setPropietario(rs.getInt("Propietario"));
+                archivo.setDescripcion(rs.getString("Descripcion"));
+                archivo.setUniversidad(rs.getString("Universidad"));
+                archivo.setGrado(rs.getString("Grado"));
+                archivo.setCurso(rs.getInt("Curso"));
+                archivo.setCuatrimestre(rs.getInt("Cuatrimestre"));
+                archivo.setAsignatura(rs.getString("Asignatura"));
+                archivo.setNumVistas(rs.getInt("numVistas"));
+                archivo.setFechaSubida(rs.getDate("FechaSubida"));
+                archivo.setNumDescargas(rs.getInt("numDescargas"));
+                archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
+                archivo.setComentario(rs.getInt("Comentario"));
+                //archivo.setContenido(rs.getObject("Contenido"));
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return archivo;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+          }       
+    } 
     
 }
