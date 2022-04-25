@@ -6,6 +6,7 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,15 +81,15 @@ public class BuscarArchivoServlet extends HttpServlet {
         String busqueda = request.getParameter("busqueda");
         
         String url = "";
-        if (ArchivoDB.buscarArchivoNombre(busqueda) == null) {
+        if (ArchivoDB.buscarArchivoNombre(busqueda).isEmpty()) {
             out.println("<script>alert('No se han encontrado coincidencias'); </script");
             url = "/MainPage.html";
                 
         } else {
-            Archivo archivo = ArchivoDB.buscarArchivoNombre(busqueda);     //sacar el archivo de la base de datos
+            ArrayList<Archivo> archivos = ArchivoDB.buscarArchivoNombre(busqueda);     //sacar el archivo de la base de datos
             // store the user in the session
             HttpSession session = request.getSession();
-            session.setAttribute("archivo", archivo);
+            session.setAttribute("archivos", archivos);
             url = "/MainPageIniciada.html"; //REVISAR: Habria que actualizar la tabla
             
             }

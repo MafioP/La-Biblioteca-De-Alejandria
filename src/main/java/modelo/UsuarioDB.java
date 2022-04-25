@@ -188,6 +188,41 @@ public class UsuarioDB {
             e.printStackTrace();
             return null;
           }       
+    }
+    
+    /**
+     * Seleccionar un usuario de la base de datos a partir de su id de usuario
+     * @param id
+     * @return 
+     */
+    public static Usuario selectUserById(int id) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Usuario WHERE idUsuario = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            Usuario usuario = null;
+
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setId(rs.getInt("idUsuario"));
+                usuario.setUsername(rs.getString("Nombre"));
+                usuario.setEmail(rs.getString("Email"));
+                usuario.setPassword(rs.getString("Contraseña"));
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return usuario;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+          }       
     } 
         
 }

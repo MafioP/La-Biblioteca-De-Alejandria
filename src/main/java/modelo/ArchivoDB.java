@@ -86,7 +86,7 @@ public class ArchivoDB {
           }       
     }
     
-    public static Archivo buscarArchivoNombre(String name) {
+    public static ArrayList<Archivo> buscarArchivoNombre(String name) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -97,10 +97,11 @@ public class ArchivoDB {
             ps.setString(1, name);
             rs = ps.executeQuery();
             Archivo archivo = null;
-
-            if (rs.next()) {
+            listaArchivos.clear();
+            
+            while (rs.next()) {
                 archivo = new Archivo();
-                archivo.setIdArchivo(rs.getInt("idUsuario"));
+                archivo.setIdArchivo(rs.getInt("idArchivo"));
                 archivo.setNombre(rs.getString("Nombre"));
                 archivo.setPropietario(rs.getInt("Propietario"));
                 archivo.setDescripcion(rs.getString("Descripcion"));
@@ -115,11 +116,13 @@ public class ArchivoDB {
                 archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
                 archivo.setComentario(rs.getInt("Comentario"));
                 archivo.setContenido((Part) rs.getObject("Contenido"));
+                listaArchivos.add(archivo);
+                
             }
             rs.close();
             ps.close();
             pool.freeConnection(connection);
-            return archivo;
+            return listaArchivos;
             
         } catch (SQLException e) {
             e.printStackTrace();
