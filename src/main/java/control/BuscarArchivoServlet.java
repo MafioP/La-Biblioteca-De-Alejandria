@@ -89,7 +89,7 @@ public class BuscarArchivoServlet extends HttpServlet {
             // store the user in the session
             HttpSession session = request.getSession();
             session.setAttribute("archivo", archivo);
-            url = "/MainPageIniciada.html"; //REVISAR: No se si mandar a esta pagina y hacer alert o a otra pagina
+            url = "/MainPageIniciada.html"; //REVISAR: Habria que actualizar la tabla
             
             }
             RequestDispatcher rs = request.getRequestDispatcher(url);

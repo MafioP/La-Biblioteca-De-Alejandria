@@ -91,7 +91,7 @@ public class ArchivoDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Archivo WHERE nombre = ?";
+        String query = "SELECT * FROM Archivo WHERE nombre LIKE '%?%'";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, name);
@@ -114,7 +114,7 @@ public class ArchivoDB {
                 archivo.setNumDescargas(rs.getInt("numDescargas"));
                 archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
                 archivo.setComentario(rs.getInt("Comentario"));
-                //archivo.setContenido(rs.getObject("Contenido"));
+                archivo.setContenido((Part) rs.getObject("Contenido"));
             }
             rs.close();
             ps.close();
