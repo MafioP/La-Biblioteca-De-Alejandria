@@ -77,24 +77,27 @@ public class BuscarArchivoServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-     
-        String busqueda = request.getParameter("busqueda");
+        String busqueda = "";
+        busqueda = request.getParameter("busqueda");
         
         String url = "";
         if (ArchivoDB.buscarArchivoNombre(busqueda).isEmpty()) {
+            
             out.println("<script>alert('No se han encontrado coincidencias'); </script");
-            url = "/MainPage.html";
+            url = "/MainPage.jsp";
                 
         } else {
-            ArrayList<Archivo> archivos = ArchivoDB.buscarArchivoNombre(busqueda);     //sacar el archivo de la base de datos
+            
             // store the user in the session
             HttpSession session = request.getSession();
-            session.setAttribute("archivos", archivos);
-            url = "/MainPageIniciada.html"; //REVISAR: Habria que actualizar la tabla
+            
+            session.setAttribute("variable", busqueda);
+            url = "/MainPage.jsp";
             
             }
             RequestDispatcher rs = request.getRequestDispatcher(url);
-                rs.include(request, response);
+                rs.forward(request, response);
+            
     }
 
     /**

@@ -35,8 +35,18 @@
             <div class="dropdown">
                 <button class="dropbtn"><img src="img/logoInicioSesion.png" width="50px"></button>
                 <div class="dropdown-content">
+                  <%if(session.isNew()){%>
+                  
                   <a href="InicioSesion.html">Iniciar sesión</a>
                   <a href="Registro.html">Registrarse</a>
+                  <%}else{%>
+                  
+                        <a href="InicioSesionServlet?parametro=0">Cerrar sesión</a>  
+                        <a href="InicioSesionServlet?parametro=1">Cambiar cuenta</a>
+                  
+                       <%} %>
+                         
+                  
                 </div>
               </div>
         </ul>    
@@ -121,8 +131,15 @@
     <div class="resultados">
         
         <% 
-          ArrayList<Archivo> archivos = ArchivoDB.getAllArchivos();  
           
+          ArrayList<Archivo> archivos = ArchivoDB.getAllArchivos(); 
+          
+          if(request.getSession().getAttribute("variable") != null){
+                  
+                  archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
+                  request.getSession().invalidate();
+            }
+         
           
           %>
       <table class="tabla-resultados">
@@ -130,7 +147,7 @@
             for(int i=0; i < archivos.size(); i++){
           %>
             <tr onclick="window.location.href='VisualizarArchivo.html';">
-                <td><%= archivos.get(i).getNombre()%></td>
+                <td><%=archivos.get(i).getNombre()%></td>
                 <td><img src="img/view.png" alt="visto icono" id="icono"><%= archivos.get(i).getNumVistas()%> vistas</td>
                 <td><img src="img/descarga.png" alt="descarga icono" id="icono"><%= archivos.get(i).getNumDescargas()%> descargas</td>
                 <td><img src="img/estrella.png" alt="estrella icono" id="icono"><%= archivos.get(i).getValoracionMedia()%>/5 valoración</td>

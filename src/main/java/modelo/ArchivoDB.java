@@ -87,14 +87,15 @@ public class ArchivoDB {
     }
     
     public static ArrayList<Archivo> buscarArchivoNombre(String name) {
+        
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Archivo WHERE nombre LIKE '%?%'";
+        String query = "SELECT * FROM Archivo WHERE nombre LIKE ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, name);
+            ps.setString(1, "%"+name+"%");
             rs = ps.executeQuery();
             Archivo archivo = null;
             listaArchivos.clear();
@@ -115,7 +116,7 @@ public class ArchivoDB {
                 archivo.setNumDescargas(rs.getInt("numDescargas"));
                 archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
                 archivo.setComentario(rs.getInt("Comentario"));
-                archivo.setContenido((Part) rs.getObject("Contenido"));
+                archivo.setContenido((Part) rs.getBlob("Contenido"));
                 listaArchivos.add(archivo);
                 
             }

@@ -13,10 +13,6 @@
         <servlet-class>control.SubirArchivoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CerrarSesionServlet</servlet-name>
-        <servlet-class>control.CerrarSesionServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BuscarArchivoServlet</servlet-name>
         <servlet-class>control.BuscarArchivoServlet</servlet-class>
     </servlet>
@@ -31,10 +27,6 @@
     <servlet-mapping>
         <servlet-name>SubirArchivoServlet</servlet-name>
         <url-pattern>/SubirArchivoServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CerrarSesionServlet</servlet-name>
-        <url-pattern>/CerrarSesionServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BuscarArchivoServlet</servlet-name>

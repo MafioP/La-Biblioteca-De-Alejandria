@@ -18,31 +18,7 @@ import modelo.UsuarioDB;
  */
 public class InicioSesionServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet InicioSesionServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet InicioSesionServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,7 +32,21 @@ public class InicioSesionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            request.getSession().invalidate();
+            String url = "";
+            
+            
+            if(request.getParameter("parametro").equals("0")){
+                url = "/MainPage.jsp";
+            }else{
+                url = "/InicioSesion.html";
+            }
+            
+            RequestDispatcher rs = request.getRequestDispatcher(url);
+            rs.include(request, response);
     }
 
     /**
@@ -73,11 +63,17 @@ public class InicioSesionServlet extends HttpServlet {
         // get parameters from the request
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-     
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
         String url = "";
+        //invalida la cuenta si ya esta abierta
+        if(request.getSession().getAttribute("usuario")!=null){
+            out.println("Hola me llamo Juan Torres aka Torro");
+            request.getSession().invalidate();
+            url = "/MainPage.jsp";
+        }else{
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+        
+        
             //Validar si las credenciales para iniciar sesion son correctas
             if (!UsuarioDB.Validate(username, password)) {
                 out.println("<script>alert('Nombre de usuario o contraseña incorrectos'); </script>");
@@ -88,9 +84,12 @@ public class InicioSesionServlet extends HttpServlet {
                 // store the user in the session
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuario);
-                url = "/MainPageIniciada.html";
+                url = "/MainPage.jsp";
                 
             }
+        }
+        
+        
             RequestDispatcher rs = request.getRequestDispatcher(url);
                 rs.include(request, response);
         
