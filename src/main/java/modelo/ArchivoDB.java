@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.servlet.http.Part;
 
 
@@ -129,6 +131,71 @@ public class ArchivoDB {
             e.printStackTrace();
             return null;
           }       
-    } 
+    }
+    
+    public static ArrayList<Archivo> ordenarArchivos(String orden, ArrayList<Archivo> archivos){
+        System.out.println("El orden es "+orden);
+        
+        switch(orden){
+            case "0":
+                Collections.sort(archivos, new Comparator<Archivo>(){
+                    public int compare(Archivo a1, Archivo a2){
+                        if(a1.getValoracionMedia() == a2.getValoracionMedia())
+                            return 0;
+                        return a2.getValoracionMedia() < a1.getValoracionMedia() ? -1 : 1;
+                    }
+                });
+                
+                break;
+                
+                
+            case "1":
+                
+                Collections.sort(archivos, new Comparator<Archivo>(){
+                    public int compare(Archivo a1, Archivo a2){
+                        if(a1.getNumDescargas() == a2.getNumDescargas())
+                            return 0;
+                        return a2.getNumDescargas() < a1.getNumDescargas() ? -1 : 1;
+                    }
+                });
+                
+                break;
+                
+                
+            case "2":
+                Collections.sort(archivos, new Comparator<Archivo>(){
+                    public int compare(Archivo a1, Archivo a2){
+                        if(a1.getNumVistas() == a2.getNumVistas())
+                            return 0;
+                        return a2.getNumVistas() < a1.getNumVistas() ? -1 : 1;
+                    }
+                });
+                
+                break;
+                
+            case "3":
+                Collections.sort(archivos, new Comparator<Archivo>() {
+                    public int compare(Archivo a1, Archivo a2) {
+                        return a1.getFechaSubida().compareTo(a2.getFechaSubida());
+                    }
+                });
+                
+                break;
+                
+            case "4":
+                Collections.sort(archivos, new Comparator<Archivo>() {
+                    public int compare(Archivo a1, Archivo a2) {
+                        return a1.getNombre().compareTo(a2.getNombre());
+                    }
+                });
+                
+                break;
+                
+            default:
+             
+        }
+        
+        return archivos;
+    }
     
 }

@@ -66,7 +66,7 @@ public class InicioSesionServlet extends HttpServlet {
         String url = "";
         //invalida la cuenta si ya esta abierta
         if(request.getSession().getAttribute("usuario")!=null){
-            out.println("Hola me llamo Juan Torres aka Torro");
+            
             request.getSession().invalidate();
             url = "/MainPage.jsp";
         }else{

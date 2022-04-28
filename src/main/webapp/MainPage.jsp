@@ -35,20 +35,21 @@
             <div class="dropdown">
                 <button class="dropbtn"><img src="img/logoInicioSesion.png" width="50px"></button>
                 <div class="dropdown-content">
-                  <%if(session.isNew()){%>
+                    <%if(session.isNew()){%>
                   
                   <a href="InicioSesion.html">Iniciar sesión</a>
                   <a href="Registro.html">Registrarse</a>
+                  
                   <%}else{%>
                   
                         <a href="InicioSesionServlet?parametro=0">Cerrar sesión</a>  
                         <a href="InicioSesionServlet?parametro=1">Cambiar cuenta</a>
-                  
+                        
                        <%} %>
                          
                   
                 </div>
-              </div>
+            </div>
         </ul>    
     </nav>
     <div class="filtros">
@@ -115,15 +116,40 @@
         </div>
         <div class="ordenar">
           <img title="Ordenar" src="img/ordenar.png" alt="ordenar icono" id="icono">
+          <form name="formOrdenar" action="BuscarArchivoServlet" method="GET">
           <div class="box">
-            <select>
-              <option>Mejor valorados</option>
-              <option>Más descargados</option>
-              <option>Más vistos</option>
-              <option>Más recientes</option>
-              <option>Alfabéticamente</option>
+            <% 
+                String orden = (String)request.getSession().getAttribute("orden");
+                String option0 = null;
+                String option1 = null;
+                String option2 = null;
+                String option3 = null;
+                String option4 = null;
+                
+                if(orden != null){
+                    switch(orden){
+                    
+                    case "0": option0="selected"; break;
+                    case "1": option1="selected"; break;
+                    case "2": option2="selected"; break;
+                    case "3": option3="selected"; break;
+                    case "4": option4="selected"; break;
+                    default: option0="selected";
+                    
+                    }
+                }
+
+            
+            %>
+            <select name="orden" onchange="javascript:document.formOrdenar.submit();">
+              <option value="0" <%=option0%>>Mejor valorados</option>
+              <option value="1" <%=option1%>>Más descargados</option>
+              <option value="2" <%=option2%>>Más vistos</option>
+              <option value="3" <%=option3%>>Más recientes</option>
+              <option value="4" <%=option4%>>Alfabéticamente</option>
             </select>
           </div>
+          </form>
         </div>
         
     </div>
@@ -132,13 +158,21 @@
         
         <% 
           
-          ArrayList<Archivo> archivos = ArchivoDB.getAllArchivos(); 
+            ArrayList<Archivo> archivos = ArchivoDB.getAllArchivos(); 
           
-          if(request.getSession().getAttribute("variable") != null){
+            if(request.getSession().getAttribute("variable") != null){
                   
-                  archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
-                  request.getSession().invalidate();
+                archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
+                request.getSession().invalidate();
             }
+            
+            
+            if(orden == null){
+                archivos = ArchivoDB.ordenarArchivos("0", archivos);
+            }else{
+                archivos = ArchivoDB.ordenarArchivos(orden, archivos);
+            }
+            
          
           
           %>
@@ -148,6 +182,7 @@
           %>
             <tr onclick="window.location.href='VisualizarArchivo.html';">
                 <td><%=archivos.get(i).getNombre()%></td>
+                <td><img src="img/fecha.png" alt="fecha icono" id="icono"><%=archivos.get(i).getFechaSubida()%></td>
                 <td><img src="img/view.png" alt="visto icono" id="icono"><%= archivos.get(i).getNumVistas()%> vistas</td>
                 <td><img src="img/descarga.png" alt="descarga icono" id="icono"><%= archivos.get(i).getNumDescargas()%> descargas</td>
                 <td><img src="img/estrella.png" alt="estrella icono" id="icono"><%= archivos.get(i).getValoracionMedia()%>/5 valoración</td>
