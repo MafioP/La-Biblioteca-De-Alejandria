@@ -133,12 +133,12 @@ public class ArchivoDB {
           }       
     }
     
-    public static ArrayList<Archivo> ordenarArchivos(String orden, ArrayList<Archivo> archivos){
+    public static ArrayList<Archivo> ordenarArchivos(String orden){
         System.out.println("El orden es "+orden);
         
         switch(orden){
             case "0":
-                Collections.sort(archivos, new Comparator<Archivo>(){
+                Collections.sort(listaArchivos, new Comparator<Archivo>(){
                     public int compare(Archivo a1, Archivo a2){
                         if(a1.getValoracionMedia() == a2.getValoracionMedia())
                             return 0;
@@ -151,7 +151,7 @@ public class ArchivoDB {
                 
             case "1":
                 
-                Collections.sort(archivos, new Comparator<Archivo>(){
+                Collections.sort(listaArchivos, new Comparator<Archivo>(){
                     public int compare(Archivo a1, Archivo a2){
                         if(a1.getNumDescargas() == a2.getNumDescargas())
                             return 0;
@@ -163,7 +163,7 @@ public class ArchivoDB {
                 
                 
             case "2":
-                Collections.sort(archivos, new Comparator<Archivo>(){
+                Collections.sort(listaArchivos, new Comparator<Archivo>(){
                     public int compare(Archivo a1, Archivo a2){
                         if(a1.getNumVistas() == a2.getNumVistas())
                             return 0;
@@ -174,7 +174,7 @@ public class ArchivoDB {
                 break;
                 
             case "3":
-                Collections.sort(archivos, new Comparator<Archivo>() {
+                Collections.sort(listaArchivos, new Comparator<Archivo>() {
                     public int compare(Archivo a1, Archivo a2) {
                         return a1.getFechaSubida().compareTo(a2.getFechaSubida());
                     }
@@ -183,7 +183,7 @@ public class ArchivoDB {
                 break;
                 
             case "4":
-                Collections.sort(archivos, new Comparator<Archivo>() {
+                Collections.sort(listaArchivos, new Comparator<Archivo>() {
                     public int compare(Archivo a1, Archivo a2) {
                         return a1.getNombre().compareTo(a2.getNombre());
                     }
@@ -195,7 +195,7 @@ public class ArchivoDB {
              
         }
         
-        return archivos;
+        return listaArchivos;
     }
     
 }

@@ -158,19 +158,21 @@
         
         <% 
           
-            ArrayList<Archivo> archivos = ArchivoDB.getAllArchivos(); 
+            ArrayList<Archivo> archivos = new ArrayList<>(); 
           
             if(request.getSession().getAttribute("variable") != null){
                   
                 archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
-                request.getSession().invalidate();
+                //request.getSession().invalidate();
+            }else{
+                 archivos = ArchivoDB.getAllArchivos();
             }
             
             
             if(orden == null){
-                archivos = ArchivoDB.ordenarArchivos("0", archivos);
+                archivos = ArchivoDB.ordenarArchivos("0");
             }else{
-                archivos = ArchivoDB.ordenarArchivos(orden, archivos);
+                archivos = ArchivoDB.ordenarArchivos(orden);
             }
             
          

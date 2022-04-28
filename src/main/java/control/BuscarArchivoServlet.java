@@ -82,7 +82,7 @@ public class BuscarArchivoServlet extends HttpServlet {
             
             }
             RequestDispatcher rs = request.getRequestDispatcher(url);
-                rs.forward(request, response);
+                rs.include(request, response);
             
     }
 
