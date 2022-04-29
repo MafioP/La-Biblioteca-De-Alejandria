@@ -36,6 +36,7 @@
             </ul>    
         </nav>
         <div class="area-subir">
+          <form action="SubirArchivoServlet" method="post" enctype="multipart/form-data">
           <div class="drag-area">
             <h2>Arrastra y suelta un archivo</h2>
             <span>O</span>
@@ -46,7 +47,7 @@
           
           <div class="subir-box" id="info-box">
               <h1>Subir archivo</h1>
-              <form action="SubirArchivoServlet" method="post">
+              
                 <!-- TITULO INPUT -->
                 <label for="titulo">Título</label>
                 <input type="text" name="nombre" placeholder="Introduce el título">
@@ -70,8 +71,9 @@
                 <input type="text" name="descripcion" placeholder="Introduce la descripción">
                 <input type="submit" value="Subir Archivo">
                 
-              </form>
+              
             </div>
+            </form>
         </div>
     </div>
     <!--CUSTOM JS-->

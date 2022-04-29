@@ -1,7 +1,9 @@
 
 package modelo;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,24 +22,34 @@ public class ArchivoDB {
      * @param archivo
      * @return 
      */
-    public static int insert(Archivo archivo) {
+    public static int insert(Archivo archivo) throws IOException {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         String query = "INSERT INTO ARCHIVO "
-                + "(NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "(PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA"
+                + "NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, CONTENIDO) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             ps = connection.prepareStatement(query,
             Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, archivo.getNombre());
-            ps.setString(2, archivo.getDescripcion());
-            ps.setString(3, archivo.getUniversidad());
-            ps.setString(4, archivo.getGrado());
-            ps.setInt(5, archivo.getCurso());
-            ps.setInt(6, archivo.getCuatrimestre());
-            ps.setString(7, archivo.getAsignatura());
+            ps.setInt(1, archivo.getPropietario());
+            ps.setString(2, archivo.getNombre());
+            ps.setString(3, archivo.getDescripcion());
+            ps.setString(4, archivo.getUniversidad());
+            ps.setString(5, archivo.getGrado());
+            ps.setInt(6, archivo.getCurso());
+            ps.setInt(7, archivo.getCuatrimestre());
+            ps.setString(8, archivo.getAsignatura());
+            ps.setInt(9, archivo.getNumVistas());
+            long time = archivo.getFechaSubida().getTime();
+            java.sql.Date fecha = new java.sql.Date(time);
+            ps.setDate(10, fecha);
+            ps.setInt(11, archivo.getNumDescargas());
+            ps.setDouble(12, archivo.getValoracionMedia());
+            ps.setInt(13, 1);
+            ps.setBlob(14, archivo.getContenido().getInputStream());
             int res = ps.executeUpdate();
    
             ps.close();

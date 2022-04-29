@@ -3,18 +3,21 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import modelo.Archivo;
 import modelo.ArchivoDB;
+import modelo.Usuario;
 
-/**
- *
- * @author ZeR3
- */
+
+@MultipartConfig
 public class SubirArchivoServlet extends HttpServlet {
 
     /**
@@ -81,17 +84,25 @@ public class SubirArchivoServlet extends HttpServlet {
         int cuatrimestre = Integer.parseInt(request.getParameter("cuatrimestre"));
         String asignatura = request.getParameter("asignatura");
         String descripcion = request.getParameter("descripcion");
+        Part contenido = request.getPart("contenido");
+        Calendar calendar = Calendar.getInstance();
+        Date fechaSubida = (Date) calendar.getTime();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         
         String url = "";
         
         Archivo archivo = new Archivo();
+        archivo.setPropietario(usuario.getId());
         archivo.setNombre(nombre);
+        archivo.setDescripcion(descripcion);
         archivo.setUniversidad(universidad);
         archivo.setGrado(grado);
         archivo.setCurso(curso);
         archivo.setCuatrimestre(cuatrimestre);
         archivo.setAsignatura(asignatura);
-        archivo.setDescripcion(descripcion);
+        archivo.setFechaSubida(fechaSubida);
+        archivo.setContenido(contenido);
+        
         
         int id = ArchivoDB.insert(archivo);
         archivo.setIdArchivo(id);
