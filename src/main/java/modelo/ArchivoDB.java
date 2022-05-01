@@ -3,7 +3,6 @@ package modelo;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,9 +42,7 @@ public class ArchivoDB {
             ps.setInt(7, archivo.getCuatrimestre());
             ps.setString(8, archivo.getAsignatura());
             ps.setInt(9, archivo.getNumVistas());
-            long time = archivo.getFechaSubida().getTime();
-            java.sql.Date fecha = new java.sql.Date(time);
-            ps.setDate(10, fecha);
+            ps.setDate(10, archivo.getFechaSubida());
             ps.setInt(11, archivo.getNumDescargas());
             ps.setDouble(12, archivo.getValoracionMedia());
             ps.setInt(13, 1);

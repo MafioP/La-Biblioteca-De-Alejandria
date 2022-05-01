@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.ArchivoDB;
 
-/**
- *
- * @author ZeR3
- */
+
 public class BuscarArchivoServlet extends HttpServlet {
 
     

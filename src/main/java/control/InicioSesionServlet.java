@@ -12,10 +12,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import modelo.UsuarioDB;
 
-/**
- *
- * @author ZeR3
- */
+
 public class InicioSesionServlet extends HttpServlet {
 
     
@@ -65,7 +62,7 @@ public class InicioSesionServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = "";
         //invalida la cuenta si ya esta abierta
-        if(request.getSession().getAttribute("usuario")!=null){
+        if(request.getSession().getAttribute("usuario") != null){
             
             request.getSession().invalidate();
             url = "/MainPage.jsp";

@@ -19,32 +19,6 @@ import modelo.Usuario;
 @MultipartConfig
 public class SubirArchivoServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SubirArchivoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SubirArchivoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -57,7 +31,7 @@ public class SubirArchivoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -86,12 +60,12 @@ public class SubirArchivoServlet extends HttpServlet {
         Part contenido = request.getPart("contenido");
         long millis = System.currentTimeMillis();
         java.sql.Date fechaSubida = new java.sql.Date(millis);
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        //Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         
         String url = "";
         
         Archivo archivo = new Archivo();
-        //archivo.setPropietario(usuario.getId());
+        archivo.setPropietario(1);
         archivo.setNombre(nombre);
         archivo.setDescripcion(descripcion);
         archivo.setUniversidad(universidad);
@@ -102,7 +76,6 @@ public class SubirArchivoServlet extends HttpServlet {
         archivo.setFechaSubida(fechaSubida);
         archivo.setContenido(contenido);
         
-        out.println(usuario.getId());
         out.println(nombre);
         out.println(universidad);
         out.println(grado);
@@ -111,7 +84,7 @@ public class SubirArchivoServlet extends HttpServlet {
         out.println(asignatura);
         out.println(descripcion);
         out.println(fechaSubida);
-        
+        out.println(contenido);
         
         
         

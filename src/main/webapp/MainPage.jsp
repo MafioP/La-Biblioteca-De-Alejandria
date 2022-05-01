@@ -24,7 +24,7 @@
       <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="InicioSesion.html">Mi biblioteca</a>
-        <a href="InicioSesion.html">Subir Archivos</a>
+        <a href="SubirArchivo.html">Subir Archivos</a>
         <a href="#">Ajustes</a>
       </div>
       <span onclick="openNav()"><img src="img/menuLogo.png"  class="menu-sidebar"></span>     
@@ -35,7 +35,7 @@
             <div class="dropdown">
                 <button class="dropbtn"><img src="img/logoInicioSesion.png" width="50px"></button>
                 <div class="dropdown-content">
-                    <%if(session.isNew()){%>
+                    <%if(session.getAttribute("usuario") == null){%>
                   
                   <a href="InicioSesion.html">Iniciar sesión</a>
                   <a href="Registro.html">Registrarse</a>
