@@ -165,7 +165,7 @@ public class UsuarioDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Usuario WHERE Username = ?";
+        String query = "SELECT * FROM Usuario WHERE nombre = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, username);

@@ -22,6 +22,22 @@ public class ArchivoDB {
      * @return 
      */
     public static int insert(Archivo archivo) throws IOException {
+        
+        System.out.println(archivo.getPropietario());
+        System.out.println(archivo.getNombre());
+        System.out.println(archivo.getDescripcion());
+        System.out.println(archivo.getUniversidad());
+        System.out.println(archivo.getGrado());
+        System.out.println(archivo.getCurso());
+        System.out.println(archivo.getCuatrimestre());
+        System.out.println(archivo.getAsignatura());
+        System.out.println(archivo.getNumVistas());
+        System.out.println(archivo.getFechaSubida());
+        System.out.println(archivo.getNumDescargas());
+        System.out.println(archivo.getValoracionMedia());
+        System.out.println(archivo.getComentario());
+        
+        
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -143,7 +159,6 @@ public class ArchivoDB {
     }
     
     public static ArrayList<Archivo> ordenarArchivos(String orden){
-        System.out.println("El orden es "+orden);
         
         switch(orden){
             case "0":

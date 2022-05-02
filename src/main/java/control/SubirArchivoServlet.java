@@ -60,12 +60,12 @@ public class SubirArchivoServlet extends HttpServlet {
         Part contenido = request.getPart("contenido");
         long millis = System.currentTimeMillis();
         java.sql.Date fechaSubida = new java.sql.Date(millis);
-        //Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         
         String url = "";
         
         Archivo archivo = new Archivo();
-        archivo.setPropietario(1);
+        archivo.setPropietario(usuario.getId());
         archivo.setNombre(nombre);
         archivo.setDescripcion(descripcion);
         archivo.setUniversidad(universidad);
@@ -76,21 +76,9 @@ public class SubirArchivoServlet extends HttpServlet {
         archivo.setFechaSubida(fechaSubida);
         archivo.setContenido(contenido);
         
-        out.println(nombre);
-        out.println(universidad);
-        out.println(grado);
-        out.println(curso);
-        out.println(cuatrimestre);
-        out.println(asignatura);
-        out.println(descripcion);
-        out.println(fechaSubida);
-        out.println(contenido);
-        
-        
-        
-        //int id = ArchivoDB.insert(archivo);
-        //archivo.setIdArchivo(id);
-        url = "/MainPage.html";
+        int id = ArchivoDB.insert(archivo);
+        archivo.setIdArchivo(id);
+        url = "/MainPage.jsp";
         
         RequestDispatcher rs = request.getRequestDispatcher(url);
         rs.include(request, response);

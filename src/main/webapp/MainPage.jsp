@@ -23,9 +23,19 @@
     <nav class="navMain">    
       <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="InicioSesion.html">Mi biblioteca</a>
-        <a href="SubirArchivo.html">Subir Archivos</a>
-        <a href="#">Ajustes</a>
+        
+        <%if(session.getAttribute("usuario") == null){%>
+            <a href="InicioSesion.html">Mi biblioteca</a>
+            <a href="InicioSesion.html">Subir Archivos</a>
+            <a href="#">Ajustes</a>
+        <%}else{%>
+            <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
+              <ul id="itemBiblio1">Favoritos ★</ul>
+              <ul id="itemBiblio2">Tercero Carrera</ul>
+              <ul id="itemBiblio3">+ Crear Nueva</ul>
+            <a href="SubirArchivo.html">Subir Archivos</a>
+            <a href="#">Ajustes</a>
+        <%} %>
       </div>
       <span onclick="openNav()"><img src="img/menuLogo.png"  class="menu-sidebar"></span>     
         <ul class="navBanner">
