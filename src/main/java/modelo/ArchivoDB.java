@@ -21,7 +21,7 @@ public class ArchivoDB {
      * @param archivo
      * @return 
      */
-    public static ResultSet insert(Archivo archivo) throws IOException {
+    public static int insert(Archivo archivo) throws IOException {
         
         System.out.println(archivo.getPropietario());
         System.out.println(archivo.getNombre());
@@ -41,14 +41,10 @@ public class ArchivoDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO ARCHIVO "
-                + "(PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA"
-                + "NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, IDARCHIVO) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        System.out.println("post pool");
+        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
-            ps = connection.prepareStatement(query);
+            ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, archivo.getPropietario());
             ps.setString(2, archivo.getNombre());
             ps.setString(3, archivo.getDescripcion());
@@ -62,16 +58,23 @@ public class ArchivoDB {
             ps.setInt(11, archivo.getNumDescargas());
             ps.setDouble(12, archivo.getValoracionMedia());
             ps.setInt(13, archivo.getComentario());
-            ps.setInt(14, 20);
-            System.out.println("pre update");
-            ResultSet res = ps.executeQuery();
-            System.out.println("post update");
-            ps.close();
             
+            
+            int res = 0;
+            
+            ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()){
+                res = rs.getInt(1);
+            }
+            ps.close();
+            pool.freeConnection(connection);
             return res;
+            
             } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return 0;
             }
     }
     

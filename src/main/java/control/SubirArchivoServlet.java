@@ -1,7 +1,6 @@
 
 package control;
 
-import com.mysql.cj.protocol.Resultset;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -58,19 +57,14 @@ public class SubirArchivoServlet extends HttpServlet {
         String cuatrimestre = request.getParameter("cuatrimestre");
         String asignatura = request.getParameter("asignatura");
         String descripcion = request.getParameter("descripcion");
-        Part contenido = request.getPart("contenido");
         long millis = System.currentTimeMillis();
         java.sql.Date fechaSubida = new java.sql.Date(millis);
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         
         String url = "";
         
-        if(contenido != null){
-            out.println("<script>alert('No se ha seleccionado ningún archivo.'); </script>");
-            url = "/SubirArchivo.html";
-            
-        }else if(!curso.equals("1") && !curso.equals("2") && !curso.equals("3") && !curso.equals("4") && !curso.equals("5")){
-            out.println("<script>alert('Curso tiene que estar entre 1 y 5.'); </script>");
+        if(!curso.equals("1") && !curso.equals("2") && !curso.equals("3") && !curso.equals("4") && !curso.equals("5") && !curso.equals("6")){
+            out.println("<script>alert('Curso tiene que estar entre 1 y 6.'); </script>");
             url = "/SubirArchivo.html";
             
         }else if(!cuatrimestre.equals("1") && !cuatrimestre.equals("2")){
@@ -89,10 +83,11 @@ public class SubirArchivoServlet extends HttpServlet {
             archivo.setCuatrimestre(Integer.parseInt(cuatrimestre));
             archivo.setAsignatura(asignatura);
             archivo.setFechaSubida(fechaSubida);
-            archivo.setContenido(contenido);
             archivo.setComentario(1);
 
-            ArchivoDB.insert(archivo);
+            int id = ArchivoDB.insert(archivo);
+            
+            archivo.setIdArchivo(id);
             
             url = "/MainPage.jsp";
         }
@@ -100,15 +95,5 @@ public class SubirArchivoServlet extends HttpServlet {
         RequestDispatcher rs = request.getRequestDispatcher(url);
         rs.include(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
