@@ -37,17 +37,17 @@
             </div>
             </ul>    
         </nav>
-        <form action="SubirArchivoServlet" method="post" enctype="multipart/form-data">
+        
         <div class="area-subir">
           
           <div class="drag-area">
             <h2>Arrastra y suelta un archivo</h2>
             <span>O</span>
             <button>Selecciona tu archivo</button>
-            <input type="file" name="archivo" id="input-file" hidden multiple/>
+            <input type="file" name="contenido" id="input-file" hidden multiple/>
             <div id="preview"></div>
           </div>
-          
+          <form action="SubirArchivoServlet" method="post" enctype="multipart/form-data">
           <div class="subir-box" id="info-box">
               <h1>Subir archivo</h1>
               
@@ -76,9 +76,9 @@
                 
               
             </div>
-            
+            </form>
         </div>
-        </form>
+        
     </div>
     <!--CUSTOM JS-->
     <script>
@@ -86,7 +86,7 @@
     const dropArea = document.querySelector(".drag-area"),
     dragText = dropArea.querySelector("h2"),
     button = dropArea.querySelector("button"),
-    input = dropArea.querySelector("input");
+    input = document.getElementById("input-file");
     let file;
 
     button.onclick = ()=>{

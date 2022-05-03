@@ -53,8 +53,8 @@ public class SubirArchivoServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String universidad = request.getParameter("universidad");
         String grado = request.getParameter("grado");
-        int curso = Integer.parseInt(request.getParameter("curso"));
-        int cuatrimestre = Integer.parseInt(request.getParameter("cuatrimestre"));
+        String curso = request.getParameter("curso");
+        String cuatrimestre = request.getParameter("cuatrimestre");
         String asignatura = request.getParameter("asignatura");
         String descripcion = request.getParameter("descripcion");
         Part contenido = request.getPart("contenido");
@@ -64,22 +64,39 @@ public class SubirArchivoServlet extends HttpServlet {
         
         String url = "";
         
-        Archivo archivo = new Archivo();
-        archivo.setPropietario(usuario.getId());
-        archivo.setNombre(nombre);
-        archivo.setDescripcion(descripcion);
-        archivo.setUniversidad(universidad);
-        archivo.setGrado(grado);
-        archivo.setCurso(curso);
-        archivo.setCuatrimestre(cuatrimestre);
-        archivo.setAsignatura(asignatura);
-        archivo.setFechaSubida(fechaSubida);
-        archivo.setContenido(contenido);
-        
-        int id = ArchivoDB.insert(archivo);
-        archivo.setIdArchivo(id);
-        url = "/MainPage.jsp";
-        
+        if(contenido != null){
+            out.println("<script>alert('No se ha seleccionado ningún archivo.'); </script>");
+            url = "/SubirArchivo.html";
+            
+        }else if(!curso.equals("1") && !curso.equals("2") && !curso.equals("3") && !curso.equals("4") && !curso.equals("5")){
+            out.println("<script>alert('Curso tiene que estar entre 1 y 5.'); </script>");
+            url = "/SubirArchivo.html";
+            
+        }else if(!cuatrimestre.equals("1") && !cuatrimestre.equals("2")){
+            out.println("<script>alert('Cuatrimestre tiene que ser 1 o 2.'); </script>");
+            url = "/SubirArchivo.html";
+            
+        }else{
+            
+            Archivo archivo = new Archivo();
+            archivo.setPropietario(usuario.getId());
+            archivo.setNombre(nombre);
+            archivo.setDescripcion(descripcion);
+            archivo.setUniversidad(universidad);
+            archivo.setGrado(grado);  
+            archivo.setCurso(Integer.parseInt(curso));
+            archivo.setCuatrimestre(Integer.parseInt(cuatrimestre));
+            archivo.setAsignatura(asignatura);
+            archivo.setFechaSubida(fechaSubida);
+            archivo.setContenido(contenido);
+            archivo.setComentario(1);
+
+            int id = ArchivoDB.insert(archivo);
+            archivo.setIdArchivo(id);
+            
+            url = "/MainPage.jsp";
+        }
+
         RequestDispatcher rs = request.getRequestDispatcher(url);
         rs.include(request, response);
     }

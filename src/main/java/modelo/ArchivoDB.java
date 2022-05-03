@@ -44,7 +44,7 @@ public class ArchivoDB {
         String query = "INSERT INTO ARCHIVO "
                 + "(PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA"
                 + "NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, CONTENIDO) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             ps = connection.prepareStatement(query,
@@ -61,8 +61,9 @@ public class ArchivoDB {
             ps.setDate(10, archivo.getFechaSubida());
             ps.setInt(11, archivo.getNumDescargas());
             ps.setDouble(12, archivo.getValoracionMedia());
-            ps.setInt(13, 1);
-            ps.setBlob(14, archivo.getContenido().getInputStream());
+            ps.setInt(13, archivo.getComentario());
+            ps.setNull(14, java.sql.Types.BLOB);
+            
             int res = ps.executeUpdate();
    
             ps.close();
