@@ -15,31 +15,6 @@ import modelo.UsuarioDB;
 
 public class RegistroServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistroServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegistroServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -53,7 +28,7 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -69,6 +44,11 @@ public class RegistroServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // get parameters from the request
+        String encoding = request.getCharacterEncoding();
+        if(encoding==null){
+            request.setCharacterEncoding("UTF-8");
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
      
@@ -81,7 +61,7 @@ public class RegistroServlet extends HttpServlet {
         
         
         if(!password1.equals(password2)){
-    
+            
             out.println("<script>alert('Las contraseñas no coinciden.'); </script>");
             url = "/Registro.html";
         }else{
@@ -109,15 +89,5 @@ public class RegistroServlet extends HttpServlet {
         RequestDispatcher rs = request.getRequestDispatcher(url);
             rs.include(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

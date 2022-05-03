@@ -28,6 +28,10 @@ public class BuscarArchivoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String encoding = request.getCharacterEncoding();
+        if(encoding==null){
+            request.setCharacterEncoding("UTF-8");
+        }
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -58,6 +62,11 @@ public class BuscarArchivoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String encoding = request.getCharacterEncoding();
+        if(encoding==null){
+            request.setCharacterEncoding("UTF-8");
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -83,14 +92,5 @@ public class BuscarArchivoServlet extends HttpServlet {
             
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

@@ -29,6 +29,12 @@ public class InicioSesionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+            String encoding = request.getCharacterEncoding();
+            if(encoding==null){
+                request.setCharacterEncoding("UTF-8");
+            }
+            
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             
@@ -57,6 +63,11 @@ public class InicioSesionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String encoding = request.getCharacterEncoding();
+        if(encoding==null){
+            request.setCharacterEncoding("UTF-8");
+        }
         // get parameters from the request
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -73,7 +84,9 @@ public class InicioSesionServlet extends HttpServlet {
         
             //Validar si las credenciales para iniciar sesion son correctas
             if (!UsuarioDB.Validate(username, password)) {
+                response.setContentType("text/html;charset=UTF-8");
                 out.println("<script>alert('Nombre de usuario o contraseña incorrectos'); </script>");
+                
                 url = "/InicioSesion.html";
                 
             } else {
@@ -91,15 +104,5 @@ public class InicioSesionServlet extends HttpServlet {
                 rs.include(request, response);
         
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

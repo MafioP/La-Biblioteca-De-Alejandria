@@ -10,7 +10,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import modelo.Archivo;
 import modelo.ArchivoDB;
 import modelo.Usuario;
@@ -45,6 +44,11 @@ public class SubirArchivoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String encoding = request.getCharacterEncoding();
+        if(encoding==null){
+            request.setCharacterEncoding("UTF-8");
+        }
         
         // get parameters from the request
         response.setContentType("text/html;charset=UTF-8");
