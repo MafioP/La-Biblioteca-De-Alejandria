@@ -1,6 +1,7 @@
 
 package control;
 
+import com.mysql.cj.protocol.Resultset;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -91,8 +92,7 @@ public class SubirArchivoServlet extends HttpServlet {
             archivo.setContenido(contenido);
             archivo.setComentario(1);
 
-            int id = ArchivoDB.insert(archivo);
-            archivo.setIdArchivo(id);
+            ArchivoDB.insert(archivo);
             
             url = "/MainPage.jsp";
         }

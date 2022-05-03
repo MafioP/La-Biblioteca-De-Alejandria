@@ -21,7 +21,7 @@ public class ArchivoDB {
      * @param archivo
      * @return 
      */
-    public static int insert(Archivo archivo) throws IOException {
+    public static ResultSet insert(Archivo archivo) throws IOException {
         
         System.out.println(archivo.getPropietario());
         System.out.println(archivo.getNombre());
@@ -43,12 +43,12 @@ public class ArchivoDB {
         PreparedStatement ps = null;
         String query = "INSERT INTO ARCHIVO "
                 + "(PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA"
-                + "NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, CONTENIDO) "
+                + "NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, IDARCHIVO) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
+        System.out.println("post pool");
         try {
-            ps = connection.prepareStatement(query,
-            Statement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement(query);
             ps.setInt(1, archivo.getPropietario());
             ps.setString(2, archivo.getNombre());
             ps.setString(3, archivo.getDescripcion());
@@ -62,16 +62,16 @@ public class ArchivoDB {
             ps.setInt(11, archivo.getNumDescargas());
             ps.setDouble(12, archivo.getValoracionMedia());
             ps.setInt(13, archivo.getComentario());
-            ps.setNull(14, java.sql.Types.BLOB);
-            
-            int res = ps.executeUpdate();
-   
+            ps.setInt(14, 20);
+            System.out.println("pre update");
+            ResultSet res = ps.executeQuery();
+            System.out.println("post update");
             ps.close();
             
             return res;
             } catch (SQLException e) {
             e.printStackTrace();
-            return 0;
+            return null;
             }
     }
     
@@ -96,8 +96,7 @@ public class ArchivoDB {
                     rs.getInt("propietario"), rs.getString("descripcion"), rs.getString("universidad"),
                     rs.getString("grado"), rs.getInt("curso"), rs.getInt("cuatrimestre"),
                     rs.getString("asignatura"), rs.getInt("numVistas"), rs.getDate("fechaSubida"),
-                    rs.getInt("numDescargas"), rs.getDouble("valoracionMedia"), rs.getInt("comentario"),
-                    (Part) rs.getBlob("contenido"));
+                    rs.getInt("numDescargas"), rs.getDouble("valoracionMedia"), rs.getInt("comentario"), null);
                 
                 listaArchivos.add(archivo);
                 
@@ -144,7 +143,7 @@ public class ArchivoDB {
                 archivo.setNumDescargas(rs.getInt("numDescargas"));
                 archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
                 archivo.setComentario(rs.getInt("Comentario"));
-                archivo.setContenido((Part) rs.getBlob("Contenido"));
+                //archivo.setContenido((Part) rs.getBlob("Contenido"));
                 listaArchivos.add(archivo);
                 
             }
@@ -201,7 +200,7 @@ public class ArchivoDB {
             case "3":
                 Collections.sort(listaArchivos, new Comparator<Archivo>() {
                     public int compare(Archivo a1, Archivo a2) {
-                        return a1.getFechaSubida().compareTo(a2.getFechaSubida());
+                        return a2.getFechaSubida().compareTo(a1.getFechaSubida());
                     }
                 });
                 
