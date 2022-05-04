@@ -22,22 +22,7 @@ public class ArchivoDB {
      * @return 
      */
     public static int insert(Archivo archivo) throws IOException {
-        
-        System.out.println(archivo.getPropietario());
-        System.out.println(archivo.getNombre());
-        System.out.println(archivo.getDescripcion());
-        System.out.println(archivo.getUniversidad());
-        System.out.println(archivo.getGrado());
-        System.out.println(archivo.getCurso());
-        System.out.println(archivo.getCuatrimestre());
-        System.out.println(archivo.getAsignatura());
-        System.out.println(archivo.getNumVistas());
-        System.out.println(archivo.getFechaSubida());
-        System.out.println(archivo.getNumDescargas());
-        System.out.println(archivo.getValoracionMedia());
-        System.out.println(archivo.getComentario());
-        
-        
+
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -116,6 +101,12 @@ public class ArchivoDB {
           }       
     }
     
+    /**
+     * Busca un archivo en la base de datos en funcion del nombre
+     * 
+     * @param name
+     * @return listaArchivos
+     */
     public static ArrayList<Archivo> buscarArchivoNombre(String name) {
         
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -146,7 +137,7 @@ public class ArchivoDB {
                 archivo.setNumDescargas(rs.getInt("numDescargas"));
                 archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
                 archivo.setComentario(rs.getInt("Comentario"));
-                //archivo.setContenido((Part) rs.getBlob("Contenido"));
+                
                 listaArchivos.add(archivo);
                 
             }
@@ -161,6 +152,13 @@ public class ArchivoDB {
           }       
     }
     
+    
+    /**
+     * Ordena los archivos en funcion del parametro orden
+     * 
+     * @param orden
+     * @return listaArchivos
+     */
     public static ArrayList<Archivo> ordenarArchivos(String orden){
         
         switch(orden){

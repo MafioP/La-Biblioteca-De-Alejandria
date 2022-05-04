@@ -15,8 +15,6 @@ import modelo.ArchivoDB;
 public class BuscarArchivoServlet extends HttpServlet {
 
     
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -28,6 +26,7 @@ public class BuscarArchivoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String encoding = request.getCharacterEncoding();
         if(encoding==null){
             request.setCharacterEncoding("UTF-8");

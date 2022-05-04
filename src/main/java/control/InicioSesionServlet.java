@@ -16,8 +16,6 @@ import modelo.UsuarioDB;
 public class InicioSesionServlet extends HttpServlet {
 
     
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -84,7 +82,7 @@ public class InicioSesionServlet extends HttpServlet {
         
             //Validar si las credenciales para iniciar sesion son correctas
             if (!UsuarioDB.Validate(username, password)) {
-                response.setContentType("text/html;charset=UTF-8");
+                
                 out.println("<script>alert('Nombre de usuario o contraseña incorrectos'); </script>");
                 
                 url = "/InicioSesion.html";
@@ -98,7 +96,6 @@ public class InicioSesionServlet extends HttpServlet {
                 
             }
         }
-        
         
             RequestDispatcher rs = request.getRequestDispatcher(url);
                 rs.include(request, response);

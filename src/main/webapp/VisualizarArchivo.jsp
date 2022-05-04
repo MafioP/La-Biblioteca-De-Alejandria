@@ -1,3 +1,8 @@
+
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,12 +18,19 @@
       <nav class="navMain">
         <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
-            <ul id="itemBiblio1">Favoritos ★</ul>
-            <ul id="itemBiblio2">Tercero Carrera</ul>
-            <ul id="itemBiblio3">+ Crear Nueva</ul>
-          <a href="SubirArchivo.html">Subir Archivos</a>
-          <a href="#">Ajustes</a>
+          
+          <%if(session.getAttribute("usuario") == null){%>
+            <a href="InicioSesion.html">Mi biblioteca</a>
+            <a href="InicioSesion.html">Subir Archivos</a>
+            <a href="#">Ajustes</a>
+          <%}else{%>
+            <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
+              <ul id="itemBiblio1">Favoritos ★</ul>
+              <ul id="itemBiblio2">Tercero Carrera</ul>
+              <ul id="itemBiblio3">+ Crear Nueva</ul>
+            <a href="SubirArchivo.html">Subir Archivos</a>
+            <a href="#">Ajustes</a>
+          <%} %>
         </div>
         <span onclick="openNav()"><img src="img/menuLogo.png"  class="menu-sidebar"></span>
       <ul class="navBanner">
@@ -28,8 +40,17 @@
               <div class="dropdown">
                   <button class="dropbtn"><img src="img/logoInicioSesion.png" width="50px"></button>
                   <div class="dropdown-content">
-                    <a href="InicioSesion.html">Iniciar sesión</a>
-                    <a href="Registro.html">Registrarse</a>
+                    <%if(session.getAttribute("usuario") == null){%>
+                  
+                        <a href="InicioSesion.html">Iniciar sesión</a>
+                        <a href="Registro.html">Registrarse</a>
+                  
+                    <%}else{%>
+                  
+                        <a href="InicioSesionServlet?parametro=0">Cerrar sesión</a>  
+                        <a href="InicioSesionServlet?parametro=1">Cambiar cuenta</a>
+                        
+                    <%} %>
                   </div>
                 </div>
           </ul>    
@@ -96,14 +117,33 @@
             <input type="number" min="1" max="5" placeholder="5">
           </div>
           <div class="buttonsComentario">
-            <button type="button" class="cancelbtn" onclick="window.location.href='VisualizarArchivo.html'">Cancelar</button>
-            <button type="button" class="addbtn" onclick="window.location.href='VisualizarArchivo.html'">Añadir</button>
+            <button type="button" class="cancelbtn" onclick="window.location.href='VisualizarArchivo.jsp'">Cancelar</button>
+            <button type="button" class="addbtn" onclick="window.location.href='VisualizarArchivo.jsp'">Añadir</button>
           </div>
         </div>
       </form>
     </div>
     <!--CUSTOM JS-->
     <script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+         /*Funcionalidad de SideBar */
+  function openNav() {
+    document.getElementById("sideNavMenu").style.width = "250px";
+  }
+
+  /*Pone el width = 0 del sidebar*/
+  function closeNav() {
+    document.getElementById("sideNavMenu").style.width = "0";
+  }
+
+  function openBiblioteca() {
+    document.getElementById("itemBiblio1").style.display = "block";
+    document.getElementById("itemBiblio2").style.display = "block";
+    document.getElementById("itemBiblio3").style.display = "block";
+  }
+  function closeBiblioteca() {
+    document.getElementById("itemBiblio1").style.display = "none";
+    document.getElementById("itemBiblio2").style.display = "none";
+    document.getElementById("itemBiblio3").style.display = "none";
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     </script>
 </body>

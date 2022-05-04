@@ -46,15 +46,15 @@
                 <div class="dropdown-content">
                     <%if(session.getAttribute("usuario") == null){%>
                   
-                  <a href="InicioSesion.html">Iniciar sesión</a>
-                  <a href="Registro.html">Registrarse</a>
+                        <a href="InicioSesion.html">Iniciar sesión</a>
+                        <a href="Registro.html">Registrarse</a>
                   
-                  <%}else{%>
+                    <%}else{%>
                   
                         <a href="InicioSesionServlet?parametro=0">Cerrar sesión</a>  
                         <a href="InicioSesionServlet?parametro=1">Cambiar cuenta</a>
                         
-                       <%} %>
+                    <%} %>
                          
                   
                 </div>
@@ -148,7 +148,6 @@
                     }
                 }
 
-            
             %>
             <select name="orden" onchange="javascript:document.formOrdenar.submit();">
               <option value="0" <%=option0%>>Mejor valorados</option>
@@ -172,7 +171,7 @@
             if(request.getSession().getAttribute("variable") != null){
                   
                 archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
-                //request.getSession().invalidate();
+                
             }else{
                  archivos = ArchivoDB.getAllArchivos();
             }
@@ -191,7 +190,7 @@
           <% 
             for(int i=0; i < archivos.size(); i++){
           %>
-            <tr onclick="window.location.href='VisualizarArchivo.html';">
+            <tr onclick="window.location.href='VisualizarArchivo.jsp';">
                 <td><%=archivos.get(i).getNombre()%></td>
                 <td><img src="img/fecha.png" alt="fecha icono" id="icono"><%=archivos.get(i).getFechaSubida()%></td>
                 <td><img src="img/view.png" alt="visto icono" id="icono"><%= archivos.get(i).getNumVistas()%> vistas</td>
