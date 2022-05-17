@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * @author Mario
  */
 public class TagTreeDB {
-    private static ArrayList<TagTree<String>> tagTrees = new ArrayList<>();
+    private static ArrayList<TagTree<String>> tagTree = new ArrayList<>();
     
     public static void insert(String uni, String carrera, String curso, String cuatri, String asig){
-        for (int i = 0; i < tagTrees.size(); i++) {
-            if (!tagTrees.get(i).getData().equals(uni)){
-                tagTrees.add(new TagTree<>(uni));
-                tagTrees.get(i).addNode(new TagTree.Node<String>(carrera));
+        for (int i = 0; i < tagTree.size(); i++) {
+            if (tagTree.get(i).getHead().equals(uni)) {
+                
+                break;
             }
         }
     }

@@ -1,52 +1,115 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+     * To change this license header, choose License Headers in Project Properties.
+     * To change this template file, choose Tools | Templates
+     * and open the template in the editor.
  */
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import javax.swing.tree.TreeNode;
 
 /**
  *
  * @author Mario
  */
-public class TagTree<String> {
-    private Node<String> root;
+public class TagTree<T> {
 
-    public TagTree(String rootData) {
-        root = new Node<String>(rootData);
-        root.children = new ArrayList<Node<String>>();
-    }
-    
-    public String getData() {
-        return root.data;
-    }
-    
-    public void addNode(Node<String> node) {
-        root.children.add(node);
+    private T head;
+
+    private ArrayList<TagTree<T>> leafs = new ArrayList<TagTree<T>>();
+
+    private TagTree<T> parent = null;
+
+    private HashMap<T, TagTree<T>> locate = new HashMap<T, TagTree<T>>();
+
+    public TagTree(T head) {
+        this.head = head;
+        locate.put(head, this);
     }
 
-    public static class Node<String> {
-        private String data;
-        private Node<String> parent;
-        private List<Node<String>> children;
-        
-        /**
-         * Añadir una opcion al selector de tags
-         * @param nombre
-         * @return 
-         */
-        public Node(String nombre) {
-            data = nombre;
+    public void addLeaf(T root, T leaf) {
+        if (locate.containsKey(root)) {
+            locate.get(root).addLeaf(leaf);
+        } else {
+            addLeaf(root).addLeaf(leaf);
         }
-        
-        public Node<String> addTag(String nombre){
-            Node<String> nuevo = new Node<String>(nombre);
-            nuevo.parent = this;
-            this.children.add(nuevo);
-            return nuevo;
+    }
+
+    public TagTree<T> addLeaf(T leaf) {
+        TagTree<T> t = new TagTree<T>(leaf);
+        leafs.add(t);
+        t.parent = this;
+        t.locate = this.locate;
+        locate.put(leaf, t);
+        return t;
+    }
+
+    public TagTree<T> setAsParent(T parentRoot) {
+        TagTree<T> t = new TagTree<T>(parentRoot);
+        t.leafs.add(this);
+        this.parent = t;
+        t.locate = this.locate;
+        t.locate.put(head, this);
+        t.locate.put(parentRoot, t);
+        return t;
+    }
+
+    public T getHead() {
+        return head;
+    }
+
+    public TagTree<T> getTree(T element) {
+        return locate.get(element);
+    }
+
+    public TagTree<T> getParent() {
+        return parent;
+    }
+
+    public Collection<T> getSuccessors(T root) {
+        Collection<T> successors = new ArrayList<T>();
+        TagTree<T> tree = getTree(root);
+        if (null != tree) {
+            for (TagTree<T> leaf : tree.leafs) {
+                successors.add(leaf.head);
+            }
         }
+        return successors;
+    }
+
+    public Collection<TagTree<T>> getSubTrees() {
+        return leafs;
+    }
+
+    public static <T> Collection<T> getSuccessors(T of, Collection<TagTree<T>> in) {
+        for (TagTree<T> tree : in) {
+            if (tree.locate.containsKey(of)) {
+                return tree.getSuccessors(of);
+            }
+        }
+        return new ArrayList<T>();
+    }
+
+    @Override
+    public String toString() {
+        return printTree(0);
+    }
+
+    private static final int indent = 2;
+
+    private String printTree(int increment) {
+        String s = "";
+        String inc = "";
+        for (int i = 0; i < increment; ++i) {
+            inc = inc + " ";
+        }
+        s = inc + head;
+        for (TagTree<T> child : leafs) {
+            s += "\n" + child.printTree(increment + indent);
+        }
+        return s;
     }
 }
