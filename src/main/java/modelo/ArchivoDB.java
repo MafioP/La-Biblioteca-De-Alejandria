@@ -25,7 +25,7 @@ public class ArchivoDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, CONTENIDO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -42,6 +42,7 @@ public class ArchivoDB {
             ps.setInt(11, archivo.getNumDescargas());
             ps.setDouble(12, archivo.getValoracionMedia());
             ps.setInt(13, archivo.getComentario());
+            ps.setBlob(14, archivo.getContenido().getInputStream());
             
             
             int res = 0;

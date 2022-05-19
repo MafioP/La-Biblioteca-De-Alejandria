@@ -10,6 +10,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import modelo.Archivo;
 import modelo.ArchivoDB;
 import modelo.Usuario;
@@ -61,6 +62,7 @@ public class SubirArchivoServlet extends HttpServlet {
         String cuatrimestre = request.getParameter("cuatrimestre");
         String asignatura = request.getParameter("asignatura");
         String descripcion = request.getParameter("descripcion");
+        Part contenido = request.getPart("archivo");
         long millis = System.currentTimeMillis();
         java.sql.Date fechaSubida = new java.sql.Date(millis);
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
@@ -88,6 +90,7 @@ public class SubirArchivoServlet extends HttpServlet {
             archivo.setAsignatura(asignatura);
             archivo.setFechaSubida(fechaSubida);
             archivo.setComentario(1);
+            archivo.setContenido(contenido);
 
             int id = ArchivoDB.insert(archivo);
             
