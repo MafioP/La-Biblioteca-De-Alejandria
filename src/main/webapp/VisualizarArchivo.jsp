@@ -1,4 +1,8 @@
 
+<%@page import="modelo.UsuarioDB"%>
+<%@page import="modelo.ComentarioDB"%>
+<%@page import="modelo.Comentario"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
@@ -77,48 +81,57 @@
             </div>
         </div>
       <div class="comentarios">
+          <% 
+          
+            ArrayList<Comentario> comentarios = new ArrayList<>(); 
+            comentarios = ComentarioDB.getAllComentarios();
+            
+      
+          
+          %>
         <h1>Comentarios</h1>
         <div class="comentariosHead">
-          <label>Numero de comentarios: 3</label>
-          <button onclick="document.getElementById('id01').style.display='block'">Añadir Comentario</button>
+          <label>Numero de comentarios: <%=comentarios.size()%></label>
+          
+          <%if(session.getAttribute("usuario") != null){%>
+            <button onclick="document.getElementById('id01').style.display='block'">Añadir Comentario</button>
+          <%}%>
+          
+          
+          
         </div>
         <table>
+          <% 
+            for(int i=0; i < comentarios.size(); i++){
+          %>
           <tr>
               <td><img src="img/logoInicioSesion.png" id="iconoFiltro"></td>
-              <td>El Torro Pai</td>
-              <td>Buenos apuntes, me sirvieron para aprobar la asignatura en la extraordinaria</td>
-              <td>Valoracion: 5.0</td>
+              <td><%= UsuarioDB.selectUserById(comentarios.get(i).getAutor()).getUsername()%></td>
+              <td><%=comentarios.get(i).getTexto()%></td>
+              <td>Valoracion: <%=comentarios.get(i).getValoracion()%></td>
           </tr>
-          <tr>
-            <td><img src="img/logoInicioSesion.png" id="iconoFiltro"></td>
-            <td>MafioP</td>
-            <td>Buena coleccion de ejercicios, aunque faltarian algunos del tema 4</td>
-            <td>Valoracion: 4.5</td>
-          </tr>
-          <tr>
-            <td><img src="img/logoInicioSesion.png" id="iconoFiltro"></td>
-            <td>Daxter268</td>
-            <td>Faltan bastantes ejercicios que hizo el profe en clase, vaya desastre de apuntes</td>
-            <td>Valoracion: 1.0</td>
-          </tr>
+          
+          <%
+            }
+          %> 
         </table>
       </div>
     </div>
 
     <div id="id01" class="modal">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <form class="modal-content" action="/action_page.php">
+      <form class="modal-content" action="AddComentarioServlet" method="post">
         <div class="container">
           <h1>Añadir Comentario</h1>
           <div class="inputComentario">
-            <textarea placeholder="Comentario"></textarea>
+              <textarea placeholder="Comentario" name="texto"></textarea>
             <br>
             <label>Valoracion</label>
-            <input type="number" min="1" max="5" placeholder="5">
+            <input type="number" min="1" max="5" placeholder="5" name="valoracion">
           </div>
           <div class="buttonsComentario">
             <button type="button" class="cancelbtn" onclick="window.location.href='VisualizarArchivo.jsp'">Cancelar</button>
-            <button type="button" class="addbtn" onclick="window.location.href='VisualizarArchivo.jsp'">Añadir</button>
+            <button type="submit" class="addbtn">Añadir</button>
           </div>
         </div>
       </form>

@@ -16,6 +16,10 @@
         <servlet-name>BuscarArchivoServlet</servlet-name>
         <servlet-class>control.BuscarArchivoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddComentarioServlet</servlet-name>
+        <servlet-class>control.AddComentarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/RegistroServlet</url-pattern>
@@ -32,6 +36,10 @@
         <servlet-name>BuscarArchivoServlet</servlet-name>
         <url-pattern>/BuscarArchivoServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddComentarioServlet</servlet-name>
+        <url-pattern>/AddComentarioServlet</url-pattern>
+    </servlet-mapping>
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
         <res-ref-name>jdbc/alejandriadb</res-ref-name>
@@ -39,5 +47,4 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-
 </web-app>
