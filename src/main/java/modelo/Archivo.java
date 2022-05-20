@@ -24,7 +24,6 @@ public class Archivo implements Serializable{
     private Date fechaSubida;
     private int numDescargas;
     private double valoracionMedia;
-    private int comentario;
     private Part contenido;
 
     
@@ -42,12 +41,11 @@ public class Archivo implements Serializable{
         this.fechaSubida = null;
         this.numDescargas = 0;
         this.valoracionMedia = 0;
-        this.comentario = -1;
         this.contenido = null;
     }
     
     
-    public Archivo(String nombre, int idArchivo, int propietario, String descripcion, String universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, int comentario, Part contenido) {
+    public Archivo(String nombre, int idArchivo, int propietario, String descripcion, String universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, Part contenido) {
         this.nombre = nombre;
         this.idArchivo = idArchivo;
         this.propietario = propietario;
@@ -61,7 +59,6 @@ public class Archivo implements Serializable{
         this.fechaSubida = fechaSubida;
         this.numDescargas = numDescargas;
         this.valoracionMedia = valoracionMedia;
-        this.comentario = comentario;
         this.contenido = contenido;
     }
     
@@ -177,14 +174,6 @@ public class Archivo implements Serializable{
 
     public void setValoracionMedia(double valoracionMedia) {
         this.valoracionMedia = valoracionMedia;
-    }
-
-    public int getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(int comentario) {
-        this.comentario = comentario;
     }
     
     

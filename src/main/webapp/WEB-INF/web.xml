@@ -20,6 +20,10 @@
         <servlet-name>AddComentarioServlet</servlet-name>
         <servlet-class>control.AddComentarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VisualizarArchivoServlet</servlet-name>
+        <servlet-class>control.VisualizarArchivoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/RegistroServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>AddComentarioServlet</servlet-name>
         <url-pattern>/AddComentarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisualizarArchivoServlet</servlet-name>
+        <url-pattern>/VisualizarArchivoServlet</url-pattern>
     </servlet-mapping>
     <resource-ref>
         <description>MySQL DB Connection Pool</description>

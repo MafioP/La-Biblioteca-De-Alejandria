@@ -89,7 +89,6 @@ public class SubirArchivoServlet extends HttpServlet {
             archivo.setCuatrimestre(Integer.parseInt(cuatrimestre));
             archivo.setAsignatura(asignatura);
             archivo.setFechaSubida(fechaSubida);
-            archivo.setComentario(1);
             archivo.setContenido(contenido);
 
             int id = ArchivoDB.insert(archivo);

@@ -78,7 +78,11 @@ public class RegistroServlet extends HttpServlet {
             } else {
                 int id = UsuarioDB.insert(usuario);
                 usuario.setId(id);
+                usuario = UsuarioDB.selectUserByName(username);
+                
                 url = "/MainPage.jsp";
+                
+                
                 // store the user in the session
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuario);

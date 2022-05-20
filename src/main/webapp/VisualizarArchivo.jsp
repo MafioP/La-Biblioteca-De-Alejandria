@@ -1,4 +1,6 @@
 
+<%@page import="modelo.ArchivoDB"%>
+<%@page import="modelo.Archivo"%>
 <%@page import="modelo.UsuarioDB"%>
 <%@page import="modelo.ComentarioDB"%>
 <%@page import="modelo.Comentario"%>
@@ -64,29 +66,32 @@
             <iframe src="files/analisis.pdf"></iframe>
           </div>
           <div class="descripcion-box">
+              
+            <%
+                        
+                Archivo archivo = (Archivo) session.getAttribute("archivo"); 
+     
+            %>
             <form>
               <h1>Título</h1>
-              <label for="titulo">Ejercicios de Sistemas y Servicios Web</label>
+              <label for="titulo"><%=archivo.getNombre()%></label>
               <h1>Descripción</h1>
-              <label for="descripcion">Ejercicios de la asignatura SSW del año 2021 resueltos en clase por el profesor</label>
+              <label for="descripcion"><%=archivo.getDescripcion()%></label>
               <h1>Tags</h1>
               <ul class="tags">
-                <li><a href="#" class="tag">Universidad De Valladolid</a></li>
-                <li><a href="#" class="tag">Informática</a></li>
-                <li><a href="#" class="tag">Tercero</a></li>
-                <li><a href="#" class="tag">2ª Cuatri</a></li>
-                <li><a href="#" class="tag">SSW</a></li>
+                <li><a href="#" class="tag"><%=archivo.getUniversidad()%></a></li>
+                <li><a href="#" class="tag"><%=archivo.getGrado()%></a></li>
+                <li><a href="#" class="tag">Curso <%=archivo.getCurso()%></a></li>
+                <li><a href="#" class="tag">Cuatrimestre <%=archivo.getCuatrimestre()%></a></li>
+                <li><a href="#" class="tag"><%=archivo.getAsignatura()%></a></li>
               </ul>
             </form>
             </div>
         </div>
       <div class="comentarios">
           <% 
-          
-            ArrayList<Comentario> comentarios = new ArrayList<>(); 
-            comentarios = ComentarioDB.getAllComentarios();
-            
-      
+
+            ArrayList<Comentario> comentarios = (ArrayList<Comentario>) session.getAttribute("comentarios"); 
           
           %>
         <h1>Comentarios</h1>
@@ -95,9 +100,9 @@
           
           <%if(session.getAttribute("usuario") != null){%>
             <button onclick="document.getElementById('id01').style.display='block'">Añadir Comentario</button>
+          <%}else{%>
+            <button onclick="window.location.href='InicioSesion.html'">Añadir Comentario</button>
           <%}%>
-          
-          
           
         </div>
         <table>
@@ -128,6 +133,7 @@
             <br>
             <label>Valoracion</label>
             <input type="number" min="1" max="5" placeholder="5" name="valoracion">
+            <input type="hidden" name="file" value=<%=archivo.getIdArchivo()%>>
           </div>
           <div class="buttonsComentario">
             <button type="button" class="cancelbtn" onclick="window.location.href='VisualizarArchivo.jsp'">Cancelar</button>

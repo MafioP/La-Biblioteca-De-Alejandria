@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.servlet.http.Part;
 
 
 public class ArchivoDB {
@@ -26,7 +27,7 @@ public class ArchivoDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, COMENTARIO, CONTENIDO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, CONTENIDO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -42,8 +43,7 @@ public class ArchivoDB {
             ps.setDate(10, archivo.getFechaSubida());
             ps.setInt(11, archivo.getNumDescargas());
             ps.setDouble(12, archivo.getValoracionMedia());
-            ps.setInt(13, archivo.getComentario());
-            ps.setBlob(14, archivo.getContenido().getInputStream());
+            ps.setBlob(13, archivo.getContenido().getInputStream());
             
             
             int res = 0;
@@ -85,7 +85,7 @@ public class ArchivoDB {
                     rs.getInt("propietario"), rs.getString("descripcion"), rs.getString("universidad"),
                     rs.getString("grado"), rs.getInt("curso"), rs.getInt("cuatrimestre"),
                     rs.getString("asignatura"), rs.getInt("numVistas"), rs.getDate("fechaSubida"),
-                    rs.getInt("numDescargas"), rs.getDouble("valoracionMedia"), rs.getInt("comentario"), null);
+                    rs.getInt("numDescargas"), rs.getDouble("valoracionMedia"), (Part) rs.getBlob("contenido"));
                 
                 listaArchivos.add(archivo);
                 
@@ -137,7 +137,7 @@ public class ArchivoDB {
                 archivo.setFechaSubida(rs.getDate("FechaSubida"));
                 archivo.setNumDescargas(rs.getInt("numDescargas"));
                 archivo.setValoracionMedia(rs.getInt("ValoracionMedia"));
-                archivo.setComentario(rs.getInt("Comentario"));
+                
                 
                 listaArchivos.add(archivo);
                 
@@ -223,5 +223,52 @@ public class ArchivoDB {
         
         return listaArchivos;
     }
+    
+    
+    /**
+     * Seleccionar un archivo de la base de datos a partir de su id de archivo
+     * @param id
+     * @return 
+     */
+    public static Archivo selectFileById(int idArchivo) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Archivo WHERE idArchivo = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, idArchivo);
+            rs = ps.executeQuery();
+            Archivo archivo = null;
+
+            if (rs.next()) {
+                archivo = new Archivo();
+                archivo.setIdArchivo(rs.getInt("idArchivo"));
+                archivo.setPropietario(rs.getInt("propietario"));
+                archivo.setNombre(rs.getString("nombre"));
+                archivo.setDescripcion(rs.getString("descripcion"));
+                archivo.setUniversidad(rs.getString("universidad"));
+                archivo.setGrado(rs.getString("grado"));
+                archivo.setCurso(rs.getInt("curso"));
+                archivo.setCuatrimestre(rs.getInt("cuatrimestre"));
+                archivo.setAsignatura(rs.getString("asignatura"));
+                archivo.setNumVistas(rs.getInt("numVistas"));
+                archivo.setFechaSubida(rs.getDate("fechaSubida"));
+                archivo.setNumDescargas(rs.getInt("numDescargas"));
+                archivo.setValoracionMedia(rs.getDouble("valoracionMedia"));
+                archivo.setContenido((Part) rs.getBlob("contenido"));
+                
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return archivo;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+          }       
+    } 
     
 }
