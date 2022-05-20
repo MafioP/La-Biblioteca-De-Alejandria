@@ -2,6 +2,9 @@
 package modelo;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -85,7 +88,7 @@ public class ArchivoDB {
                     rs.getInt("propietario"), rs.getString("descripcion"), rs.getString("universidad"),
                     rs.getString("grado"), rs.getInt("curso"), rs.getInt("cuatrimestre"),
                     rs.getString("asignatura"), rs.getInt("numVistas"), rs.getDate("fechaSubida"),
-                    rs.getInt("numDescargas"), rs.getDouble("valoracionMedia"), (Part) rs.getBlob("contenido"));
+                    rs.getInt("numDescargas"), rs.getDouble("valoracionMedia"), null);
                 
                 listaArchivos.add(archivo);
                 
@@ -257,7 +260,7 @@ public class ArchivoDB {
                 archivo.setFechaSubida(rs.getDate("fechaSubida"));
                 archivo.setNumDescargas(rs.getInt("numDescargas"));
                 archivo.setValoracionMedia(rs.getDouble("valoracionMedia"));
-                archivo.setContenido((Part) rs.getBlob("contenido"));
+                
                 
             }
             rs.close();
@@ -268,6 +271,45 @@ public class ArchivoDB {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+          }       
+    }
+    
+    /**
+     * Obtener un archivo de la base de datos a partir de su id de archivo
+     * @param id
+     * @param respuesta
+     */
+    public static void getFile(int idArchivo, OutputStream respuesta) throws IOException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT contenido FROM Archivo WHERE idArchivo = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, idArchivo);
+            rs = ps.executeQuery();
+            
+
+            if (rs.next()) {
+                Blob blob = rs.getBlob("contenido");
+                if(!rs.wasNull() && blob.length() > 1){
+                    InputStream archivo = blob.getBinaryStream();
+                    byte[] buffer = new byte[1000];
+                    int len = archivo.read(buffer);
+                    while(len != -1){
+                        respuesta.write(buffer, 0, len);
+                        len = archivo.read(buffer);
+                    }
+                    archivo.close();
+                }
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+     
+        } catch (SQLException e) {
+            e.printStackTrace();
           }       
     } 
     

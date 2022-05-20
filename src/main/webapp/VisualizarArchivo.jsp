@@ -61,17 +61,19 @@
                 </div>
           </ul>    
       </nav>
+                  
+      <%
+                        
+      Archivo archivo = (Archivo) session.getAttribute("archivo"); 
+     
+      %>
       <div class="visualizarArea">
           <div class="preview-box">
-            <iframe src="files/analisis.pdf"></iframe>
+            <iframe src="ObtenerArchivoServlet?file=<%=archivo.getIdArchivo()%>"></iframe>
           </div>
           <div class="descripcion-box">
               
-            <%
-                        
-                Archivo archivo = (Archivo) session.getAttribute("archivo"); 
-     
-            %>
+            
             <form>
               <h1>Título</h1>
               <label for="titulo"><%=archivo.getNombre()%></label>

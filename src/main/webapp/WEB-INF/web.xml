@@ -24,6 +24,10 @@
         <servlet-name>VisualizarArchivoServlet</servlet-name>
         <servlet-class>control.VisualizarArchivoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ObtenerArchivoServlet</servlet-name>
+        <servlet-class>control.ObtenerArchivoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/RegistroServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>VisualizarArchivoServlet</servlet-name>
         <url-pattern>/VisualizarArchivoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ObtenerArchivoServlet</servlet-name>
+        <url-pattern>/ObtenerArchivoServlet</url-pattern>
     </servlet-mapping>
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
