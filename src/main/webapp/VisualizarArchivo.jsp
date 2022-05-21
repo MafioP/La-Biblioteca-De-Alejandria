@@ -90,13 +90,10 @@
                 <li><a href="#" class="tag">Cuatrimestre <%=archivo.getCuatrimestre()%></a></li>
                 <li><a href="#" class="tag"><%=archivo.getAsignatura()%></a></li>
               </ul>
-              
-              
-              <button class="btn-download" type="submit"><i class="fa fa-download"></i> Download</button>
+ 
+              <button class="btn-download" type="submit"><i class="fa fa-download"></i> Descargar</button>
               <input type="hidden" name="download-file" value=<%=archivo.getIdArchivo()%>>
-              
 
-              
             </form>
             </div>
         </div>
