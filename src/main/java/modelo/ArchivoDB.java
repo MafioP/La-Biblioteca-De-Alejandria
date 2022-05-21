@@ -49,6 +49,7 @@ public class ArchivoDB {
             ps.setBlob(13, archivo.getContenido().getInputStream());
             
             
+            
             int res = 0;
             
             ps.executeUpdate();
@@ -304,13 +305,102 @@ public class ArchivoDB {
                     archivo.close();
                 }
             }
-            rs.close();
-            ps.close();
+            
             pool.freeConnection(connection);
      
         } catch (SQLException e) {
             e.printStackTrace();
           }       
-    } 
+    }
+    
+    /**
+     * Actualiza el numero de vistas de un archivo en la base de datos
+     * @param archivo
+     * 
+     */
+    public static void updateNumVistas(Archivo archivo) throws IOException {
+
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        String query = "UPDATE ARCHIVO SET NumVistas = ? WHERE idArchivo = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, archivo.getNumVistas());
+            ps.setInt(2, archivo.getIdArchivo());
+            
+            ps.executeUpdate();
+            
+
+            ps.close();
+            pool.freeConnection(connection);
+            
+            
+            } catch (SQLException e) {
+            e.printStackTrace();
+            
+            }
+    }
+    
+    /**
+     * Actualiza el numero de descargas de un archivo en la base de datos
+     * @param archivo
+     * 
+     */
+    public static void updateNumDescargas(Archivo archivo) throws IOException {
+
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        String query = "UPDATE ARCHIVO SET NumDescargas = ? WHERE idArchivo = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, archivo.getNumDescargas());
+            ps.setInt(2, archivo.getIdArchivo());
+            
+            ps.executeUpdate();
+            
+
+            ps.close();
+            pool.freeConnection(connection);
+            
+            
+            } catch (SQLException e) {
+            e.printStackTrace();
+            
+            }
+    }
+    
+    /**
+     * Actualiza la valoracion media de un archivo en la base de datos
+     * @param archivo
+     * 
+     */
+    public static void updateValoracionMedia(Archivo archivo) throws IOException {
+
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        String query = "UPDATE ARCHIVO SET valoracionMedia = ? WHERE idArchivo = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, archivo.getValoracionMedia());
+            ps.setInt(2, archivo.getIdArchivo());
+            
+            ps.executeUpdate();
+            
+
+            ps.close();
+            pool.freeConnection(connection);
+            
+            
+            } catch (SQLException e) {
+            e.printStackTrace();
+            
+            }
+    }
     
 }

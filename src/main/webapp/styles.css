@@ -188,11 +188,11 @@ ul {
 /*Subir Archivos */
 .subir-box {
     width: 500px;
-    height: 900px;
+    height: 750px;
 }
 
 #info-box #uploadBtn {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .login-box h1 {
@@ -536,6 +536,22 @@ ul {
     border-radius: 5px;
     width: 100px;
     height: 30px;
+}
+
+
+ /* download button */
+.btn-download {
+    background-color: whitesmoke;
+    border: none;
+    color: black;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn-download:hover {
+    background-color: orange;
 }
 
 

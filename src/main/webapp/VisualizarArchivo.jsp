@@ -18,6 +18,8 @@
 
     <!--CUSTOM CSS-->
     <link rel="stylesheet" href="styles.css">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
@@ -69,12 +71,13 @@
       %>
       <div class="visualizarArea">
           <div class="preview-box">
-            <iframe src="ObtenerArchivoServlet?file=<%=archivo.getIdArchivo()%>"></iframe>
+              
+            <iframe src="files/torneo_dtd.pdf"></iframe>
           </div>
           <div class="descripcion-box">
               
             
-            <form>
+            <form class="download-form" action="ObtenerArchivoServlet" method="post">
               <h1>Título</h1>
               <label for="titulo"><%=archivo.getNombre()%></label>
               <h1>Descripción</h1>
@@ -87,6 +90,13 @@
                 <li><a href="#" class="tag">Cuatrimestre <%=archivo.getCuatrimestre()%></a></li>
                 <li><a href="#" class="tag"><%=archivo.getAsignatura()%></a></li>
               </ul>
+              
+              
+              <button class="btn-download" type="submit"><i class="fa fa-download"></i> Download</button>
+              <input type="hidden" name="download-file" value=<%=archivo.getIdArchivo()%>>
+              
+
+              
             </form>
             </div>
         </div>

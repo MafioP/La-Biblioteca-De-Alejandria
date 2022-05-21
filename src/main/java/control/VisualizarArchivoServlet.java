@@ -46,8 +46,13 @@ public class VisualizarArchivoServlet extends HttpServlet {
         Archivo archivo = null;
         archivo = ArchivoDB.selectFileById(Integer.parseInt(file));
         
+        //Actualiza el numero de vistas del archivo
+        archivo.setNumVistas(archivo.getNumVistas() + 1);
+        ArchivoDB.updateNumVistas(archivo);
+        
         ArrayList<Comentario> comentarios = new ArrayList<>();
         comentarios = ComentarioDB.selectCommentsByFileId(Integer.parseInt(file));
+
         
         // store the user in the session
         HttpSession session = request.getSession();

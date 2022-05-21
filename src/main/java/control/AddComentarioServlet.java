@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Archivo;
+import modelo.ArchivoDB;
 import modelo.Comentario;
 import modelo.ComentarioDB;
 import modelo.Usuario;
@@ -71,6 +73,24 @@ public class AddComentarioServlet extends HttpServlet {
         
         ArrayList<Comentario> comentarios = new ArrayList<>();
         comentarios = ComentarioDB.selectCommentsByFileId(Integer.parseInt(file));
+        
+        
+        Archivo archivo = ArchivoDB.selectFileById(Integer.parseInt(file));
+        
+        double valoracionMedia = 0;
+        int sumaValoracion = 0;
+        
+        for(int i = 0; i < comentarios.size(); i++){
+            sumaValoracion = sumaValoracion + comentarios.get(i).getValoracion();
+        }
+        
+        valoracionMedia = (double) sumaValoracion / comentarios.size();
+        
+        double valoracionMedia2 = Math.round(valoracionMedia * 100.0) / 100.0;
+ 
+        archivo.setValoracionMedia(valoracionMedia2);
+        
+        ArchivoDB.updateValoracionMedia(archivo);
         
         // store the user in the session
         HttpSession session = request.getSession();

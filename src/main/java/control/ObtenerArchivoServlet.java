@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Archivo;
 import modelo.ArchivoDB;
 
 
@@ -26,12 +27,7 @@ public class ObtenerArchivoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("APPLICATION/OCTET-STREAM");
-        OutputStream respuesta = response.getOutputStream();
-        String idArchivo = request.getParameter("file");
-        ArchivoDB.getFile(Integer.parseInt(idArchivo), respuesta);
-        respuesta.close();
-        response.flushBuffer();
+        
     }
 
     /**
@@ -45,7 +41,21 @@ public class ObtenerArchivoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("APPLICATION/OCTET-STREAM");
+        OutputStream respuesta = response.getOutputStream();
+        String idArchivo = request.getParameter("download-file");
         
+        Archivo archivo = null;
+        archivo = ArchivoDB.selectFileById(Integer.parseInt(idArchivo));
+        
+        //Actualiza el numero de descargas del archivo
+        archivo.setNumDescargas(archivo.getNumDescargas() + 1);
+        ArchivoDB.updateNumDescargas(archivo);
+        
+        //Obtiene el archivo para poder descargarlo
+        ArchivoDB.getFile(Integer.parseInt(idArchivo), respuesta);
+        respuesta.close();
+        response.flushBuffer();
     }
 
 
