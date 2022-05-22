@@ -10,7 +10,8 @@ import javax.servlet.http.Part;
  * Clase JavaBeans que implementa a un Archivo
  */
 public class Archivo implements Serializable{
-
+    
+    private String titulo;
     private String nombre;
     private int idArchivo;
     private int propietario;
@@ -28,6 +29,7 @@ public class Archivo implements Serializable{
 
     
     public Archivo() {
+        this.titulo = "";
         this.nombre = ""; 
         this.idArchivo = -1;
         this.propietario = -1;
@@ -45,7 +47,9 @@ public class Archivo implements Serializable{
     }
     
     
-    public Archivo(String nombre, int idArchivo, int propietario, String descripcion, String universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, Part contenido) {
+    public Archivo(String titulo, String nombre, int idArchivo, int propietario, String descripcion, String universidad, String grado, int curso, int cuatrimestre, String asignatura, int numVistas, Date fechaSubida, int numDescargas, double valoracionMedia, Part contenido) {
+        
+        this.titulo = titulo;
         this.nombre = nombre;
         this.idArchivo = idArchivo;
         this.propietario = propietario;
@@ -62,6 +66,14 @@ public class Archivo implements Serializable{
         this.contenido = contenido;
     }
     
+    
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
     
     public String getNombre() {
         return nombre;

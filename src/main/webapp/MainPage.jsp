@@ -193,7 +193,7 @@
           
             <tr onclick="document.location = 'VisualizarArchivoServlet?file=<%=archivos.get(i).getIdArchivo()%>';">
             
-                <td><%=archivos.get(i).getNombre()%></td>
+                <td><%=archivos.get(i).getTitulo()%></td>
                 <td><img src="img/fecha.png" alt="fecha icono" id="icono"><%=archivos.get(i).getFechaSubida()%></td>
                 <td><img src="img/view.png" alt="visto icono" id="icono"><%= archivos.get(i).getNumVistas()%> vistas</td>
                 <td><img src="img/descarga.png" alt="descarga icono" id="icono"><%= archivos.get(i).getNumDescargas()%> descargas</td>

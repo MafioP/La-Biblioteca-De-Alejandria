@@ -30,23 +30,24 @@ public class ArchivoDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, CONTENIDO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO ARCHIVO (PROPIETARIO, NOMBRE, TITULO, DESCRIPCION, UNIVERSIDAD, GRADO, CURSO, CUATRIMESTRE, ASIGNATURA, NUMVISTAS, FECHASUBIDA, NUMDESCARGAS, VALORACIONMEDIA, CONTENIDO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, archivo.getPropietario());
             ps.setString(2, archivo.getNombre());
-            ps.setString(3, archivo.getDescripcion());
-            ps.setString(4, archivo.getUniversidad());
-            ps.setString(5, archivo.getGrado());
-            ps.setInt(6, archivo.getCurso());
-            ps.setInt(7, archivo.getCuatrimestre());
-            ps.setString(8, archivo.getAsignatura());
-            ps.setInt(9, archivo.getNumVistas());
-            ps.setDate(10, archivo.getFechaSubida());
-            ps.setInt(11, archivo.getNumDescargas());
-            ps.setDouble(12, archivo.getValoracionMedia());
-            ps.setBlob(13, archivo.getContenido().getInputStream());
+            ps.setString(3, archivo.getTitulo());
+            ps.setString(4, archivo.getDescripcion());
+            ps.setString(5, archivo.getUniversidad());
+            ps.setString(6, archivo.getGrado());
+            ps.setInt(7, archivo.getCurso());
+            ps.setInt(8, archivo.getCuatrimestre());
+            ps.setString(9, archivo.getAsignatura());
+            ps.setInt(10, archivo.getNumVistas());
+            ps.setDate(11, archivo.getFechaSubida());
+            ps.setInt(12, archivo.getNumDescargas());
+            ps.setDouble(13, archivo.getValoracionMedia());
+            ps.setBlob(14, archivo.getContenido().getInputStream());
             
             TagTreeDB.insert(archivo.getUniversidad(), archivo.getGrado(),      //insertar los tags al arbol de filtros
                     archivo.getCurso() + "", archivo.getCuatrimestre() + "", 
@@ -88,7 +89,7 @@ public class ArchivoDB {
             listaArchivos.clear();
 
             while (rs.next()) {
-                archivo = new Archivo(rs.getString("nombre"), rs.getInt("idArchivo"),
+                archivo = new Archivo(rs.getString("titulo"), rs.getString("nombre"), rs.getInt("idArchivo"),
                     rs.getInt("propietario"), rs.getString("descripcion"), rs.getString("universidad"),
                     rs.getString("grado"), rs.getInt("curso"), rs.getInt("cuatrimestre"),
                     rs.getString("asignatura"), rs.getInt("numVistas"), rs.getDate("fechaSubida"),
@@ -132,6 +133,7 @@ public class ArchivoDB {
             while (rs.next()) {
                 archivo = new Archivo();
                 archivo.setIdArchivo(rs.getInt("idArchivo"));
+                archivo.setTitulo(rs.getString("titulo"));
                 archivo.setNombre(rs.getString("Nombre"));
                 archivo.setPropietario(rs.getInt("Propietario"));
                 archivo.setDescripcion(rs.getString("Descripcion"));
@@ -253,6 +255,7 @@ public class ArchivoDB {
                 archivo = new Archivo();
                 archivo.setIdArchivo(rs.getInt("idArchivo"));
                 archivo.setPropietario(rs.getInt("propietario"));
+                archivo.setTitulo(rs.getString("titulo"));
                 archivo.setNombre(rs.getString("nombre"));
                 archivo.setDescripcion(rs.getString("descripcion"));
                 archivo.setUniversidad(rs.getString("universidad"));

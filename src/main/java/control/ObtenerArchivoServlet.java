@@ -41,12 +41,18 @@ public class ObtenerArchivoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("APPLICATION/OCTET-STREAM");
-        OutputStream respuesta = response.getOutputStream();
+        
         String idArchivo = request.getParameter("download-file");
         
         Archivo archivo = null;
         archivo = ArchivoDB.selectFileById(Integer.parseInt(idArchivo));
+        
+        response.setContentType("APPLICATION/OCTET-STREAM");
+        response.setHeader("Content-Disposition", "attachment; filename=\""+archivo.getNombre()+"\"");
+        OutputStream respuesta = response.getOutputStream();
+        
+        
+        
         
         //Actualiza el numero de descargas del archivo
         archivo.setNumDescargas(archivo.getNumDescargas() + 1);

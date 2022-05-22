@@ -4,6 +4,8 @@ package control;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -54,8 +56,9 @@ public class SubirArchivoServlet extends HttpServlet {
         // get parameters from the request
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-     
-        String nombre = request.getParameter("nombre");
+
+        
+        String titulo = request.getParameter("nombre");
         String universidad = request.getParameter("universidad");
         String grado = request.getParameter("grado");
         String curso = request.getParameter("curso");
@@ -63,9 +66,12 @@ public class SubirArchivoServlet extends HttpServlet {
         String asignatura = request.getParameter("asignatura");
         String descripcion = request.getParameter("descripcion");
         Part contenido = request.getPart("archivo");
+        String nombre = contenido.getSubmittedFileName();
+        
         long millis = System.currentTimeMillis();
         java.sql.Date fechaSubida = new java.sql.Date(millis);
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
         
         String url = "";
         
@@ -81,6 +87,7 @@ public class SubirArchivoServlet extends HttpServlet {
             
             Archivo archivo = new Archivo();
             archivo.setPropietario(usuario.getId());
+            archivo.setTitulo(titulo);
             archivo.setNombre(nombre);
             archivo.setDescripcion(descripcion);
             archivo.setUniversidad(universidad);
