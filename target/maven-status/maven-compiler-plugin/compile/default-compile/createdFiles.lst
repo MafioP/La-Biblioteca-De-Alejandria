@@ -1,1 +1,7 @@
+modelo\ComentarioDB.class
+control\ObtenerArchivoServlet.class
+control\VisualizarArchivoServlet.class
+modelo\Comentario.class
 modelo\TagTree.class
+modelo\TagTreeDB.class
+control\AddComentarioServlet.class

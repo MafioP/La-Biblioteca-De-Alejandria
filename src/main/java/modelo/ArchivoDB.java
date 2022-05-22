@@ -48,6 +48,9 @@ public class ArchivoDB {
             ps.setDouble(12, archivo.getValoracionMedia());
             ps.setBlob(13, archivo.getContenido().getInputStream());
             
+            TagTreeDB.insert(archivo.getUniversidad(), archivo.getGrado(),      //insertar los tags al arbol de filtros
+                    archivo.getCurso() + "", archivo.getCuatrimestre() + "", 
+                    archivo.getAsignatura());
             
             
             int res = 0;
