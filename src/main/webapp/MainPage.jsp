@@ -1,3 +1,4 @@
+<%@page import="modelo.TagTreeDB"%>
 <%@page import="modelo.UsuarioDB"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.ArchivoDB"%>
@@ -61,20 +62,38 @@
             </div>
         </ul>    
     </nav>
+        <% 
+            ArrayList<Archivo> archivos = new ArrayList<>(); 
+          
+            if(request.getSession().getAttribute("variable") != null){
+                  
+                archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
+                
+            }else{
+                 archivos = ArchivoDB.getAllArchivos();
+            }  
+            for (int i = 0; i < archivos.size(); i++) {
+                TagTreeDB.insert(archivos.get(i).getUniversidad(), archivos.get(i).getGrado(), 
+                archivos.get(i).getCurso() + "", archivos.get(i).getCuatrimestre() + "", archivos.get(i).getAsignatura());
+            }
+        %>
     <div class="filtros">
             <div title="Filtrar"><img src="img/filtro.png" alt="filtro icono" id="iconoFiltro"></div>
             <div class="box">
                 <select>
-                  <option>Universidad de Valladolid</option>
-                  <option>Universidad de Valencia</option>
-                  <option>Universidad de Barcelona</option>
+                    <%  
+                    ArrayList<String> unis = TagTreeDB.getOptions("root");
+                    for (int j = 0; j < unis.size(); j++) {%>
+                        <option><%unis.get(j);%></option>
+                    }%>
                 </select>
               </div>
             <div class="box">
                 <select>
-                  <option>Ingeniería Informática</option>
-                  <option>Educación Primaría</option>
-                  <option>Ingeniería Industrial</option>
+                  ArrayList<String> grados = TagTreeDB.getOptions("root");  //Seleccion del anterior select
+                    for (int j = 0; j < unis.size(); j++) {%>
+                        <option><%unis.get(j);%></option>
+                    }%>
                   
                 </select>
               </div>
@@ -164,19 +183,8 @@
       
     <div class="resultados">
         
-        <% 
-          
-            ArrayList<Archivo> archivos = new ArrayList<>(); 
-          
-            if(request.getSession().getAttribute("variable") != null){
-                  
-                archivos = ArchivoDB.buscarArchivoNombre((String)request.getSession().getAttribute("variable"));
-                
-            }else{
-                 archivos = ArchivoDB.getAllArchivos();
-            }
             
-            
+        <%
             if(orden == null){
                 archivos = ArchivoDB.ordenarArchivos("0");
             }else{
@@ -187,9 +195,7 @@
           
           %>
       <table class="tabla-resultados">
-          <% 
-            for(int i=0; i < archivos.size(); i++){
-          %>
+          <% for(int i=0; i < archivos.size(); i++){ %>
           
             <tr onclick="document.location = 'VisualizarArchivoServlet?file=<%=archivos.get(i).getIdArchivo()%>';">
             

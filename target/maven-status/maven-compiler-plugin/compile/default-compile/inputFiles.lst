@@ -1,1 +1,16 @@
-C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\LaBibliotecaDeAlejandria\src\main\java\me\uva\labibliotecadealejandria\control\InicioSesionHandler.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\AddComentarioServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\Usuario.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\BuscarArchivoServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\UsuarioDB.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\Comentario.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\TagTreeDB.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\RegistroServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\SubirArchivoServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\ComentarioDB.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\ObtenerArchivoServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\VisualizarArchivoServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\ArchivoDB.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\control\InicioSesionServlet.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\TagTree.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\Archivo.java
+C:\Users\mnky6\OneDrive\Documentos\NetBeansProjects\La-Biblioteca-De-Alejandria\src\main\java\modelo\ConnectionPool.java
