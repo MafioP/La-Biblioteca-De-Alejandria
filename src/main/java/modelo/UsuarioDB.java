@@ -42,7 +42,7 @@ public class UsuarioDB {
      * @param password
      * @return 
      */
-    public static boolean Validate(String user, String password){
+    public static boolean validate(String user, String password){
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;

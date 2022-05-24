@@ -14,6 +14,8 @@ import modelo.Archivo;
 import modelo.ArchivoDB;
 import modelo.Comentario;
 import modelo.ComentarioDB;
+import modelo.FavoritoDB;
+import modelo.Usuario;
 
 
 public class VisualizarArchivoServlet extends HttpServlet {
@@ -52,12 +54,20 @@ public class VisualizarArchivoServlet extends HttpServlet {
         
         ArrayList<Comentario> comentarios = new ArrayList<>();
         comentarios = ComentarioDB.selectCommentsByFileId(Integer.parseInt(file));
+        
+        boolean yaEsFav = false;
+        if(request.getSession().getAttribute("usuario") != null){
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            yaEsFav = FavoritoDB.favoritoExists(usuario.getId(), Integer.parseInt(file));
+        }
+        
 
         
         // store the user in the session
         HttpSession session = request.getSession();
         session.setAttribute("comentarios", comentarios);
         session.setAttribute("archivo", archivo);
+        session.setAttribute("yaEsFav", yaEsFav);
         url = "/VisualizarArchivo.jsp";
         
         RequestDispatcher rs = request.getRequestDispatcher(url);
