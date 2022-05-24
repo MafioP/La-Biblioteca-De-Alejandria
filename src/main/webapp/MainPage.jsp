@@ -25,7 +25,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <%if(session.getAttribute("usuario") == null){%>
-            <a href="InicioSesion.html">Mi biblioteca</a>
+            <a href="InicioSesion.html">Favoritos ★</a>
             <a href="InicioSesion.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
         <%}else{%>
@@ -78,19 +78,13 @@
             <div title="Filtrar"><img src="img/filtro.png" alt="filtro icono" id="iconoFiltro"></div>
             <div class="box">
                 <select>
-                    <%  
-                    ArrayList<String> unis = TagTreeDB.getOptions("root");
-                    for (int j = 0; j < unis.size(); j++) {%>
-                        <option><%unis.get(j);%></option>
-                    }%>
+                    
                 </select>
               </div>
             <div class="box">
                 <select>
-                  ArrayList<String> grados = TagTreeDB.getOptions("root");  //Seleccion del anterior select
-                    for (int j = 0; j < unis.size(); j++) {%>
-                        <option><%unis.get(j);%></option>
-                    }%>
+                    
+                  
                   
                 </select>
               </div>
