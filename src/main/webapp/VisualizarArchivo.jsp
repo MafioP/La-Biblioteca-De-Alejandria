@@ -78,7 +78,11 @@
               
             
             <form class="download-form" action="ObtenerArchivoServlet" method="post">
+                <div class="fila-fav">
               <h1>Título</h1>
+              <button class="btn-fav" type="submit" title="Añadir a favoritos"><i class="fa fa-star"></i></button>
+              <input type="hidden" name="fav" value="1">
+                </div>
               <label for="titulo"><%=archivo.getNombre()%></label>
               <h1>Descripción</h1>
               <label for="descripcion"><%=archivo.getDescripcion()%></label>
@@ -91,7 +95,7 @@
                 <li><a href="#" class="tag"><%=archivo.getAsignatura()%></a></li>
               </ul>
  
-              <button class="btn-download" type="submit"><i class="fa fa-download"></i> Descargar</button>
+              <button class="btn-download" type="submit" title="Descargar el archivo"><i class="fa fa-download"></i> Descargar</button>
               <input type="hidden" name="download-file" value=<%=archivo.getIdArchivo()%>>
 
             </form>
