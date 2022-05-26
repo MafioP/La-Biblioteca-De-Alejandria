@@ -79,43 +79,48 @@
         %>
     <div class="filtros">
             <div title="Filtrar"><img src="img/filtro.png" alt="filtro icono" id="iconoFiltro"></div>
+            <form class="box">
+                <select name="universidad">
+                    <% ArrayList<String> options = TagTreeDB.getOptions("root");%>
+                    <!-- <option value="" select disabled hidden>Elige Universidad</option>-->
+                    <%for (int j = 0; j < options.size(); j++) {%>
+                        <option><%options.get(j);%></option>
+                    <%}%>
+                </select>
+                <input type="submit" value="Submit">
+              </form>
+            <% System.out.println(request.getParameter("universidad")); %>
             <div class="box">
-                <select>
-                    <%  
-                    ArrayList<String> unis = TagTreeDB.getOptions("root");
-                    for (int j = 0; j < unis.size(); j++) {%>
-                        <option><%unis.get(j);%></option>
-                    }%>
+                <select name="grado">
+                     <%  
+                        options = TagTreeDB.getOptions(request.getParameter("universidad").toString());
+                    for (int j = 0; j < options.size(); j++) {%>
+                        <option><%options.get(j);%></option>
+                    <%}%>
                 </select>
               </div>
             <div class="box">
-                <select>
-                  ArrayList<String> grados = TagTreeDB.getOptions("root");  //Seleccion del anterior select
-                    for (int j = 0; j < unis.size(); j++) {%>
-                        <option><%unis.get(j);%></option>
-                    }%>
-                  
+                <select name ="curso">
+                  <% options = TagTreeDB.getOptions(request.getParameter("grado").toString());
+                    for (int j = 0; j < options.size(); j++) {%>
+                        <option><%options.get(j);%></option>
+                    <%}%>
                 </select>
               </div>
             <div class="box">
-                <select>
-                  <option>Primer Curso</option>
-                  <option>Segundo Curso</option>
-                  <option>Tercer Curso</option>
-                  <option>Cuarto Curso</option>
+                <select name ="cuatri">
+                  <% options = TagTreeDB.getOptions(request.getParameter("curso").toString());
+                    for (int j = 0; j < options.size(); j++) {%>
+                        <option><%options.get(j);%></option>
+                    <%}%>
                 </select>
               </div>
             <div class="box">
-                <select>
-                  <option>Primer Cuatrimestre</option>
-                  <option>Segundo Cuatrimestre</option>
-                </select>
-              </div>
-            <div class="box">
-                <select>
-                  <option>Servicios y Sistemas Web</option>
-                  <option>Física</option>
-                  <option>Fundamentos de Matemáticas</option>
+                <select name="asig">
+                  <% options = TagTreeDB.getOptions(request.getParameter("cuatri").toString());
+                    for (int j = 0; j < options.size(); j++) {%>
+                        <option><%options.get(j);%></option>
+                    <%}%>
                 </select>
               </div>
               <div class="box">
