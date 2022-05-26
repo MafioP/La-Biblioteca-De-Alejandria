@@ -490,6 +490,7 @@ ul {
     border-radius: 5px;
     height: 30px;
     border: 0px;
+    cursor: pointer;
 }
 
 .comentariosHead label{
@@ -547,13 +548,54 @@ ul {
     color: black;
     padding: 12px 30px;
     cursor: pointer;
-    font-size:  20px;
+    font-size: 20px;
 }
 
 /* Darker background on mouse-over */
 .btn-download:hover {
     background-color: orange;
 }
+
+.fila-fav {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+ /* fav button */
+.btn-fav {
+    margin-top: 20px;
+    background-color: whitesmoke;
+    border: none;
+    color: black;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+/* Darker background on mouse-over */
+.btn-fav:hover {
+    background-color: yellow;
+}
+
+ /* fav-ya button */
+.btn-fav-ya {
+    margin-top: 20px;
+    background-color: yellow;
+    border: none;
+    color: black;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+/* Darker background on mouse-over */
+.btn-fav-ya:hover {
+    background-color: whitesmoke;
+}
+
 
 
 

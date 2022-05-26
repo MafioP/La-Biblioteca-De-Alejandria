@@ -81,7 +81,7 @@ public class InicioSesionServlet extends HttpServlet {
         
         
             //Validar si las credenciales para iniciar sesion son correctas
-            if (!UsuarioDB.Validate(username, password)) {
+            if (!UsuarioDB.validate(username, password)) {
                 
                 out.println("<script>alert('Nombre de usuario o contraseña incorrectos'); </script>");
                 

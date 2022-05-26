@@ -1,4 +1,5 @@
 
+<%@page import="modelo.Usuario"%>
 <%@page import="modelo.ArchivoDB"%>
 <%@page import="modelo.Archivo"%>
 <%@page import="modelo.UsuarioDB"%>
@@ -24,18 +25,15 @@
 <body>
     <div class="container">
       <nav class="navMain">
-        <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
+        <div id="sideNavMenu" class="sideNav">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           
           <%if(session.getAttribute("usuario") == null){%>
-            <a href="InicioSesion.html">Mi biblioteca</a>
+            <a href="InicioSesion.html">Favoritos ★</a>
             <a href="InicioSesion.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
           <%}else{%>
-            <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
-              <ul id="itemBiblio1">Favoritos ★</ul>
-              <ul id="itemBiblio2">Tercero Carrera</ul>
-              <ul id="itemBiblio3">+ Crear Nueva</ul>
+            <a href="#">Favoritos ★</a>
             <a href="SubirArchivo.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
           <%} %>
@@ -66,8 +64,9 @@
                   
       <%
                         
-      Archivo archivo = (Archivo) session.getAttribute("archivo"); 
-     
+      Archivo archivo = (Archivo) session.getAttribute("archivo");
+      boolean yaEsFav = (Boolean) session.getAttribute("yaEsFav");
+
       %>
       <div class="visualizarArea">
           <div class="preview-box">
@@ -76,9 +75,28 @@
           </div>
           <div class="descripcion-box">
               
-            
-            <form class="download-form" action="ObtenerArchivoServlet" method="post">
-              <h1>Título</h1>
+                <div class="fila-fav">
+                  <h1>Título</h1>
+                  
+                  <%if(session.getAttribute("usuario") != null){%>
+                  <form class="fav-form" action="AddFavoritoServlet" method="post">
+                      
+                    <%if(yaEsFav){%>    
+                        <button class="btn-fav-ya" type="submit" title="Quitar de favoritos"><i class="fa fa-star"></i></button>
+                        <input type="hidden" name="file" value=<%=archivo.getIdArchivo()%>>
+                    <%}else{%>
+                        <button class="btn-fav" type="submit" title="Añadir a favoritos"><i class="fa fa-star"></i></button>
+                        <input type="hidden" name="file" value=<%=archivo.getIdArchivo()%>>
+                    <%} %>
+                    
+                  </form>
+                  <%}else{%>
+                  <button class="btn-fav" onclick="location.href = 'InicioSesion.html'" title="Debes iniciar sesión para añadir a favoritos"><i class="fa fa-star"></i></button>
+                  <%} %>
+                  
+                </div>
+              
+              <form class="download-form" action="ObtenerArchivoServlet" method="post">
               <label for="titulo"><%=archivo.getNombre()%></label>
               <h1>Descripción</h1>
               <label for="descripcion"><%=archivo.getDescripcion()%></label>
@@ -91,7 +109,7 @@
                 <li><a href="#" class="tag"><%=archivo.getAsignatura()%></a></li>
               </ul>
  
-              <button class="btn-download" type="submit"><i class="fa fa-download"></i> Descargar</button>
+              <button class="btn-download" type="submit" title="Descargar el archivo"><i class="fa fa-download"></i> Descargar</button>
               <input type="hidden" name="download-file" value=<%=archivo.getIdArchivo()%>>
 
             </form>
@@ -162,16 +180,6 @@
   function closeNav() {
     document.getElementById("sideNavMenu").style.width = "0";
   }
-
-  function openBiblioteca() {
-    document.getElementById("itemBiblio1").style.display = "block";
-    document.getElementById("itemBiblio2").style.display = "block";
-    document.getElementById("itemBiblio3").style.display = "block";
-  }
-  function closeBiblioteca() {
-    document.getElementById("itemBiblio1").style.display = "none";
-    document.getElementById("itemBiblio2").style.display = "none";
-    document.getElementById("itemBiblio3").style.display = "none";
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     </script>
 </body>

@@ -21,18 +21,15 @@
   
   <div class="container">
     <nav class="navMain">    
-      <div id="sideNavMenu" class="sideNav" onmouseleave="closeBiblioteca()">
+      <div id="sideNavMenu" class="sideNav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <%if(session.getAttribute("usuario") == null){%>
-            <a href="InicioSesion.html">Mi biblioteca</a>
+            <a href="InicioSesion.html">Favoritos ★</a>
             <a href="InicioSesion.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
         <%}else{%>
-            <a href="#" onmouseenter="openBiblioteca()">Mi biblioteca</a>
-              <ul id="itemBiblio1">Favoritos ★</ul>
-              <ul id="itemBiblio2">Tercero Carrera</ul>
-              <ul id="itemBiblio3">+ Crear Nueva</ul>
+            <a href="#">Favoritos ★</a>
             <a href="SubirArchivo.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
         <%} %>
@@ -230,17 +227,7 @@
   function closeNav() {
     document.getElementById("sideNavMenu").style.width = "0";
   }
-
-  function openBiblioteca() {
-    document.getElementById("itemBiblio1").style.display = "block";
-    document.getElementById("itemBiblio2").style.display = "block";
-    document.getElementById("itemBiblio3").style.display = "block";
-  }
-  function closeBiblioteca() {
-    document.getElementById("itemBiblio1").style.display = "none";
-    document.getElementById("itemBiblio2").style.display = "none";
-    document.getElementById("itemBiblio3").style.display = "none";
-  }
+  
   </script>
 </body>
 </html>
