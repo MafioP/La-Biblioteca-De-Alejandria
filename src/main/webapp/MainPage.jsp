@@ -76,48 +76,75 @@
         %>
     <div class="filtros">
             <div title="Filtrar"><img src="img/filtro.png" alt="filtro icono" id="iconoFiltro"></div>
-            <form class="box">
-                <select name="universidad">
-                    <% ArrayList<String> options = TagTreeDB.getOptions("root");%>
-                    <!-- <option value="" select disabled hidden>Elige Universidad</option>-->
-                    <%for (int j = 0; j < options.size(); j++) {%>
-                        <option><%options.get(j);%></option>
-                    <%}%>
+            <form class="box" id="uniSelectForm" action="FiltrarBusquedaServlet">
+                <select name="uniSelect" onchange="submitTag()">
+                    <% ArrayList<String> options = TagTreeDB.getOptions("root");
+                    int selectedUni = 0;
+                    if (session.getAttribute("uniSelect")!= null) {
+                        selectedUni = Integer.parseInt((String)session.getAttribute("uniSelect")); 
+                        System.out.println(selectedUni);
+                    }%>
+                    <option>-- Seleccione universidad --</option>
+                    <%for (int j = 0; j < (options.size()); j++) {
+                        if (selectedUni == j+1) { %>
+                            <option value=<%=j+1%> selected><%=options.get(j)%></option>
+                            <%System.out.println("select j=" + j);%>
+                        <% }else{ %>
+                            <option value=<%=j+1%>><%=options.get(j)%></option>
+                    <%}}%>
                 </select>
-                <input type="submit" value="Submit">
               </form>
-            <% System.out.println(request.getParameter("universidad")); %>
+            <form class="box" id="gradoSelectForm">
+                <div name="gradoData">
+                <select name="gradoSelect" onchange="submitTag()">
+                    <option value="0">-- Seleccione Grado --</option>
+                    <% ArrayList<String> grados = (ArrayList<String>)session.getAttribute("gradoData");
+                    if (grados != null) {
+                    System.out.println(grados.toString());
+                    int selectedGrado = 0;
+                    if (session.getAttribute("gradoSelect")!= null) {
+                        selectedGrado = Integer.parseInt((String)session.getAttribute("gradoSelect")); 
+                        System.out.println(selectedGrado);
+                    }%>
+                    <%for (int j = 0; j < (options.size()); j++) {
+                        if (selectedGrado == j+1) { %>
+                            <option value=<%=j+1%> selected><%=grados.get(j)%></option>
+                            <%System.out.println("select j=" + j);%>
+                        <% }else{ %>
+                            <option value=<%=j+1%>><%=grados.get(j)%></option>
+                    <%}}}%>
+                </select>
+                </div>
+              </form>
+            <form class="box" id="cursoSelectForm">
+                <div name="cursoData">
+                <select name ="cursoSelect" onchange="submitTag()">
+                    <option value="0">-- Seleccione Curso --</option>
+                  <% ArrayList<String> cursos = (ArrayList<String>)session.getAttribute("cursoData");
+                    if (cursos != null) {
+                    int selectedCurso = 0;
+                    if (session.getAttribute("cursoSelect")!= null) {
+                        selectedCurso = Integer.parseInt((String)session.getAttribute("cursoSelect")); 
+                        System.out.println(selectedCurso);
+                    }%>
+                    <%for (int j = 0; j < (options.size()); j++) {
+                        if (selectedCurso == j+1) { %>
+                            <option value=<%=j+1%> selected><%=cursos.get(j)%></option>
+                            <%System.out.println("select j=" + j);%>
+                        <% }else{ %>
+                            <option value=<%=j+1%>><%=cursos.get(j)%></option>
+                    <%}}}%>
+                </select>
+                </div>
+              </form>
             <div class="box">
-                <select name="grado">
-                     <%  
-                        options = TagTreeDB.getOptions(request.getParameter("universidad").toString());
-                    for (int j = 0; j < options.size(); j++) {%>
-                        <option><%options.get(j);%></option>
-                    <%}%>
+                <select name ="cuatriSelect">
+                  <option value="0">-- Seleccione Cuatrimestre --</option>
                 </select>
               </div>
             <div class="box">
-                <select name ="curso">
-                  <% options = TagTreeDB.getOptions(request.getParameter("grado").toString());
-                    for (int j = 0; j < options.size(); j++) {%>
-                        <option><%options.get(j);%></option>
-                    <%}%>
-                </select>
-              </div>
-            <div class="box">
-                <select name ="cuatri">
-                  <% options = TagTreeDB.getOptions(request.getParameter("curso").toString());
-                    for (int j = 0; j < options.size(); j++) {%>
-                        <option><%options.get(j);%></option>
-                    <%}%>
-                </select>
-              </div>
-            <div class="box">
-                <select name="asig">
-                  <% options = TagTreeDB.getOptions(request.getParameter("cuatri").toString());
-                    for (int j = 0; j < options.size(); j++) {%>
-                        <option><%options.get(j);%></option>
-                    <%}%>
+                <select name="asigSelect">
+                  <option value="0">-- Seleccione Asignatura --</option>
                 </select>
               </div>
               <div class="box">
@@ -192,9 +219,6 @@
             }else{
                 archivos = ArchivoDB.ordenarArchivos(orden);
             }
-            
-         
-          
           %>
       <table class="tabla-resultados">
           <% for(int i=0; i < archivos.size(); i++){ %>
@@ -226,6 +250,15 @@
   /*Pone el width = 0 del sidebar*/
   function closeNav() {
     document.getElementById("sideNavMenu").style.width = "0";
+  }
+  
+  function submitTag() {
+      document.getElementById("uniSelectForm").submit();
+      console.log(document.getElementById("uniSelectForm"));
+      document.getElementById("gradoSelectForm").submit();
+      document.getElementById("cursoSelectForm").submit();
+      document.getElementById("cuatriSelectForm").submit();
+      document.getElementById("asigSelectForm").submit();
   }
   
   </script>

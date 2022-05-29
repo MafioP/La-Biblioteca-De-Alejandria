@@ -40,13 +40,13 @@ public class BuscarArchivoServlet extends HttpServlet {
         String url = "";
         
         // store the user in the session
-            HttpSession session = request.getSession();
-            
-            session.setAttribute("orden", orden);
-            url = "/MainPage.jsp";
-            
-            RequestDispatcher rs = request.getRequestDispatcher(url);
-            rs.forward(request, response);
+        HttpSession session = request.getSession();
+
+        session.setAttribute("orden", orden);
+        url = "/MainPage.jsp";
+
+        RequestDispatcher rs = request.getRequestDispatcher(url);
+        rs.forward(request, response);
     }
 
     /**

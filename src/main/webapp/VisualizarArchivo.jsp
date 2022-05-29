@@ -116,11 +116,7 @@
             </div>
         </div>
       <div class="comentarios">
-          <% 
-
-            ArrayList<Comentario> comentarios = (ArrayList<Comentario>) session.getAttribute("comentarios"); 
-          
-          %>
+        <% ArrayList<Comentario> comentarios = (ArrayList<Comentario>) session.getAttribute("comentarios"); %>
         <h1>Comentarios</h1>
         <div class="comentariosHead">
           <label>Numero de comentarios: <%=comentarios.size()%></label>

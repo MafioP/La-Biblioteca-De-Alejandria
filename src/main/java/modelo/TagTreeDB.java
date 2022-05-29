@@ -41,7 +41,7 @@ public class TagTreeDB {
                 }
             }
         }
-        System.out.println(tagTree.toString());
+        //System.out.println(tagTree.toString());
     }
     
     public static ArrayList<String> getOptions(String parent) {
