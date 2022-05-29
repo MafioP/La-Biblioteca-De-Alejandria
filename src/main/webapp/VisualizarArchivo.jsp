@@ -33,7 +33,7 @@
             <a href="InicioSesion.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
           <%}else{%>
-            <a href="#">Favoritos ★</a>
+            <a href="Favoritos.jsp">Favoritos ★</a>
             <a href="SubirArchivo.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
           <%} %>
@@ -97,7 +97,7 @@
                 </div>
               
               <form class="download-form" action="ObtenerArchivoServlet" method="post">
-              <label for="titulo"><%=archivo.getNombre()%></label>
+              <label for="titulo"><%=archivo.getTitulo()%></label>
               <h1>Descripción</h1>
               <label for="descripcion"><%=archivo.getDescripcion()%></label>
               <h1>Tags</h1>

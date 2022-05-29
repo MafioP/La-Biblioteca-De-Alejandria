@@ -29,7 +29,7 @@
             <a href="InicioSesion.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
         <%}else{%>
-            <a href="#">Favoritos ★</a>
+            <a href="Favoritos.jsp">Favoritos ★</a>
             <a href="SubirArchivo.html">Subir Archivos</a>
             <a href="#">Ajustes</a>
         <%} %>

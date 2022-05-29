@@ -120,7 +120,7 @@ public class FavoritoDB {
             listaFavoritos.clear();
 
             while (rs.next()) {
-                favorito = new Favorito(rs.getInt("idFavorito"), rs.getInt("miArchivo"));
+                favorito = new Favorito(rs.getInt("miArchivo"), rs.getInt("idFavorito"));
                 
                 listaFavoritos.add(favorito);
             }
