@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.ArchivoDB;
 import modelo.TagTreeDB;
 
 /**
@@ -71,44 +72,44 @@ public class FiltrarBusquedaServlet extends HttpServlet {
         String uniSelect = request.getParameter("uniSelect");
         String gradoSelect = request.getParameter("gradoSelect");
         String cursoSelect = request.getParameter("cursoSelect");
-        String cuatriSelect = request.getParameter("cuatriSelect");
         String asigSelect = request.getParameter("asigSelect");
         
         
         
         ArrayList<String> unis = TagTreeDB.getOptions("root");
         System.out.println("Select: " + uniSelect + " " + gradoSelect + " " 
-            + cursoSelect + " " + cuatriSelect + " " + asigSelect);
+            + cursoSelect + " " + asigSelect);
         
         HttpSession session = request.getSession();
-        session.setAttribute("uniSelect", uniSelect);
-        session.setAttribute("gradoSelect", gradoSelect);
-        session.setAttribute("cursoSelect", cursoSelect);
-        session.setAttribute("cuatriSelect", cuatriSelect);
-        session.setAttribute("asigSelect", asigSelect);
+        if (uniSelect != null) {
+            session.setAttribute("uniSelect", uniSelect);
+            session.setAttribute("gradoSelect", "0");
+        } else if (gradoSelect != null) {
+            session.setAttribute("gradoSelect", gradoSelect);        
+            session.setAttribute("cursoSelect", "0");        
+        } else if (cursoSelect != null) {
+            session.setAttribute("cursoSelect", cursoSelect);
+            session.setAttribute("asigSelect", "0");
+        } else if (asigSelect != null) {
+            session.setAttribute("asigSelect", asigSelect);
+        }
+        
         
         ArrayList<String> grados = new ArrayList<>();
         ArrayList<String> cursos = new ArrayList<>();
-        ArrayList<String> cuatris = new ArrayList<>();
         ArrayList<String> asigs = new ArrayList<>();
         
-        if (uniSelect != "0" && uniSelect !=null) {
+        if (!"0".equals(uniSelect) && uniSelect !=null) {
             String uni = unis.get(Integer.parseInt(uniSelect)-1);
             for (int i = 0; i < TagTreeDB.getOptions(uni).size(); i++) {
                 grados.add(TagTreeDB.getOptions(uni).get(i));
             }
             session.setAttribute("gradoData", grados);
+            session.setAttribute("cursoData", cursos);
+            session.setAttribute("asigData", asigs);
             
-            if (gradoSelect != "0" && gradoSelect!=null) {
-                System.out.println("gradoSelect: " + gradoSelect);
-                grados = (ArrayList<String>)session.getAttribute("gradoData");
-                String grado = grados.get(Integer.parseInt(gradoSelect)-1);
-                for (int i = 0; i < TagTreeDB.getOptions(grado).size(); i++) {
-                    cursos.add(TagTreeDB.getOptions(grado).get(i));
-                }
-                session.setAttribute("cursoData", cursos);
-            }
         }
+        
         if (gradoSelect != "0" && gradoSelect!=null) {
             System.out.println("gradoSelect: " + gradoSelect);
             grados = (ArrayList<String>)session.getAttribute("gradoData");
@@ -116,65 +117,24 @@ public class FiltrarBusquedaServlet extends HttpServlet {
             for (int i = 0; i < TagTreeDB.getOptions(grado).size(); i++) {
                 cursos.add(TagTreeDB.getOptions(grado).get(i));
             }
-            session.setAttribute("gradoData", grados);
             session.setAttribute("cursoData", cursos);
+            session.setAttribute("asigData", asigs);
         }
         
-        /*if (cursoSelect != "0" && cursoSelect!=null) {
+        if (!"0".equals(cursoSelect) && cursoSelect!=null) {
+            System.out.println("cursoSelect: " + cursoSelect);
+            cursos = (ArrayList<String>)session.getAttribute("cursoData");
             String curso = cursos.get(Integer.parseInt(cursoSelect)-1);
             for (int i = 0; i < TagTreeDB.getOptions(curso).size(); i++) {
-                cuatris.add(TagTreeDB.getOptions(curso).get(i));
+                asigs.add(TagTreeDB.getOptions(curso).get(i));
             }
-            session.setAttribute("gradoSelectForm", grados);
-            session.setAttribute("cursoSelectForm", cursos);
-            session.setAttribute("cuatriSelectForm", cuatris);
-            session.setAttribute("asigSelectForm", asigs);
+            session.setAttribute("asigData", asigs);
         }
         
-        if (cuatriSelect != "0" && cuatriSelect!=null) {
-            String cuatri = cuatris.get(Integer.parseInt(cuatriSelect)-1);
-            for (int i = 0; i < TagTreeDB.getOptions(cuatri).size(); i++) {
-                asigs.add(TagTreeDB.getOptions(cuatri).get(i));
-            }
-            session.setAttribute("gradoSelectForm", grados);
-            session.setAttribute("cursoSelectForm", cursos);
-            session.setAttribute("cuatriSelectForm", cuatris);
-            session.setAttribute("asigSelectForm", asigs);
-        }*/
-        
-        
-        
-        
-        
-
         String url = "/MainPage.jsp";
 
         RequestDispatcher rs = request.getRequestDispatcher(url);
         rs.forward(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

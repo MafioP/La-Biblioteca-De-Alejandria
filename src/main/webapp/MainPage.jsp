@@ -71,82 +71,89 @@
             }  
             for (int i = 0; i < archivos.size(); i++) {
                 TagTreeDB.insert(archivos.get(i).getUniversidad(), archivos.get(i).getGrado(), 
-                archivos.get(i).getCurso() + "", archivos.get(i).getCuatrimestre() + "", archivos.get(i).getAsignatura());
+                archivos.get(i).getCurso() + "", archivos.get(i).getAsignatura());
             }
+            ArrayList<String> tags = new ArrayList<>();
         %>
     <div class="filtros">
             <div title="Filtrar"><img src="img/filtro.png" alt="filtro icono" id="iconoFiltro"></div>
-            <form class="box" id="uniSelectForm" action="FiltrarBusquedaServlet">
-                <select name="uniSelect" onchange="submitTag()">
+            <form class="box" name="uniSelectForm" action="FiltrarBusquedaServlet">
+                <select name="uniSelect" onchange="javascript:document.uniSelectForm.submit()">
                     <% ArrayList<String> options = TagTreeDB.getOptions("root");
                     int selectedUni = 0;
                     if (session.getAttribute("uniSelect")!= null) {
                         selectedUni = Integer.parseInt((String)session.getAttribute("uniSelect")); 
-                        System.out.println(selectedUni);
                     }%>
-                    <option>-- Seleccione universidad --</option>
+                    <option value="0">-- Seleccione universidad --</option>
                     <%for (int j = 0; j < (options.size()); j++) {
                         if (selectedUni == j+1) { %>
                             <option value=<%=j+1%> selected><%=options.get(j)%></option>
-                            <%System.out.println("select j=" + j);%>
+                            <%tags.add(options.get(j));%>
                         <% }else{ %>
                             <option value=<%=j+1%>><%=options.get(j)%></option>
                     <%}}%>
                 </select>
               </form>
-            <form class="box" id="gradoSelectForm">
+            <form class="box" name="gradoSelectForm" action="FiltrarBusquedaServlet">
                 <div name="gradoData">
-                <select name="gradoSelect" onchange="submitTag()">
+                <select name="gradoSelect" onchange="javascript:document.gradoSelectForm.submit()">
                     <option value="0">-- Seleccione Grado --</option>
                     <% ArrayList<String> grados = (ArrayList<String>)session.getAttribute("gradoData");
                     if (grados != null) {
-                    System.out.println(grados.toString());
                     int selectedGrado = 0;
                     if (session.getAttribute("gradoSelect")!= null) {
                         selectedGrado = Integer.parseInt((String)session.getAttribute("gradoSelect")); 
-                        System.out.println(selectedGrado);
                     }%>
-                    <%for (int j = 0; j < (options.size()); j++) {
+                    <%for (int j = 0; j < (grados.size()); j++) {
                         if (selectedGrado == j+1) { %>
                             <option value=<%=j+1%> selected><%=grados.get(j)%></option>
-                            <%System.out.println("select j=" + j);%>
+                            <%tags.add(grados.get(j));%>
                         <% }else{ %>
                             <option value=<%=j+1%>><%=grados.get(j)%></option>
                     <%}}}%>
                 </select>
                 </div>
               </form>
-            <form class="box" id="cursoSelectForm">
+            <form class="box" name="cursoSelectForm" action="FiltrarBusquedaServlet">
                 <div name="cursoData">
-                <select name ="cursoSelect" onchange="submitTag()">
+                <select name ="cursoSelect" onchange="javascript:document.cursoSelectForm.submit()">
                     <option value="0">-- Seleccione Curso --</option>
                   <% ArrayList<String> cursos = (ArrayList<String>)session.getAttribute("cursoData");
                     if (cursos != null) {
                     int selectedCurso = 0;
                     if (session.getAttribute("cursoSelect")!= null) {
                         selectedCurso = Integer.parseInt((String)session.getAttribute("cursoSelect")); 
-                        System.out.println(selectedCurso);
                     }%>
-                    <%for (int j = 0; j < (options.size()); j++) {
+                    <%for (int j = 0; j < (cursos.size()); j++) {
                         if (selectedCurso == j+1) { %>
                             <option value=<%=j+1%> selected><%=cursos.get(j)%></option>
-                            <%System.out.println("select j=" + j);%>
+                            <%tags.add(cursos.get(j));%>
                         <% }else{ %>
                             <option value=<%=j+1%>><%=cursos.get(j)%></option>
                     <%}}}%>
                 </select>
                 </div>
               </form>
-            <div class="box">
-                <select name ="cuatriSelect">
-                  <option value="0">-- Seleccione Cuatrimestre --</option>
+            <form class="box" name="asigSelectForm" action="FiltrarBusquedaServlet">
+                <div name="asigData">
+                <select name ="asigSelect" onchange="javascript:document.asigSelectForm.submit()">
+                    <option value="0">-- Seleccione Asignatura --</option>
+                  <% ArrayList<String> asigs = (ArrayList<String>)session.getAttribute("asigData");
+                    if (asigs != null) {
+                    int selectedAsig = 0;
+                    if (session.getAttribute("asigSelect")!= null) {
+                        selectedAsig = Integer.parseInt((String)session.getAttribute("asigSelect")); 
+                    }%>
+                    <%for (int j = 0; j < (asigs.size()); j++) {
+                        if (selectedAsig == j+1) { %>
+                            <option value=<%=j+1%> selected><%=asigs.get(j)%></option>
+                            <%tags.add(asigs.get(j));%>
+                        <% }else{ %>
+                            <option value=<%=j+1%>><%=asigs.get(j)%></option>
+                    <%}}}%>
                 </select>
-              </div>
-            <div class="box">
-                <select name="asigSelect">
-                  <option value="0">-- Seleccione Asignatura --</option>
-                </select>
-              </div>
+                </div>
+              </form>
               <div class="box">
                 <select>
                   <option>PDF</option>
@@ -214,10 +221,13 @@
         
             
         <%
+            archivos = ArchivoDB.filtrarArchivos(tags);
+            System.out.println("Selected Tags: " + tags.toString());
+            
             if(orden == null){
-                archivos = ArchivoDB.ordenarArchivos("0");
+                archivos = ArchivoDB.ordenarArchivos("0", archivos);
             }else{
-                archivos = ArchivoDB.ordenarArchivos(orden);
+                archivos = ArchivoDB.ordenarArchivos(orden, archivos);
             }
           %>
       <table class="tabla-resultados">

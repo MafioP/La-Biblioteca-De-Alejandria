@@ -50,8 +50,7 @@ public class ArchivoDB {
             ps.setBlob(14, archivo.getContenido().getInputStream());
             
             TagTreeDB.insert(archivo.getUniversidad(), archivo.getGrado(),      //insertar los tags al arbol de filtros
-                    archivo.getCurso() + "", archivo.getCuatrimestre() + "", 
-                    archivo.getAsignatura());
+                    archivo.getCurso() + "", archivo.getAsignatura());
             
             
             int res = 0;
@@ -163,17 +162,53 @@ public class ArchivoDB {
     }
     
     
+    public static ArrayList<Archivo> filtrarArchivos(ArrayList<String> tags) {
+        ArrayList<Archivo> archivos = getAllArchivos();
+        ArrayList<Archivo> filtrados = new ArrayList<>();
+        for (Archivo archivo : archivos) {
+            switch(tags.size()) {
+                case 0: 
+                    filtrados.add(archivo);
+                    break;
+                case 1:
+                    if (archivo.getUniversidad().equals(tags.get(0))) {
+                        filtrados.add(archivo);
+                    }
+                    break;
+                case 2:
+                    if (archivo.getUniversidad().equals(tags.get(0))&& archivo.getGrado().equals(tags.get(1))) {
+                        filtrados.add(archivo);
+                    }
+                    break;
+                case 3:
+                    if (archivo.getUniversidad().equals(tags.get(0))&& archivo.getGrado().equals(tags.get(1))
+                            &&archivo.getCurso() == Integer.parseInt(tags.get(2))) {
+                        filtrados.add(archivo);
+                    }
+                    break;
+                case 4:
+                    if (archivo.getUniversidad().equals(tags.get(0))&& archivo.getGrado().equals(tags.get(1))
+                            &&archivo.getCurso() == Integer.parseInt(tags.get(2)) && archivo.getAsignatura().equals(tags.get(3))) {
+                        filtrados.add(archivo);
+                        System.out.println("Archivo añadido: " + archivo.getNombre());
+                    }
+                    break;
+            }
+        }
+        return filtrados;
+    }
+    
     /**
      * Ordena los archivos en funcion del parametro orden
      * 
      * @param orden
      * @return listaArchivos
      */
-    public static ArrayList<Archivo> ordenarArchivos(String orden){
+    public static ArrayList<Archivo> ordenarArchivos(String orden, ArrayList<Archivo> archivos){
         
         switch(orden){
             case "0":
-                Collections.sort(listaArchivos, new Comparator<Archivo>(){
+                Collections.sort(archivos, new Comparator<Archivo>(){
                     public int compare(Archivo a1, Archivo a2){
                         if(a1.getValoracionMedia() == a2.getValoracionMedia())
                             return 0;
@@ -186,7 +221,7 @@ public class ArchivoDB {
                 
             case "1":
                 
-                Collections.sort(listaArchivos, new Comparator<Archivo>(){
+                Collections.sort(archivos, new Comparator<Archivo>(){
                     public int compare(Archivo a1, Archivo a2){
                         if(a1.getNumDescargas() == a2.getNumDescargas())
                             return 0;
@@ -198,7 +233,7 @@ public class ArchivoDB {
                 
                 
             case "2":
-                Collections.sort(listaArchivos, new Comparator<Archivo>(){
+                Collections.sort(archivos, new Comparator<Archivo>(){
                     public int compare(Archivo a1, Archivo a2){
                         if(a1.getNumVistas() == a2.getNumVistas())
                             return 0;
@@ -209,7 +244,7 @@ public class ArchivoDB {
                 break;
                 
             case "3":
-                Collections.sort(listaArchivos, new Comparator<Archivo>() {
+                Collections.sort(archivos, new Comparator<Archivo>() {
                     public int compare(Archivo a1, Archivo a2) {
                         return a2.getFechaSubida().compareTo(a1.getFechaSubida());
                     }
@@ -218,7 +253,7 @@ public class ArchivoDB {
                 break;
                 
             case "4":
-                Collections.sort(listaArchivos, new Comparator<Archivo>() {
+                Collections.sort(archivos, new Comparator<Archivo>() {
                     public int compare(Archivo a1, Archivo a2) {
                         return a1.getNombre().compareTo(a2.getNombre());
                     }
@@ -230,7 +265,7 @@ public class ArchivoDB {
              
         }
         
-        return listaArchivos;
+        return archivos;
     }
     
     
