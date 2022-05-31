@@ -71,6 +71,7 @@ public class BuscarArchivoServlet extends HttpServlet {
         
         String busqueda = request.getParameter("busqueda");
         
+        
         String url = "";
         if (ArchivoDB.buscarArchivoNombre(busqueda).isEmpty()) {
             

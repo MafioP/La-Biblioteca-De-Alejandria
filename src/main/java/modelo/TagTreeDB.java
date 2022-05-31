@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class TagTreeDB {
     private static TagTree<String> tagTree = new TagTree<String>("root");
     
-    public static void insert(String uni, String carrera, String curso, String asig){
-        System.out.println("INSERT: " + uni + ", " + carrera + ", " + curso + ", " + asig);
+    public static void insert(String uni, String carrera, String curso, String asig){ 
         
         if (!tagTree.getSuccessors(tagTree.getHead()).contains(uni)) {
             TagTree tagUni = tagTree.addLeaf(uni);
@@ -34,7 +33,6 @@ public class TagTreeDB {
                 }
             }
         }
-        System.out.println(tagTree.toString() + "\n-------");
     }
     
     public static ArrayList<String> getOptions(String parent) {

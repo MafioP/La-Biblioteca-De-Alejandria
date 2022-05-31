@@ -121,7 +121,7 @@ public class ArchivoDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Archivo WHERE nombre LIKE ?";
+        String query = "SELECT * FROM Archivo WHERE titulo LIKE ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, "%"+name+"%");
@@ -162,8 +162,8 @@ public class ArchivoDB {
     }
     
     
-    public static ArrayList<Archivo> filtrarArchivos(ArrayList<String> tags) {
-        ArrayList<Archivo> archivos = getAllArchivos();
+    public static ArrayList<Archivo> filtrarArchivos(ArrayList<String> tags, ArrayList<Archivo> archivos) {
+        
         ArrayList<Archivo> filtrados = new ArrayList<>();
         for (Archivo archivo : archivos) {
             switch(tags.size()) {
@@ -190,7 +190,7 @@ public class ArchivoDB {
                     if (archivo.getUniversidad().equals(tags.get(0))&& archivo.getGrado().equals(tags.get(1))
                             &&archivo.getCurso() == Integer.parseInt(tags.get(2)) && archivo.getAsignatura().equals(tags.get(3))) {
                         filtrados.add(archivo);
-                        System.out.println("Archivo añadido: " + archivo.getNombre());
+                        
                     }
                     break;
             }

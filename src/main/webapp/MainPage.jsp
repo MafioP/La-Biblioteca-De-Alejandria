@@ -221,8 +221,8 @@
         
             
         <%
-            archivos = ArchivoDB.filtrarArchivos(tags);
-            System.out.println("Selected Tags: " + tags.toString());
+            archivos = ArchivoDB.filtrarArchivos(tags, archivos);
+ 
             
             if(orden == null){
                 archivos = ArchivoDB.ordenarArchivos("0", archivos);
