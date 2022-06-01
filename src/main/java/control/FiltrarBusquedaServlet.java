@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package control;
 
 import java.io.IOException;
@@ -15,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import modelo.ArchivoDB;
 import modelo.TagTreeDB;
 
 /**
@@ -77,8 +72,6 @@ public class FiltrarBusquedaServlet extends HttpServlet {
         
         
         ArrayList<String> unis = TagTreeDB.getOptions("root");
-        System.out.println("Select: " + uniSelect + " " + gradoSelect + " " 
-            + cursoSelect + " " + asigSelect);
         
         HttpSession session = request.getSession();
         if (uniSelect != null) {
@@ -111,7 +104,7 @@ public class FiltrarBusquedaServlet extends HttpServlet {
         }
         
         if (gradoSelect != "0" && gradoSelect!=null) {
-            System.out.println("gradoSelect: " + gradoSelect);
+            
             grados = (ArrayList<String>)session.getAttribute("gradoData");
             String grado = grados.get(Integer.parseInt(gradoSelect)-1);
             for (int i = 0; i < TagTreeDB.getOptions(grado).size(); i++) {
@@ -122,7 +115,7 @@ public class FiltrarBusquedaServlet extends HttpServlet {
         }
         
         if (!"0".equals(cursoSelect) && cursoSelect!=null) {
-            System.out.println("cursoSelect: " + cursoSelect);
+            
             cursos = (ArrayList<String>)session.getAttribute("cursoData");
             String curso = cursos.get(Integer.parseInt(cursoSelect)-1);
             for (int i = 0; i < TagTreeDB.getOptions(curso).size(); i++) {

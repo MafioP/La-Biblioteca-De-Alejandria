@@ -255,7 +255,7 @@ public class ArchivoDB {
             case "4":
                 Collections.sort(archivos, new Comparator<Archivo>() {
                     public int compare(Archivo a1, Archivo a2) {
-                        return a1.getNombre().compareTo(a2.getNombre());
+                        return a1.getTitulo().compareTo(a2.getTitulo());
                     }
                 });
                 
